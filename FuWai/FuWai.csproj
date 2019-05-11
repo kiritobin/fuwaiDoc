@@ -69,11 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\jquery.min.js" />
+    <Content Include="js\jsencrypt.min.js" />
     <Content Include="js\vue.js" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,7 +88,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BLL\" />
     <Folder Include="css\" />
     <Folder Include="DAO\" />
   </ItemGroup>
