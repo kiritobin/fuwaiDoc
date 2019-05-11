@@ -68,6 +68,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\styles.css" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jsencrypt.min.js" />
     <Content Include="js\vue.js" />
@@ -88,7 +89,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="css\" />
     <Folder Include="DAO\" />
   </ItemGroup>
   <PropertyGroup>
