@@ -61,12 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="action\Login.ashx" />
-    <Content Include="action\Drone.ashx" />
+    <Content Include="action\TDrone.ashx" />
     <Content Include="action\VMedicalHistory.ashx" />
     <Content Include="action\VPatient.ashx" />
     <Content Include="action\VTreatment.ashx" />
-    <Content Include="action\VDronePatient.ashx" />
-    <Content Include="action\VCheck.ashx" />
+    <Content Include="action\TGcontact.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,31 +75,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\styles.css" />
-    <Content Include="css\bootstrap.min.css" />
-    <Content Include="home\bootstrap.min.css" />
-    <Content Include="home\jquery.min.js" />
-    <Content Include="home\index.html" />
-    <Content Include="home\vue.js" />
-    <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jsencrypt.min.js" />
     <Content Include="js\vue.js" />
     <Content Include="login.html" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="action\Drone.ashx.cs">
-      <DependentUpon>Drone.ashx</DependentUpon>
+    <Compile Include="action\TDrone.ashx.cs">
+      <DependentUpon>TDrone.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>
-    <Compile Include="action\VCheck.ashx.cs">
-      <DependentUpon>VCheck.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="action\VDronePatient.ashx.cs">
-      <DependentUpon>VDronePatient.ashx</DependentUpon>
+    <Compile Include="action\TGcontact.ashx.cs">
+      <DependentUpon>TGcontact.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\VMedicalHistory.ashx.cs">
       <DependentUpon>VMedicalHistory.ashx</DependentUpon>
@@ -111,17 +100,17 @@
     <Compile Include="action\VTreatment.ashx.cs">
       <DependentUpon>VTreatment.ashx</DependentUpon>
     </Compile>
-    <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
+    <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VTreatmentBLL.cs" />
-    <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
+    <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
@@ -129,13 +118,6 @@
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
