@@ -60,6 +60,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\VPatientBLL.cs" />
+    <Compile Include="BLL\VTreatmentBLL.cs" />
+    <Compile Include="DAO\VPatientDAO.cs" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -80,6 +83,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\VTreatmentDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
