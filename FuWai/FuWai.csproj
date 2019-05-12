@@ -66,6 +66,7 @@
     <Content Include="action\VPatient.ashx" />
     <Content Include="action\VTreatment.ashx" />
     <Content Include="action\VDronePatient.ashx" />
+    <Content Include="action\TMedicalhistory.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,6 +90,9 @@
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\TMedicalhistory.ashx.cs">
+      <DependentUpon>TMedicalhistory.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VDronePatient.ashx.cs">
       <DependentUpon>VDronePatient.ashx</DependentUpon>
     </Compile>
@@ -101,6 +105,7 @@
     <Compile Include="action\VTreatment.ashx.cs">
       <DependentUpon>VTreatment.ashx</DependentUpon>
     </Compile>
+    <Compile Include="BLL\TMedicalhistoryBLL.cs" />
     <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
@@ -109,6 +114,7 @@
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VTreatmentBLL.cs" />
+    <Compile Include="DAO\TMedicalhistoryDAO.cs" />
     <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
