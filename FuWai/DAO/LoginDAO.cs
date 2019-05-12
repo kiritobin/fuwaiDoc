@@ -20,7 +20,7 @@ namespace FuWai.DAO
             String sql = "select count(id) from T_Admin where Adminid=@Adminid and pwd=@pwd";
             string[] param = {"@Adminid", "@pwd" };
             object[] value = { user , pwd };
-            row = db.ExecuteNoneQuery(sql, param, value);
+            row = Convert.ToInt32(db.ExecuteScalar(sql, param, value));
            
             return row;
         }
