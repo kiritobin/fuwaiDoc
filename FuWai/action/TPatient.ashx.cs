@@ -76,7 +76,7 @@ namespace FuWai.action
             String droneid = context.Request["droneid"];
             String tel = context.Request["tel"];
 
-            if (tb.update(patientid, patientname, gender, guardianid, diseasestatusid, droneid,tel))
+            if (tb.update(patientid, patientname, gender,tel))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();

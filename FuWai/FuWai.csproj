@@ -74,6 +74,8 @@
     <Content Include="action\TMedicalhistory.ashx" />
     <Content Include="action\TPatient.ashx" />
     <Content Include="action\PatientInfo.ashx" />
+    <Content Include="标注点.html" />
+    <Content Include="闪烁.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,6 +91,11 @@
     <Content Include="home\index.html" />
     <Content Include="home\jquery.min.js" />
     <Content Include="home\vue.js" />
+    <Content Include="image\UAV 无人机.png" />
+    <Content Include="image\UAV 无人机.svg" />
+    <Content Include="image\人物-异常.png" />
+    <Content Include="image\人物-正常.png" />
+    <Content Include="image\无人机.png" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jsencrypt.min.js" />

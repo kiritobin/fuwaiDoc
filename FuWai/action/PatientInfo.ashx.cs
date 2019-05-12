@@ -1,6 +1,5 @@
 ﻿using FuWai.BLL;
 using FuWai.DBHelper;
-using FuWai.model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +25,6 @@ namespace FuWai.action
         TGuardianBLL guardianBLL = new TGuardianBLL();
         TDiseasestatusBLL diseasestatusBLL = new TDiseasestatusBLL();
         TDroneBLL droneBLL = new TDroneBLL();
-
-        PatientAbout patient = new PatientAbout();
-
 
         private void patientAbout(HttpContext context)
         {

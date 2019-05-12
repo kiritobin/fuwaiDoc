@@ -15,8 +15,8 @@
             <div class="col-md-3" style="height: 100%">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#">病人信息管理</a></li>
-                    <li><a href="#">SVN</a></li>
-                    <li><a href="#">iOS</a></li>
+                    <li><a href="../标注点.html">标注点</a></li>
+                    <li><a href="../闪烁.html">闪烁</a></li>
                     <li><a href="#">VB.Net</a></li>
                     <li><a href="#">Java</a></li>
                     <li><a href="#">PHP</a></li>
@@ -127,7 +127,7 @@
                                     </p>
                                     <p>
                                         <label>姓名：</label>
-                                        <input type="text" id="Name">
+                                        <input type="text" id="aName">
                                     </p>
                                     <p>
                                         <label>性别：</label>
@@ -183,19 +183,19 @@
                                 <div class="modal-body">
                                     <p>
                                         <label>编号：</label>
-                                        <input type="text" readonly v-model="editPeople.patientid" id="No" value="">
+                                        <input type="text" readonly v-model="editPeople.patientid" id="eNo" value="">
                                     </p>
                                     <p>
                                         <label>姓名：</label>
-                                        <input type="text" v-model="editPeople.patientname" id="Name"  value="">
+                                        <input type="text" v-model="editPeople.patientname" id="eName"  value="">
                                     </p>
                                     <p>
                                         <label>性别：</label>
-                                        <input type="text" v-model="editPeople.gender" id="gender" value="">
+                                        <input type="text" v-model="editPeople.gender" id="egender" value="">
                                     </p>
                                     <p>
                                         <label>联系号码：</label>
-                                        <input type="text" v-model="editPeople.tel" id="Tel" value="">
+                                        <input type="text" v-model="editPeople.tel" id="eTel" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -218,7 +218,7 @@
     <script>
         function add() {
             var patientid = $("#No").val();
-            var patientname = $("#patientname").val();
+            var patientname = $("#aName").val();
             var gender = $("#gender").val();
             var tel = $("#Tel").val();
             var guardianid = $("#contact").val();
@@ -301,15 +301,12 @@
             })
         }
         function update() {
-            var patientid = $("#No").val();
-            var patientname = $("#patientname").val();
-            var gender = $("#gender").val();
-            var tel = $("#Tel").val();
+            var patientid = $("#eNo").val();
+            var patientname = $("#eName").val();
+            var gender = $("#egender").val();
+            var tel = $("#eTel").val();
             if (patientid == "" || patientname == "" || gender == "" || tel == "" ) {
                 alert("含有未填项");
-            }
-            else if (gender != "男" || gender != "女") {
-                alert("请正确填写性别");
             }
             else {
                 $.ajax({
@@ -491,7 +488,7 @@
                 },
                 //提交
                 add: function () {
-                    
+                    add();
                 },
                 del: function (item) {
                     console.log(item);
@@ -525,6 +522,9 @@
                             var contact = JSON.parse(arr[0]);
                             var disease = JSON.parse(arr[1]);
                             var drone = JSON.parse(arr[2]);
+                            $("#contact").empty();
+                            $("#disease").empty();
+                            $("#drone").empty();
                             $.each(contact, function (index, item) {
                                 $("#contact").append( 
                                     "<option value=" + item.guardianid + ">" + item.guardianname + "(" + item.appellation+")" + "</option>");

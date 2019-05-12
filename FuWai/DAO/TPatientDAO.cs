@@ -65,12 +65,12 @@ namespace FuWai.DAO
         /// <param name="droneid">无人机编号</param>
         /// <returns>返回int</returns>
         /// <returns>返回int</returns>
-        public int update(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid,string tel)
+        public int update(string patientid, string patientname, string gender,string tel)
         {
-            string sql = "update T_Patient set patientid=@patientid patientname=@patientname ,gender=@gender,guardianid=@guardianid,diseasestatusid=@diseasestatusid,droneid=@droneid,tel=@tel where patientid=@patientid ";
+            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,tel=@tel where patientid=@patientid ";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@guardianid", "@diseasestatusid", "@droneid","@tel" };
-            object[] value = { patientid, patientname, gender, guardianid, diseasestatusid, droneid ,tel};
+            string[] param = { "@patientid", "@patientname", "@gender","@tel" };
+            object[] value = { patientid, patientname, gender,tel};
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
