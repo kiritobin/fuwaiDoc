@@ -1,23 +1,23 @@
 ﻿using FuWai.DAO;
+using FuWai.DBHelper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
-using System.Data;
-using FuWai.DBHelper;
 
 namespace FuWai.BLL
 {
-    public class TDroneBLL
+    public class VMedicalHistoryBLL
     {
-        TDroneDAO td = new TDroneDAO();
+        VMedicalHistoryDAO vmh  = new VMedicalHistoryDAO();
         /// <summary>
-        /// 无人机信息查询
+        /// 病人病史信息查询
         /// </summary>
         /// <returns></returns>
         public String getDroneinfo()
         {
-            DataTable dt = td.SelectDrone();
+            DataTable dt = vmh.SelectVMedicalHistory();
             String json = "";
             json = JsonHelper.ToJson(dt);
             return json;
