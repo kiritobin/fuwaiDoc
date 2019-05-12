@@ -7,9 +7,9 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// TGcontact 的摘要说明
+    /// TPatient 的摘要说明
     /// </summary>
-    public class TGcontact : IHttpHandler
+    public class TPatient : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -30,15 +30,15 @@ namespace FuWai.action
             }
             else if (op == "delete")
             {
-                delete(context);
+                update(context);
             }
         }
 
-        TGcontactBLL tb = new TGcontactBLL();
+       TPatientBLL tb = new TPatientBLL();
 
         private void load(HttpContext context)
         {
-            String json = tb.getGcontactinfo();
+            String json = tb.getPatient();
             context.Response.Write(json);
             context.Response.End();
 
@@ -46,10 +46,14 @@ namespace FuWai.action
 
         private void insert(HttpContext context)
         {
-            String contactphone = context.Request["contactphone"];
-            String guardianid = context.Request["guardianid"];
+            String patientid = context.Request["patientid"];
+            String patientname = context.Request["patientname"];
+            String gender = context.Request["gender"];
+            int guardianid = Convert.ToInt32(context.Request["guardianid"]);
+            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            String droneid = context.Request["droneid"];
 
-            if (tb.insert(contactphone, guardianid))
+            if (tb.insert(patientid, patientname, gender, guardianid, diseasestatusid, droneid))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -64,10 +68,14 @@ namespace FuWai.action
 
         private void update(HttpContext context)
         {
-            String contactphone = context.Request["contactphone"];
-            String guardianid = context.Request["guardianid"];
+            String patientid = context.Request["patientid"];
+            String patientname = context.Request["patientname"];
+            String gender = context.Request["gender"];
+            int guardianid = Convert.ToInt32(context.Request["guardianid"]);
+            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            String droneid = context.Request["droneid"];
 
-            if (tb.update(contactphone, guardianid))
+            if (tb.update(patientid, patientname, gender, guardianid, diseasestatusid, droneid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -81,9 +89,9 @@ namespace FuWai.action
         }
         private void delete(HttpContext context)
         {
-            String gcontactid = context.Request["gcontactid"];
+            String patientid = context.Request["patientid"];
 
-            if (tb.delete(gcontactid))
+            if (tb.delete(patientid))
             {
                 context.Response.Write("删除成功");
                 context.Response.End();

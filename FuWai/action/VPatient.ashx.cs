@@ -60,7 +60,6 @@ namespace FuWai.action
             String json = vp.SelectPatientByPatientID(patientid);
             context.Response.Write(json);
             context.Response.End();
-
         }
 
         /// <summary>
