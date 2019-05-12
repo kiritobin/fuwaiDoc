@@ -12,7 +12,7 @@ namespace FuWai.DAO
         SQLHelper db = new SQLHelper();
 
         /// <summary>
-        /// 查询监护人联系方式
+        /// 查询所有监护人联系方式
         /// </summary>
         /// <returns>返回数据集DataTable</returns>
         public DataTable SelectGcontact()

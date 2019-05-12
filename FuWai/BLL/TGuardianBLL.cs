@@ -7,38 +7,38 @@ using System.Web;
 
 namespace FuWai.BLL
 {
-    public class TGcontactBLL
+    public class TGuardianBLL
     {
-        TGcontactDAO td = new TGcontactDAO();
+        TGuardianDAO td = new TGuardianDAO();
         /// <summary>
-        /// 查询监护人联系方式
+        /// 查询监护人
         /// </summary>
         /// <returns>返回json</returns>
         public String getGcontactinfo()
         {
-            return JsonHelper.ToJson(td.SelectGcontact());
+            return JsonHelper.ToJson(td.SelectGuardian());
         }
 
         /// <summary>
-        /// 通过监护人编号查询监护人联系方式
+        /// 通过监护人编号查询监护人
         /// </summary>
         /// <param name="guardianid">监护人编号</param>
         /// <returns>返回json</returns>
         public String getGcontactinfobyguardianid(string guardianid)
         {
-            return JsonHelper.ToJson(td.SelectGcontactbyguardianid(guardianid));
+            return JsonHelper.ToJson(td.SelectGuardianbyguardianid(guardianid));
         }
 
 
         /// <summary>
-        /// 添加监护人联系方式
+        /// 添加监护人
         /// </summary>
-        /// <param name="contactphone">联系方式</param>
-        /// <param name="guardianid">监护人编号</param>
+        /// <param name="appellation">成员关系</param>
+        /// <param name="guardianname">监护人姓名</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string contactphone, string guardianid)
+        public Boolean insert(string appellation, string guardianname)
         {
-            int row = td.insert(contactphone, guardianid);
+            int row = td.insert(appellation, guardianname);
             if (row > 0)
             {
                 return true;
@@ -46,14 +46,15 @@ namespace FuWai.BLL
             return false;
         }
         /// <summary>
-        /// 修改监护人联系方式
+        /// 修改监护人
         /// </summary>
-        /// <param name="contactphone">联系方式</param>
+        /// <param name="appellation">成员关系</param>
+        /// <param name="guardianname">监护人姓名</param>
         /// <param name="guardianid">监护人编号</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean update(string contactphone, string guardianid)
+        public Boolean update(string appellation, string guardianname, string guardianid)
         {
-            int row = td.update(contactphone, guardianid);
+            int row = td.update(appellation, guardianname, guardianid);
             if (row > 0)
             {
                 return true;
@@ -62,13 +63,13 @@ namespace FuWai.BLL
         }
 
         /// <summary>
-        /// 删除监护人联系方式
+        /// 删除监护人
         /// </summary>
-        /// <param name="gcontactid">联系方式编号</param>
+        /// <param name="guardianid">监护人编号</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean delete(string gcontactid)
+        public Boolean delete(string guardianid)
         {
-            int row = td.delete(gcontactid);
+            int row = td.delete(guardianid);
             if (row > 0)
             {
                 return true;
