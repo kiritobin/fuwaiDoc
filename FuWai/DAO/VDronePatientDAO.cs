@@ -7,7 +7,7 @@ using System.Web;
 
 namespace FuWai.DAO
 {
-    public class DronePatientDAO
+    public class VDronePatientDAO
     {
 
         SQLHelper db = new SQLHelper();

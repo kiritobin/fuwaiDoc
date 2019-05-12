@@ -8,10 +8,10 @@ using System.Web;
 
 namespace FuWai.BLL
 {
-    public class DronePatientBLL
+    public class VDronePatientBLL
     {
 
-        DronePatientDAO dao = new DronePatientDAO();
+        VDronePatientDAO dao = new VDronePatientDAO();
 
         /// <summary>
         /// 查询视图V_DronePatient所有信息
