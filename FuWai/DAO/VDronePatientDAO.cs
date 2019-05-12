@@ -9,7 +9,6 @@ namespace FuWai.DAO
 {
     public class VDronePatientDAO
     {
-
         SQLHelper db = new SQLHelper();
 
         /// <summary>
@@ -19,8 +18,7 @@ namespace FuWai.DAO
         public DataTable selectVDronePatient()
         {
             string sql = "select * from V_DronePatient";
-            DataTable dt = db.FillDataSet(sql, null, null).Tables[0];
-            return dt;
+            return db.FillDataSet(sql, null, null).Tables[0];
         }
 
         /// <summary>
@@ -33,9 +31,7 @@ namespace FuWai.DAO
             string sql = "select * from V_DronePatient where droneid = @droneid";
             string[] param = { "@droneid" };
             object[] value = { droneid };
-            DataTable dt = db.FillDataSet(sql, param, value).Tables[0];
-            return dt;
+            return db.FillDataSet(sql, param, value).Tables[0]; 
         }
-
     }
 }
