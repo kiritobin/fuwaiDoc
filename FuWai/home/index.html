@@ -4,16 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Test</title>
-    <link rel="stylesheet" href="bootstrap.min.css" />
+    <title>阜外医院</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
 </head>
 
 <body>
     <div class="container body-content">
+        <h2></h2>
         <div class="row" style="height:600px">
             <div class="col-md-3" style="height: 100%">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="#">病人信息管理</a></li>
                     <li><a href="#">SVN</a></li>
                     <li><a href="#">iOS</a></li>
                     <li><a href="#">VB.Net</a></li>
@@ -24,30 +25,42 @@
             <div class="col-md-9">
                 <div id="test" class="form-group">
                     <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
-                        data-target="#addModal">添加</button>
+                            data-target="#addModal">
+                        添加
+                    </button>
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
-                                <th v-on:click="sortBy('id')">ID</th>
+                                <th v-on:click="sortBy('id')">编号</th>
                                 <th>姓名</th>
-                                <th v-on:click="sortBy('age')">年龄</th>
+                                <th v-on:click="sortBy('age')">性别</th>
+                                <th>联系号码</th>
+                                <th>监护人</th>
+                                <th>监护人号码</th>
+                                <th>无人机编号</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.id}}</td>
-                                <td>{{dataItem.name}}</td>
-                                <td>{{dataItem.age}}</td>
+                                <td>{{dataItem.patientid}}</td>
+                                <td>{{dataItem.patientname}}</td>
+                                <td>{{dataItem.gender}}</td>
+                                <td>{{dataItem.pcontactphone}}</td>
+                                <td>{{dataItem.guardianname}} - {{dataItem.appellation}}</td>
+                                <td>{{dataItem.contactphone}}</td>
+                                <td>{{dataItem.droneid}}</td>
                                 <td>
-                                    <button @click="del()" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="del(dataItem.patientid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
-                                    <button @click="" class="btn btn-primary btn-sm">查询</button>
+                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">病史记录</div></a>
+                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">检查记录</div></a>
+                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">治疗记录</div></a>
                                 </td>
                             </tr>
                         </table>
                         <div class="pager" id="pager">
                             <span class="form-inline">
                                 <select class="form-control" v-model="pagesize"
-                                    v-on:change="showPage(pageCurrent,$event,true)" number>
+                                        v-on:change="showPage(pageCurrent,$event,true)" number>
                                     <option v-for="item in arrPageSize" value="{{item}}">{{item}}</option>
                                 </select>
                             </span>
@@ -56,7 +69,7 @@
                                     首页
                                 </span>
                                 <span v-if="item==1" class="btn btn-default"
-                                    v-on:click="showPage(pageCurrent-1,$event)">
+                                      v-on:click="showPage(pageCurrent-1,$event)">
                                     上一页
                                 </span>
                                 <span v-if="item==1" class="btn btn-default" v-on:click="showPage(item,$event)">
@@ -65,31 +78,30 @@
                                 <span v-if="item==1&&item<showPagesStart-1" class="btn btn-default disabled">
                                     ...
                                 </span>
-                                <span
-                                    v-if="item>1&&item<=pageCount-1&&item>=showPagesStart&&item<=showPageEnd&&item<=pageCount"
-                                    class="btn btn-default" v-on:click="showPage(item,$event)">
+                                <span v-if="item>1&&item<=pageCount-1&&item>=showPagesStart&&item<=showPageEnd&&item<=pageCount"
+                                      class="btn btn-default" v-on:click="showPage(item,$event)">
                                     {{item}}
                                 </span>
                                 <span v-if="item==pageCount&&item>showPageEnd+1" class="btn btn-default disabled">
                                     ...
                                 </span>
                                 <span v-if="item==pageCount&&item!=1" class="btn btn-default"
-                                    v-on:click="showPage(item,$event)">
+                                      v-on:click="showPage(item,$event)">
                                     {{item}}
                                 </span>
                                 <span v-if="item==pageCount" class="btn btn-default"
-                                    v-on:click="showPage(pageCurrent+1,$event)">
+                                      v-on:click="showPage(pageCurrent+1,$event)">
                                     下一页
                                 </span>
                                 <span v-if="item==pageCount" class="btn btn-default"
-                                    v-on:click="showPage(pageCount,$event)">
+                                      v-on:click="showPage(pageCount,$event)">
                                     尾页
                                 </span>
                             </template>
                             <span class="form-inline">
                                 <input class="pageIndex form-control" style="width:60px;text-align:center" type="text"
-                                    v-model="pageCurrent | onlyNumeric"
-                                    v-on:keyup.enter="showPage(pageCurrent,$event,true)" />
+                                       v-model="pageCurrent | onlyNumeric"
+                                       v-on:keyup.enter="showPage(pageCurrent,$event,true)" />
                             </span>
                             <span>{{pageCurrent}}/{{pageCount}}</span>
                         </div>
@@ -97,7 +109,7 @@
 
                     <!-- 添加学生 -->
                     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addodalLabel"
-                        aria-hidden="true">
+                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -105,21 +117,25 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        添加学生
+                                        添加病人
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>学号：</label>
-                                        <input type="text" id="stuNo" v-model="add.id">
+                                        <label>编号：</label>
+                                        <input type="text" id="stuNo" v-model="add.patientid">
                                     </p>
                                     <p>
                                         <label>姓名：</label>
-                                        <input type="text" id="stuName" v-model="add.name">
+                                        <input type="text" id="stuName" v-model="add.patientname">
                                     </p>
                                     <p>
-                                        <label>年龄：</label>
-                                        <input type="number" id="stuAge" v-model="add.age">
+                                        <label>性别：</label>
+                                        <input type="text" id="stuAge" v-model="add.gender">
+                                    </p>
+                                    <p>
+                                        <label>联系号码：</label>
+                                        <input type="text" v-model="add.pcontactphone" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -132,7 +148,7 @@
                     </div>
                     <!-- 编辑学生 -->
                     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addodalLabel"
-                        aria-hidden="true">
+                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -140,21 +156,25 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        编辑学生
+                                        编辑病人
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>学号：</label>
-                                        <input type="text" v-model="this.editPeople.id" value="">
+                                        <label>编号：</label>
+                                        <input type="text" readonly v-model="editPeople.patientid" value="">
                                     </p>
                                     <p>
                                         <label>姓名：</label>
-                                        <input type="text" v-model="this.editPeople.name" value="">
+                                        <input type="text" v-model="editPeople.patientname" value="">
                                     </p>
                                     <p>
-                                        <label>年龄：</label>
-                                        <input type="number" v-model="this.editPeople.age" value="">
+                                        <label>性别：</label>
+                                        <input type="text" v-model="editPeople.gender" value="">
+                                    </p>
+                                    <p>
+                                        <label>联系号码：</label>
+                                        <input type="text" v-model="editPeople.pcontactphone" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -191,33 +211,37 @@
         })
 
 
-
-        //模拟获取数据
-        var getData = function () {
-            var result = [{ "name": "12", "age": "14", "id": "125" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }];
-            // for (var i = 0; i < 500; i++) {
-            // 	result[i] ={name:'test'+i,id:i,age:(Math.random()*100).toFixed()};
-            // 	}
-            //操作数据json
-            var opJson = {
-                addPeople: {},
-                editPeople: {},
-                editlist: false,
-                checked: false,
-                selected: [],
-                editSid: ""
-            };
-            var newJson = $.extend(true, result, opJson);
-            console.log(JSON.stringify(newJson));
-            return newJson;
-        }
-
         var vue = new Vue({
             el: "#test",
             ready: function () {
-                this.arrayDataAll = getData();
-                this.totalCount = this.arrayDataAll.length;
-                this.showPage(this.pageCurrent, null, true);
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/VPatient.ashx',
+                    data: {
+                        op: "all"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        //getData(data);
+                        _this.arrayDataAll = data;
+                        _this.totalCount = _this.arrayDataAll.length;
+                        _this.showPage(_this.pageCurrent, null, true);
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                        else if (textStatus == "parsererror") {
+                            alert("返回类型错误");
+                        }
+                    }
+                })
             },
             data: {
                 //总项目数
@@ -249,10 +273,7 @@
             methods: {
                 //分页方法
                 showPage: function (pageIndex, $event, forceRefresh) {
-
                     if (pageIndex > 0) {
-
-
                         if (pageIndex > this.pageCount) {
                             pageIndex = this.pageCount;
                         }
@@ -316,21 +337,20 @@
                 },
                 //提交
                 add: function () {
-                    console.log(123);
+                    
                 },
-                del: function () {
+                del: function (item) {
+                    console.log(item);
 
                 },
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        id: item.id,
-                        name: item.name,
-                        age: item.age
+                        patientid: item.patientid,
+                        patientname: item.patientname,
+                        gender: item.gender,
+                        pcontactphone: item.pcontactphone
                     };
-                    console.log(this.editPeople.id);
-                    console.log(this.editPeople.age);
-                    console.log(this.editPeople.name);
                 },
                 update: function () {
 
@@ -342,7 +362,7 @@
             // console.log(value==vue.arrayData);
             // console.log(vue.arrayData);
             // console.log("==============arrayData end==============");
-        }); 
+        });
     </script>
 </body>
 
