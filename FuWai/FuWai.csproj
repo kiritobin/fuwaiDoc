@@ -69,6 +69,7 @@
     <Content Include="action\VDronePatient.ashx" />
     <Content Include="action\VCheck.ashx" />
     <Content Include="action\TCheck.ashx" />
+    <Content Include="action\TDiseasestatus.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -93,6 +94,9 @@
   <ItemGroup>
     <Compile Include="action\TCheck.ashx.cs">
       <DependentUpon>TCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TDiseasestatus.ashx.cs">
+      <DependentUpon>TDiseasestatus.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\TDrone.ashx.cs">
       <DependentUpon>TDrone.ashx</DependentUpon>
@@ -121,6 +125,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TCheckBLL.cs" />
+    <Compile Include="BLL\TDiseasestatusBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
@@ -131,6 +136,7 @@
     <Compile Include="BLL\VTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
+    <Compile Include="DAO\TDiseasestatusDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\TGuardianDAO.cs" />
