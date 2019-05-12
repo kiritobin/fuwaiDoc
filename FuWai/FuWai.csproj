@@ -79,7 +79,9 @@
   <ItemGroup>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
+    <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
