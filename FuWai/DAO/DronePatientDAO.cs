@@ -31,7 +31,7 @@ namespace FuWai.DAO
         public DataTable selectVDronePatientByDroneid(string droneid)
         {
             string sql = "select * from V_DronePatient where droneid = @droneid";
-            String[] param = { "@droneid" };
+            string[] param = { "@droneid" };
             object[] value = { droneid };
             DataTable dt = db.FillDataSet(sql, param, value).Tables[0];
             return dt;

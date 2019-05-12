@@ -12,13 +12,32 @@ namespace FuWai.DAO
         SQLHelper db = new SQLHelper();
 
         /// <summary>
-        /// 无人机信息查询
+        /// 病史信息查询
         /// </summary>
         /// <returns></returns>
-        public DataTable SelectVMedicalHistory()
+        public DataTable SelectVMedicalHistorybymedicalhistoryid(string medicalhistoryid)
         {
-            string sql = "select * from V_MedicalHistory";
-            return db.FillDataSet(sql, null, null).Tables[0];
+            string sql = "select * from V_MedicalHistory where medicalhistoryid = @medicalhistoryid";
+
+            string[] param = { "@medicalhistoryid" };
+            object[] vlaue = { medicalhistoryid };
+
+            return db.FillDataSet(sql, param, vlaue).Tables[0];
         }
+
+        /// <summary>
+        /// 病人病史信息查询
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SelectVMedicalHistorybypatientid(string patientid)
+        {
+            string sql = "select * from V_MedicalHistory where patientid = @patientid";
+
+            string[] param = { "@patientid" };
+            object[] vlaue = { patientid };
+
+            return db.FillDataSet(sql, param, vlaue).Tables[0];
+        }
+
     }
 }

@@ -32,7 +32,7 @@ namespace FuWai.DAO
         public int insertDrone(string droneid,string dronemodel, string position,int flycount,int status) {
             string sql = "insert into T_Drone values(@droneid,@dronemodel,@position,@flycount,@status)";
 
-            string[] param = { @droneid, @dronemodel, @position, @flycount.ToString(), @status.ToString() };
+            string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" };
             object[] value = { droneid, dronemodel, position, flycount, status };
 
             return db.ExecuteNoneQuery(sql, param, value);
@@ -49,7 +49,7 @@ namespace FuWai.DAO
         public int updateDrone(string droneid, string dronemodel, string position, int flycount, int status) {
             string sql = "update T_Drone set droneid=@droneid ,dronemodel=@dronemodel,position=@position,flycount=@flycount,status=@status where droneid=@droneid ";
 
-            string[] param = { @droneid, @dronemodel, @position, @flycount.ToString(), @status.ToString() };
+            string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" };
             object[] value = { droneid, dronemodel, position, flycount, status };
 
             return db.ExecuteNoneQuery(sql, param, value);
@@ -62,7 +62,7 @@ namespace FuWai.DAO
         public int deleteDrone(string droneid) {
             string sql = "delete from T_Drone where droneid=@droneid ";
 
-            string[] param = { @droneid };
+            string[] param = { "@droneid" };
             object[] value = { droneid };
 
             return db.ExecuteNoneQuery(sql, param, value);

@@ -12,15 +12,28 @@ namespace FuWai.BLL
     {
         VMedicalHistoryDAO vmh  = new VMedicalHistoryDAO();
         /// <summary>
-        /// 病人病史信息查询
+        /// 历史信息编号查询病史
         /// </summary>
         /// <returns></returns>
-        public String getDroneinfo()
+        public String getDroneinfobymedicalhistoryid(string medicalhistoryid)
         {
-            DataTable dt = vmh.SelectVMedicalHistory();
+            DataTable dt = vmh.SelectVMedicalHistorybymedicalhistoryid(medicalhistoryid);
             String json = "";
             json = JsonHelper.ToJson(dt);
             return json;
         }
+
+        /// <summary>
+        /// 病人编号查询病史
+        /// </summary>
+        /// <returns></returns>
+        public String getDroneinfobypatientid(string patientid)
+        {
+            DataTable dt = vmh.SelectVMedicalHistorybymedicalhistoryid(patientid);
+            String json = "";
+            json = JsonHelper.ToJson(dt);
+            return json;
+        }
+
     }
 }

@@ -19,9 +19,7 @@ namespace FuWai.DAO
         public DataTable SelectAllPatient()
         {
             string sql = "select * from V_Patient";
-            string[] param = { };
-            object[] value = { };
-            return db.FillDataSet(sql, param, value).Tables[0];
+            return db.FillDataSet(sql, null, null).Tables[0];
         }
 
         /// <summary>
