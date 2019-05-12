@@ -68,6 +68,8 @@
     <Content Include="action\TGcontact.ashx" />
     <Content Include="action\VDronePatient.ashx" />
     <Content Include="action\VCheck.ashx" />
+    <Content Include="action\TTreatment.ashx" />
+    <Content Include="action\TPContact.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -99,6 +101,12 @@
     <Compile Include="action\TGcontact.ashx.cs">
       <DependentUpon>TGcontact.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\TPContact.ashx.cs">
+      <DependentUpon>TPContact.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TTreatment.ashx.cs">
+      <DependentUpon>TTreatment.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VCheck.ashx.cs">
       <DependentUpon>VCheck.ashx</DependentUpon>
     </Compile>
@@ -121,6 +129,8 @@
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
+    <Compile Include="BLL\TPContactBLL.cs" />
+    <Compile Include="BLL\TTreatmentBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
@@ -131,6 +141,8 @@
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\TGuardianDAO.cs" />
+    <Compile Include="DAO\TPContactDAO.cs" />
+    <Compile Include="DAO\TTreatmentDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
