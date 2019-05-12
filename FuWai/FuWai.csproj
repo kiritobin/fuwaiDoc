@@ -80,7 +80,6 @@
     <Content Include="js\vue.js" />
     <Content Include="login.html" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="action\TDrone.ashx.cs">
@@ -101,7 +100,6 @@
     <Compile Include="action\VTreatment.ashx.cs">
       <DependentUpon>VTreatment.ashx</DependentUpon>
     </Compile>
-    <Compile Include="BLL\DronePatientBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
@@ -110,7 +108,6 @@
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VTreatmentBLL.cs" />
-    <Compile Include="DAO\DronePatientDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
@@ -121,13 +118,6 @@
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
