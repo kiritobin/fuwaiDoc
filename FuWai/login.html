@@ -46,7 +46,42 @@
             $('.wrapper').addClass('form-success');
             var user = $("#user").val();
             var pwd = $("#pwd").val();
-            alert(user + "  " + pwd);
+            if (user == "" || pwd == "") {
+                alert("含有未填项目");
+            }
+            else {
+                $.ajax({
+                    type: 'Post',
+                    url: 'action/Login.ashx',
+                    data: {
+                        user: user,
+                        pwd: pwd,
+                        op:"login"
+                    },
+                    dataType: 'text',
+                    success: function (data) {
+                        alert(data);
+                        if (data == "登录成功") {
+                            window.location.href = "home.html";
+                        }
+                        else {
+                            alert("登录失败，请重试");
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                        else if (textStatus == "parsererror") {
+                            alert("返回类型错误");
+                        }
+                    }
+                })
+            }
         });
     </script>
 
