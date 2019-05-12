@@ -77,8 +77,10 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\DronePatientBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
+    <Compile Include="DAO\DronePatientDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
