@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
+    <Compile Include="BLL\VCheckBLL.cs" />
+    <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
