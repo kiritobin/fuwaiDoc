@@ -68,6 +68,11 @@
     <Content Include="action\TGcontact.ashx" />
     <Content Include="action\VDronePatient.ashx" />
     <Content Include="action\VCheck.ashx" />
+    <Content Include="action\TCheck.ashx" />
+    <Content Include="action\TDiseasestatus.ashx" />
+    <Content Include="action\TGuardian.ashx" />
+    <Content Include="action\TMedicalhistory.ashx" />
+    <Content Include="action\TPatient.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -91,6 +96,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\TCheck.ashx.cs">
+      <DependentUpon>TCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TDiseasestatus.ashx.cs">
+      <DependentUpon>TDiseasestatus.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\TDrone.ashx.cs">
       <DependentUpon>TDrone.ashx</DependentUpon>
     </Compile>
@@ -99,6 +110,15 @@
     </Compile>
     <Compile Include="action\TGcontact.ashx.cs">
       <DependentUpon>TGcontact.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TGuardian.ashx.cs">
+      <DependentUpon>TGuardian.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TMedicalhistory.ashx.cs">
+      <DependentUpon>TMedicalhistory.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TPatient.ashx.cs">
+      <DependentUpon>TPatient.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\VCheck.ashx.cs">
       <DependentUpon>VCheck.ashx</DependentUpon>
@@ -118,9 +138,12 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TCheckBLL.cs" />
+    <Compile Include="BLL\TDiseasestatusBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
+    <Compile Include="BLL\TMedicalhistoryBLL.cs" />
+    <Compile Include="BLL\TPatientBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
@@ -128,9 +151,12 @@
     <Compile Include="BLL\VTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
+    <Compile Include="DAO\TDiseasestatusDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\TGuardianDAO.cs" />
+    <Compile Include="DAO\TMedicalhistoryDAO.cs" />
+    <Compile Include="DAO\TPatientDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />

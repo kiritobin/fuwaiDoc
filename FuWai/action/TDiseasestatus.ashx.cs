@@ -7,20 +7,15 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// TGcontact 的摘要说明
+    /// TDiseasestatus 的摘要说明
     /// </summary>
-    public class TGcontact : IHttpHandler
+    public class TDiseasestatus : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
         {
             string op = context.Request["op"];
-
-            if (op == "load")
-            {
-                load(context);
-            }
-            else if (op == "insert")
+            if (op == "insert")
             {
                 insert(context);
             }
@@ -32,24 +27,24 @@ namespace FuWai.action
             {
                 delete(context);
             }
+            else if (op == "all")
+            {
+                SelectAllTDiseasestatus(context);
+            }
+            else if (op == "bypatientid")
+            {
+                SelectByDiseasestatusid(context);
+            }
         }
 
-        TGcontactBLL tb = new TGcontactBLL();
-
-        private void load(HttpContext context)
-        {
-            String json = tb.getGcontactinfo();
-            context.Response.Write(json);
-            context.Response.End();
-
-        }
+        TDiseasestatusBLL tb = new TDiseasestatusBLL();
 
         private void insert(HttpContext context)
         {
-            String contactphone = context.Request["contactphone"];
-            String guardianid = context.Request["guardianid"];
+            String diseasestatusid = context.Request["diseasestatusid"];
+            String statusname = context.Request["statusname"];
 
-            if (tb.insert(contactphone, guardianid))
+            if (tb.insert(diseasestatusid, statusname))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -61,13 +56,12 @@ namespace FuWai.action
                 context.Response.End();
             }
         }
-
         private void update(HttpContext context)
         {
-            String contactphone = context.Request["contactphone"];
-            String guardianid = context.Request["guardianid"];
+            String diseasestatusid = context.Request["diseasestatusid"];
+            String statusname = context.Request["statusname"];
 
-            if (tb.update(contactphone, guardianid))
+            if (tb.update(diseasestatusid, statusname))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -81,19 +75,36 @@ namespace FuWai.action
         }
         private void delete(HttpContext context)
         {
-            String gcontactid = context.Request["gcontactid"];
+            String diseasestatusid = context.Request["diseasestatusid"];
 
-            if (tb.delete(gcontactid))
+            if (tb.delete(diseasestatusid))
             {
-                context.Response.Write("删除成功");
+                context.Response.Write("修改成功");
                 context.Response.End();
 
             }
             else
             {
-                context.Response.Write("删除失败");
+                context.Response.Write("修改失败");
                 context.Response.End();
             }
+        }
+
+        private void SelectAllTDiseasestatus(HttpContext context)
+        {
+            String json = tb.SelectAllTDiseasestatus();
+            context.Response.Write(json);
+            context.Response.End();
+
+        }
+
+        private void SelectByDiseasestatusid(HttpContext context)
+        {
+            String diseasestatusid = context.Request["diseasestatusid"];
+            String json = tb.SelectByDiseasestatusid(diseasestatusid);
+            context.Response.Write(json);
+            context.Response.End();
+
         }
 
         public bool IsReusable
