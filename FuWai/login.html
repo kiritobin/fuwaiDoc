@@ -17,8 +17,8 @@
         <div class="container">
             <h1>Welcome</h1>
             <form class="form">
-                <input type="text" placeholder="用户名">
-                <input type="password" placeholder="密码">
+                <input type="text" id="user" placeholder="用户名">
+                <input type="password" id="pwd" placeholder="密码">
                 <button type="submit" id="login-button">登录</button>
             </form>
         </div>
@@ -44,6 +44,9 @@
             event.preventDefault();
             $('form').fadeOut(500);
             $('.wrapper').addClass('form-success');
+            var user = $("#user").val();
+            var pwd = $("#pwd").val();
+            alert(user + "  " + pwd);
         });
     </script>
 
