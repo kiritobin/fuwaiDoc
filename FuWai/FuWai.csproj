@@ -61,10 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="action\Login.ashx" />
-    <Content Include="action\Drone.ashx" />
+    <Content Include="action\TDrone.ashx" />
     <Content Include="action\VMedicalHistory.ashx" />
     <Content Include="action\VPatient.ashx" />
     <Content Include="action\VTreatment.ashx" />
+    <Content Include="action\TGcontact.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -82,11 +83,14 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="action\Drone.ashx.cs">
-      <DependentUpon>Drone.ashx</DependentUpon>
+    <Compile Include="action\TDrone.ashx.cs">
+      <DependentUpon>TDrone.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TGcontact.ashx.cs">
+      <DependentUpon>TGcontact.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\VMedicalHistory.ashx.cs">
       <DependentUpon>VMedicalHistory.ashx</DependentUpon>
@@ -101,6 +105,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
+    <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
@@ -108,6 +113,7 @@
     <Compile Include="DAO\DronePatientDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
+    <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />

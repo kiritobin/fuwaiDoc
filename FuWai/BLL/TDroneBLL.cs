@@ -39,9 +39,9 @@ namespace FuWai.BLL
         /// <param name="position">停落位置</param>
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
-        /// <returns></returns>
-        public Boolean insertDrone(string droneid, string dronemodel, string position, int flycount, int status) {
-            int row = td.insertDrone( droneid, dronemodel, position, flycount, status);
+        /// <returns>成功返回true失败返回fasle</returns>
+        public Boolean insert(string droneid, string dronemodel, string position, int flycount, int status) {
+            int row = td.insert( droneid, dronemodel, position, flycount, status);
             if (row > 0) {
                 return true;
             }
@@ -55,9 +55,9 @@ namespace FuWai.BLL
         /// <param name="position">停落位置</param>
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
-        /// <returns></returns>
-        public Boolean updateDrone(string droneid, string dronemodel, string position, int flycount, int status) {
-            int row = td.updateDrone(droneid, dronemodel, position, flycount, status);
+        /// <returns>成功返回true失败返回fasle</returns>
+        public Boolean update(string droneid, string dronemodel, string position, int flycount, int status) {
+            int row = td.update(droneid, dronemodel, position, flycount, status);
             if (row > 0)
             {
                 return true;
@@ -69,9 +69,9 @@ namespace FuWai.BLL
         /// 通过无人机编号删除无人机
         /// </summary>
         /// <param name="droneid">无人机编号</param>
-        /// <returns></returns>
-        public Boolean deleteDrone(string droneid) {
-            int row = td.deleteDrone(droneid);
+        /// <returns>成功返回true失败返回fasle</returns>
+        public Boolean delete(string droneid) {
+            int row = td.delete(droneid);
             if (row > 0)
             {
                 return true;

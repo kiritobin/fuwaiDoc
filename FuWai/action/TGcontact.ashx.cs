@@ -7,9 +7,9 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// Drone 的摘要说明
+    /// TGcontact 的摘要说明
     /// </summary>
-    public class Drone : IHttpHandler
+    public class TGcontact : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -18,37 +18,38 @@ namespace FuWai.action
 
             if (op == "load")
             {
-                loadDrop(context);
+                load(context);
             }
-            else if (op == "add") {
-                addDrone(context);
+            else if (op == "add")
+            {
+                add(context);
             }
-            else if (op == "update") {
-                updateDrone(context);
+            else if (op == "update")
+            {
+                update(context);
             }
             else if (op == "delete")
             {
-                updateDrone(context);
+                delete(context);
             }
         }
-        TDroneBLL drone = new TDroneBLL();
 
-        private void loadDrop(HttpContext context)
+        TGcontactBLL tb = new TGcontactBLL();
+
+        private void load(HttpContext context)
         {
-            String json = drone.getDroneinfo();
+            String json = tb.getGcontactinfo();
             context.Response.Write(json);
             context.Response.End();
 
         }
 
-        private void addDrone(HttpContext context) {
-            String droneid = context.Request["droneid"];
-            String dronemodel = context.Request["dronemodel"];
-            String position = context.Request["position"];
-            int flycount = Convert.ToInt32(context.Request["flycount"]);
-            int status = Convert.ToInt32(context.Request["status"]);
+        private void add(HttpContext context)
+        {
+            String contactphone = context.Request["contactphone"];
+            String guardianid = context.Request["guardianid"];
 
-            if (drone.insertDrone(droneid, dronemodel, position, flycount, status))
+            if (tb.insert(contactphone, guardianid))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -61,15 +62,12 @@ namespace FuWai.action
             }
         }
 
-        private void updateDrone(HttpContext context)
+        private void update(HttpContext context)
         {
-            String droneid = context.Request["droneid"];
-            String dronemodel = context.Request["dronemodel"];
-            String position = context.Request["position"];
-            int flycount = Convert.ToInt32(context.Request["flycount"]);
-            int status = Convert.ToInt32(context.Request["status"]);
+            String contactphone = context.Request["contactphone"];
+            String guardianid = context.Request["guardianid"];
 
-            if (drone.updateDrone(droneid, dronemodel, position, flycount, status))
+            if (tb.update(contactphone, guardianid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -81,11 +79,11 @@ namespace FuWai.action
                 context.Response.End();
             }
         }
-        private void deleteDrone(HttpContext context)
+        private void delete(HttpContext context)
         {
-            String droneid = context.Request["droneid"];
+            String guardianid = context.Request["guardianid"];
 
-            if (drone.deleteDrone(droneid))
+            if (tb.delete(guardianid))
             {
                 context.Response.Write("删除成功");
                 context.Response.End();

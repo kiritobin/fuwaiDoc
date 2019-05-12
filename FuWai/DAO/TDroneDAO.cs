@@ -41,8 +41,8 @@ namespace FuWai.DAO
         /// <param name="position">停落位置</param>
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
-        /// <returns></returns>
-        public int insertDrone(string droneid,string dronemodel, string position,int flycount,int status) {
+        /// <returns>返回int</returns>
+        public int insert(string droneid,string dronemodel, string position,int flycount,int status) {
             string sql = "insert into T_Drone values(@droneid,@dronemodel,@position,@flycount,@status)";
 
             string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" };
@@ -58,8 +58,8 @@ namespace FuWai.DAO
         /// <param name="position">停落位置</param>
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
-        /// <returns></returns>
-        public int updateDrone(string droneid, string dronemodel, string position, int flycount, int status) {
+        /// <returns>返回int</returns>
+        public int update(string droneid, string dronemodel, string position, int flycount, int status) {
             string sql = "update T_Drone set droneid=@droneid ,dronemodel=@dronemodel,position=@position,flycount=@flycount,status=@status where droneid=@droneid ";
 
             string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" };
@@ -71,8 +71,8 @@ namespace FuWai.DAO
         /// 删除无人机信息
         /// </summary>
         /// <param name="droneid">编号</param>
-        /// <returns></returns>
-        public int deleteDrone(string droneid) {
+        /// <returns>返回int</returns>
+        public int delete(string droneid) {
             string sql = "delete from T_Drone where droneid=@droneid ";
 
             string[] param = { "@droneid" };
