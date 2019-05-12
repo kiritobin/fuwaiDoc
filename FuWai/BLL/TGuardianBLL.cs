@@ -14,7 +14,7 @@ namespace FuWai.BLL
         /// 查询监护人
         /// </summary>
         /// <returns>返回json</returns>
-        public String getGcontactinfo()
+        public String getGuardianinfo()
         {
             return JsonHelper.ToJson(td.SelectGuardian());
         }
@@ -24,7 +24,7 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="guardianid">监护人编号</param>
         /// <returns>返回json</returns>
-        public String getGcontactinfobyguardianid(string guardianid)
+        public String getGuardianinfobyguardianid(string guardianid)
         {
             return JsonHelper.ToJson(td.SelectGuardianbyguardianid(guardianid));
         }
