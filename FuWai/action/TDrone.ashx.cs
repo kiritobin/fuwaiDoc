@@ -20,8 +20,8 @@ namespace FuWai.action
             {
                 load(context);
             }
-            else if (op == "add") {
-                add(context);
+            else if (op == "insert") {
+                insert(context);
             }
             else if (op == "update") {
                 update(context);
@@ -41,7 +41,7 @@ namespace FuWai.action
 
         }
 
-        private void add(HttpContext context) {
+        private void insert(HttpContext context) {
             String droneid = context.Request["droneid"];
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];

@@ -20,9 +20,9 @@ namespace FuWai.action
             {
                 load(context);
             }
-            else if (op == "add")
+            else if (op == "insert")
             {
-                add(context);
+                insert(context);
             }
             else if (op == "update")
             {
@@ -44,7 +44,7 @@ namespace FuWai.action
 
         }
 
-        private void add(HttpContext context)
+        private void insert(HttpContext context)
         {
             String contactphone = context.Request["contactphone"];
             String guardianid = context.Request["guardianid"];
