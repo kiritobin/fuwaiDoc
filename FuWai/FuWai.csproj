@@ -124,6 +124,8 @@
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
+    <Compile Include="BLL\TMedicalhistoryBLL.cs" />
+    <Compile Include="BLL\TPatientBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
@@ -134,6 +136,8 @@
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\TGuardianDAO.cs" />
+    <Compile Include="DAO\TMedicalhistoryDAO.cs" />
+    <Compile Include="DAO\TPatientDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
