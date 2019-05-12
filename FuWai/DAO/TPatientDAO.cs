@@ -45,12 +45,12 @@ namespace FuWai.DAO
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
         /// <returns>返回int</returns>
-        public int insert(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid)
+        public int insert(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid,string tel)
         {
-            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@guardianid,@diseasestatusid,@droneid)";
+            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@guardianid,@diseasestatusid,@droneid,@tel)";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@guardianid", "@diseasestatusid", "@droneid" };
-            object[] value = { patientid, patientname, gender, guardianid, diseasestatusid, droneid };
+            string[] param = { "@patientid", "@patientname", "@gender", "@guardianid", "@diseasestatusid", "@droneid" ,"@tel"};
+            object[] value = { patientid, patientname, gender, guardianid, diseasestatusid, droneid ,tel};
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -65,12 +65,12 @@ namespace FuWai.DAO
         /// <param name="droneid">无人机编号</param>
         /// <returns>返回int</returns>
         /// <returns>返回int</returns>
-        public int update(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid)
+        public int update(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid,string tel)
         {
-            string sql = "update T_Patient set patientid=@patientid patientname=@patientname ,gender=@gender,guardianid=@guardianid,diseasestatusid=@diseasestatusid,droneid=@droneid where patientid=@patientid ";
+            string sql = "update T_Patient set patientid=@patientid patientname=@patientname ,gender=@gender,guardianid=@guardianid,diseasestatusid=@diseasestatusid,droneid=@droneid,tel=@tel where patientid=@patientid ";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@guardianid", "@diseasestatusid", "@droneid" };
-            object[] value = { patientid, patientname, gender, guardianid, diseasestatusid, droneid };
+            string[] param = { "@patientid", "@patientname", "@gender", "@guardianid", "@diseasestatusid", "@droneid","@tel" };
+            object[] value = { patientid, patientname, gender, guardianid, diseasestatusid, droneid ,tel};
 
             return db.ExecuteNoneQuery(sql, param, value);
         }

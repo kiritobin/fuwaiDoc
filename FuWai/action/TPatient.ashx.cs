@@ -30,7 +30,7 @@ namespace FuWai.action
             }
             else if (op == "delete")
             {
-                update(context);
+                delete(context);
             }
         }
 
@@ -52,8 +52,8 @@ namespace FuWai.action
             int guardianid = Convert.ToInt32(context.Request["guardianid"]);
             int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
             String droneid = context.Request["droneid"];
-
-            if (tb.insert(patientid, patientname, gender, guardianid, diseasestatusid, droneid))
+            String tel = context.Request["tel"];
+            if (tb.insert(patientid, patientname, gender, guardianid, diseasestatusid, droneid,tel))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -74,8 +74,9 @@ namespace FuWai.action
             int guardianid = Convert.ToInt32(context.Request["guardianid"]);
             int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
             String droneid = context.Request["droneid"];
+            String tel = context.Request["tel"];
 
-            if (tb.update(patientid, patientname, gender, guardianid, diseasestatusid, droneid))
+            if (tb.update(patientid, patientname, gender, guardianid, diseasestatusid, droneid,tel))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();

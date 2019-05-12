@@ -73,6 +73,7 @@
     <Content Include="action\TGuardian.ashx" />
     <Content Include="action\TMedicalhistory.ashx" />
     <Content Include="action\TPatient.ashx" />
+    <Content Include="action\PatientInfo.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,6 +97,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\PatientInfo.ashx.cs">
+      <DependentUpon>PatientInfo.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\TCheck.ashx.cs">
       <DependentUpon>TCheck.ashx</DependentUpon>
     </Compile>

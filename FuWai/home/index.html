@@ -25,7 +25,7 @@
             <div class="col-md-9">
                 <div id="test" class="form-group">
                     <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
-                            data-target="#addModal">
+                            data-target="#addModal" id="search" @click="search()">
                         添加
                     </button>
                     <div class="form-group">
@@ -44,7 +44,7 @@
                                 <td>{{dataItem.patientid}}</td>
                                 <td>{{dataItem.patientname}}</td>
                                 <td>{{dataItem.gender}}</td>
-                                <td>{{dataItem.pcontactphone}}</td>
+                                <td>{{dataItem.tel}}</td>
                                 <td>{{dataItem.guardianname}} - {{dataItem.appellation}}</td>
                                 <td>{{dataItem.contactphone}}</td>
                                 <td>{{dataItem.droneid}}</td>
@@ -123,23 +123,44 @@
                                 <div class="modal-body">
                                     <p>
                                         <label>编号：</label>
-                                        <input type="text" id="stuNo" v-model="add.patientid">
+                                        <input type="text" id="No">
                                     </p>
                                     <p>
                                         <label>姓名：</label>
-                                        <input type="text" id="stuName" v-model="add.patientname">
+                                        <input type="text" id="Name">
                                     </p>
                                     <p>
                                         <label>性别：</label>
-                                        <input type="text" id="stuAge" v-model="add.gender">
+                                        <select id="gender">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
                                     </p>
                                     <p>
                                         <label>联系号码：</label>
-                                        <input type="text" v-model="add.pcontactphone" value="">
+                                        <input type="text" value="" id="Tel">
+                                    </p>
+                                    <p>
+                                        <label>监护人编号：</label>
+                                        <select id="contact">
+                                            
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label>病情等级：</label>
+                                        <select id="disease">
+                                           
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label>无人机编号：</label>
+                                        <select id="drone">
+                                            
+                                        </select>
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="add">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="add()">
                                         提交更改
                                     </button>
                                 </div>
@@ -162,23 +183,23 @@
                                 <div class="modal-body">
                                     <p>
                                         <label>编号：</label>
-                                        <input type="text" readonly v-model="editPeople.patientid" value="">
+                                        <input type="text" readonly v-model="editPeople.patientid" id="No" value="">
                                     </p>
                                     <p>
                                         <label>姓名：</label>
-                                        <input type="text" v-model="editPeople.patientname" value="">
+                                        <input type="text" v-model="editPeople.patientname" id="Name"  value="">
                                     </p>
                                     <p>
                                         <label>性别：</label>
-                                        <input type="text" v-model="editPeople.gender" value="">
+                                        <input type="text" v-model="editPeople.gender" id="gender" value="">
                                     </p>
                                     <p>
                                         <label>联系号码：</label>
-                                        <input type="text" v-model="editPeople.pcontactphone" value="">
+                                        <input type="text" v-model="editPeople.tel" id="Tel" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update()">
                                         提交更改
                                     </button>
                                 </div>
@@ -195,6 +216,138 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="vue.js"></script>
     <script>
+        function add() {
+            var patientid = $("#No").val();
+            var patientname = $("#patientname").val();
+            var gender = $("#gender").val();
+            var tel = $("#Tel").val();
+            var guardianid = $("#contact").val();
+            var diseasestatusid = $("#disease").val();
+            var droneid = $("#drone").val();
+            if (patientid == "" || patientname == "" || gender == "" || tel == "" || guardianid == "" || diseasestatusid == "" || droneid == "") {
+                alert("含有未填项");
+            }
+            else {
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/TPatient.ashx',
+                    data: {
+                        patientid: patientid,
+                        patientname: patientname,
+                        gender: gender,
+                        tel: tel,
+                        guardianid: guardianid,
+                        diseasestatusid: diseasestatusid,
+                        droneid: droneid,
+                        op: "insert"
+                    },
+                    dataType: 'text',
+                    success: function (data) {
+                        console.log(data);
+                        if ("添加成功") {
+                            alert("添加成功");
+                            window.location.reload();
+                        }
+                        else {
+                            alert("添加失败");
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                        else if (textStatus == "parsererror") {
+                            alert("返回类型错误");
+                        }
+                    }
+                })
+            }
+        }
+        function dele(patientid) {
+            $.ajax({
+                type: 'Post',
+                url: '../action/TPatient.ashx',
+                data: {
+                    patientid: patientid,
+                    op: "delete"
+                },
+                dataType: 'text',
+                success: function (data) {
+                    console.log(data);
+                    if ("删除成功") {
+                        alert("删除成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus) { //请求失败
+                    if (textStatus == 'timeout') {
+                        var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                        xmlhttp.abort();
+                        alert("请求超时");
+                    } else if (textStatus == "error") {
+                        alert("服务器内部错误");
+                    }
+                    else if (textStatus == "parsererror") {
+                        alert("返回类型错误");
+                    }
+                }
+            })
+        }
+        function update() {
+            var patientid = $("#No").val();
+            var patientname = $("#patientname").val();
+            var gender = $("#gender").val();
+            var tel = $("#Tel").val();
+            if (patientid == "" || patientname == "" || gender == "" || tel == "" ) {
+                alert("含有未填项");
+            }
+            else if (gender != "男" || gender != "女") {
+                alert("请正确填写性别");
+            }
+            else {
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/TPatient.ashx',
+                    data: {
+                        patientid: patientid,
+                        patientname: patientname,
+                        gender: gender,
+                        tel: tel,
+                        op: "update"
+                    },
+                    dataType: 'text',
+                    success: function (data) {
+                        console.log(data);
+                        if ("修改成功") {
+                            alert("修改成功");
+                            window.location.reload();
+                        }
+                        else {
+                            alert("修改失败");
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                        else if (textStatus == "parsererror") {
+                            alert("返回类型错误");
+                        }
+                    }
+                })
+            }
+        }
         //只能输入正整数过滤器
         Vue.filter('onlyNumeric', {
             // model -> view
@@ -242,6 +395,7 @@
                         }
                     }
                 })
+                //search(_this);
             },
             data: {
                 //总项目数
@@ -341,7 +495,7 @@
                 },
                 del: function (item) {
                     console.log(item);
-
+                    dele(item);
                 },
                 //编辑
                 edit: function (item) {
@@ -349,11 +503,54 @@
                         patientid: item.patientid,
                         patientname: item.patientname,
                         gender: item.gender,
-                        pcontactphone: item.pcontactphone
+                        pcontactphone: item.pcontactphone,
+                        tel:item.tel
                     };
                 },
                 update: function () {
+                    update();
+                },
+                search: function () {
+                    $.ajax({
+                        type: 'Post',
+                        url: '../action/PatientInfo.ashx',
+                        data: {
+                            op: "search"
+                        },
+                        dataType: 'text',
+                        success: function (data) {
+                            var arr = [];
+                            arr = data.split('|-|');
 
+                            var contact = JSON.parse(arr[0]);
+                            var disease = JSON.parse(arr[1]);
+                            var drone = JSON.parse(arr[2]);
+                            $.each(contact, function (index, item) {
+                                $("#contact").append( 
+                                    "<option value=" + item.guardianid + ">" + item.guardianname + "(" + item.appellation+")" + "</option>");
+                            });
+                            $.each(disease, function (index, item) {
+                                $("#disease").append(
+                                    "<option value=" + item.diseasestatusid + ">" + item.statusname + "</option>");
+                            });
+                            $.each(drone, function (index, item) {
+                                $("#drone").append(
+                                    "<option value=" + item.droneid + ">" + item.dronemodel + "(" + item.droneid + ")" + "</option>");
+                            });
+                        },
+                        error: function (XMLHttpRequest, textStatus) { //请求失败
+                            if (textStatus == 'timeout') {
+                                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                                xmlhttp.abort();
+                                alert("请求超时");
+                            } else if (textStatus == "error") {
+                                alert("服务器内部错误");
+                            }
+                            else if (textStatus == "parsererror") {
+                                alert("返回类型错误");
+                            }
+                        }
+                    })
                 }
             }
         });

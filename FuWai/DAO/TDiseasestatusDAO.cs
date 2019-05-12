@@ -61,7 +61,7 @@ namespace FuWai.DAO
         /// <returns>DataTable</returns>
         public DataTable SelectAllTDiseasestatus()
         {
-            string sql = "select * T_Diseasestatus";
+            string sql = "select * from T_Diseasestatus";
             return db.FillDataSet(sql, null, null).Tables[0];
         }
 
