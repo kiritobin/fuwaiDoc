@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="action\Login.ashx" />
+    <Content Include="action\Drone.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -78,6 +79,9 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Drone.ashx.cs">
+      <DependentUpon>Drone.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>

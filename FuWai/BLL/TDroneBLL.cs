@@ -16,7 +16,7 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="datatable"></param>
         /// <returns></returns>
-        public String getDroneinfo(DataTable datatable)
+        public String getDroneinfo()
         {
             DataTable dt = td.SelectDrone();
             String json = "";
