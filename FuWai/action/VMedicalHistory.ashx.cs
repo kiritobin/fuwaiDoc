@@ -14,7 +14,7 @@ namespace FuWai.action
 
         public void ProcessRequest(HttpContext context)
         {
-            string op = context.Request["load"];
+            string op = context.Request["op"];
             if (op == "load")
             {
                 loadDrop(context);
