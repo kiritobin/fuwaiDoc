@@ -7,9 +7,9 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// TGcontact 的摘要说明
+    /// TGuardian 的摘要说明
     /// </summary>
-    public class TGcontact : IHttpHandler
+    public class TGuardian : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -34,11 +34,11 @@ namespace FuWai.action
             }
         }
 
-        TGcontactBLL tb = new TGcontactBLL();
+        TGuardianBLL tb = new TGuardianBLL();
 
         private void load(HttpContext context)
         {
-            String json = tb.getGcontactinfo();
+            String json = tb.getGuardianinfo();
             context.Response.Write(json);
             context.Response.End();
 
@@ -46,10 +46,10 @@ namespace FuWai.action
 
         private void insert(HttpContext context)
         {
-            String contactphone = context.Request["contactphone"];
-            String guardianid = context.Request["guardianid"];
+            String appellation = context.Request["appellation"];
+            String guardianname = context.Request["guardianname"];
 
-            if (tb.insert(contactphone, guardianid))
+            if (tb.insert(appellation, guardianname))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -64,10 +64,11 @@ namespace FuWai.action
 
         private void update(HttpContext context)
         {
-            String contactphone = context.Request["contactphone"];
+            String appellation = context.Request["appellation"];
+            String guardianname = context.Request["guardianname"];
             String guardianid = context.Request["guardianid"];
 
-            if (tb.update(contactphone, guardianid))
+            if (tb.update(appellation, guardianname, guardianid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -81,9 +82,9 @@ namespace FuWai.action
         }
         private void delete(HttpContext context)
         {
-            String gcontactid = context.Request["gcontactid"];
+            String guardianid = context.Request["guardianid"];
 
-            if (tb.delete(gcontactid))
+            if (tb.delete(guardianid))
             {
                 context.Response.Write("删除成功");
                 context.Response.End();

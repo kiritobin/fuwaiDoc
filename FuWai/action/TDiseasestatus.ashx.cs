@@ -7,11 +7,11 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// TCheck 的摘要说明
+    /// TDiseasestatus 的摘要说明
     /// </summary>
-    public class TCheck : IHttpHandler
+    public class TDiseasestatus : IHttpHandler
     {
-        TCheckBLL tb = new TCheckBLL();
+
         public void ProcessRequest(HttpContext context)
         {
             string op = context.Request["op"];
@@ -29,22 +29,22 @@ namespace FuWai.action
             }
             else if (op == "all")
             {
-                SelectAllPatient(context);
+                SelectAllTDiseasestatus(context);
             }
             else if (op == "bypatientid")
             {
-                SelectCheckByCheckID(context);
+                SelectByDiseasestatusid(context);
             }
         }
+
+        TDiseasestatusBLL tb = new TDiseasestatusBLL();
+
         private void insert(HttpContext context)
         {
-            String checkid = context.Request["checkid"];
-            String bloodpressure = context.Request["bloodpressure"];
-            double bodytemp = Convert.ToDouble(context.Request["bodytemp"]);
-            String checkdate = context.Request["checkdate"];
-            String patientid = context.Request["patientid"];
+            String diseasestatusid = context.Request["diseasestatusid"];
+            String statusname = context.Request["statusname"];
 
-            if (tb.insert(checkid, bloodpressure, bodytemp, checkdate, patientid))
+            if (tb.insert(diseasestatusid, statusname))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -58,13 +58,10 @@ namespace FuWai.action
         }
         private void update(HttpContext context)
         {
-            String checkid = context.Request["checkid"];
-            String bloodpressure = context.Request["bloodpressure"];
-            double bodytemp = Convert.ToDouble(context.Request["bodytemp"]);
-            String checkdate = context.Request["checkdate"];
-            String patientid = context.Request["patientid"];
+            String diseasestatusid = context.Request["diseasestatusid"];
+            String statusname = context.Request["statusname"];
 
-            if (tb.update(checkid, bloodpressure, bodytemp, checkdate, patientid))
+            if (tb.update(diseasestatusid, statusname))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -78,9 +75,9 @@ namespace FuWai.action
         }
         private void delete(HttpContext context)
         {
-            String checkid = context.Request["checkid"];
+            String diseasestatusid = context.Request["diseasestatusid"];
 
-            if (tb.delete(checkid))
+            if (tb.delete(diseasestatusid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -93,18 +90,18 @@ namespace FuWai.action
             }
         }
 
-        private void SelectAllPatient(HttpContext context)
+        private void SelectAllTDiseasestatus(HttpContext context)
         {
-            String json = tb.SelectAllCheck();
+            String json = tb.SelectAllTDiseasestatus();
             context.Response.Write(json);
             context.Response.End();
 
         }
 
-        private void SelectCheckByCheckID(HttpContext context)
+        private void SelectByDiseasestatusid(HttpContext context)
         {
-            String checkid = context.Request["checkid"];
-            String json = tb.SelectCheckByCheckID(checkid);
+            String diseasestatusid = context.Request["diseasestatusid"];
+            String json = tb.SelectByDiseasestatusid(diseasestatusid);
             context.Response.Write(json);
             context.Response.End();
 

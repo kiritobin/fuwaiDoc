@@ -57,7 +57,7 @@ namespace FuWai.DAO
             string sql = "delete from T_Check = where checkid=@checkid";
             string[] param = { "@checkid" };
             object[] values = { checkid };
-            return db.ExecuteNoneQuery(checkid, param, values);
+            return db.ExecuteNoneQuery(sql, param, values);
         }
 
         /// <summary>
