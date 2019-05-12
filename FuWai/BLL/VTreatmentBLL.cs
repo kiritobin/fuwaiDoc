@@ -36,7 +36,7 @@ namespace FuWai.BLL
         /// <returns>DataTable</returns>
         public string SelectTreatmentByTreatmentID(string treatmentid)
         {
-            return JsonHelper.ToJson(tdao.SelectTreatmentByTreatmentidID(treatmentid));
+            return JsonHelper.ToJson(tdao.SelectTreatmentByTreatmentID(treatmentid));
         }
     }
 }
