@@ -14,14 +14,41 @@ namespace FuWai.action
         TPContactBLL tpbll = new TPContactBLL();
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            string op = context.Request["op"];
+            if (op == "insert")
+            {
+                insert(context);
+            }
+            else if (op == "all")
+            {
+                SelectAll(context);
+            }
+            else if (op == "selectByPatientId")
+            {
+                selectByPatientId(context);
+            }
+            else if (op == "deletByPContactId")
+            {
+                deletByPContactId(context);
+            }
+            else if (op == "deletByPatientId")
+            {
+                deletByPatientId(context);
+            }
+            else if (op == "deletByPatientId")
+            {
+                deletByPatientId(context);
+            }
+            else if (op == "update")
+            {
+                update(context);
+            }
         }
         /// <summary>
         /// 查询所有的病人联系方式
         /// </summary>
         /// <returns></returns>
-        public void SelectDrone(HttpContext context)
+        public void SelectAll(HttpContext context)
         {
             String json = tpbll.selectAllPContact();
             context.Response.Write(json);
@@ -44,7 +71,7 @@ namespace FuWai.action
         /// <param name="pcontactphone">病人联系方式</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        private void insertPContact(HttpContext context)
+        private void insert(HttpContext context)
         {
             String pcontactphone = context.Request["pcontactphone"];
             String patientid = context.Request["patientid"];
@@ -106,7 +133,7 @@ namespace FuWai.action
         /// <param name="pcontactphone">新的联系方式</param>
         /// <param name="pcontactid">主键id</param>
         /// <returns></returns>
-        private void updatePContact(HttpContext context)
+        private void update(HttpContext context)
         {
             String pcontactphone = context.Request["pcontactphone"];
             String pcontactid = context.Request["pcontactid"];

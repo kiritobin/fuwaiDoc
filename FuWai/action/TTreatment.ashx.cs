@@ -14,14 +14,45 @@ namespace FuWai.action
         TTreatmentBLL tbll = new TTreatmentBLL();
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            string op = context.Request["op"];
+            if (op == "insert")
+            {
+                insert(context);
+            }
+            else if (op == "updateTreatmentId")
+            {
+                updateTreatmentId(context);
+            }
+            else if (op == "updatePatientId")
+            {
+                updatePatientId(context);
+            }
+            else if (op == "deleteByTreatmentId")
+            {
+                deleteByTreatmentId(context);
+            }
+            else if (op == "deletByPatientId")
+            {
+                deletByPatientId(context);
+            }
+            else if (op == "all")
+            {
+                selectAll(context);
+            }
+            else if (op == "selectByid")
+            {
+                selectByPatientId(context);
+            }
+            else if (op == "selectByPId")
+            {
+                selectByPatientId(context);
+            }
         }
         /// <summary>
         /// 查询所有的治疗记录
         /// </summary>
         /// <returns></returns>
-        private void selectAllTTreatment(HttpContext context)
+        private void selectAll(HttpContext context)
         {
             String json = tbll.selectAllTTreatment();
             context.Response.Write(json);
@@ -59,7 +90,7 @@ namespace FuWai.action
         /// <param name="treatmentEdate">结束时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        private void insertTreatment(HttpContext context)
+        private void insert(HttpContext context)
         {
             String treatmentid = context.Request["treatmentid"];
             String treatmentBdate = context.Request["treatmentBdate"];
