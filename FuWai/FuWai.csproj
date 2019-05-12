@@ -66,6 +66,7 @@
     <Content Include="action\VPatient.ashx" />
     <Content Include="action\VTreatment.ashx" />
     <Content Include="action\VDronePatient.ashx" />
+    <Content Include="action\VCheck.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -75,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\styles.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="home\bootstrap.min.css" />
+    <Content Include="home\jquery.min.js" />
+    <Content Include="home\index.html" />
+    <Content Include="home\vue.js" />
+    <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jsencrypt.min.js" />
     <Content Include="js\vue.js" />
@@ -88,6 +95,9 @@
     </Compile>
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\VCheck.ashx.cs">
+      <DependentUpon>VCheck.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\VDronePatient.ashx.cs">
       <DependentUpon>VDronePatient.ashx</DependentUpon>
