@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
+    <Compile Include="BLL\TCheckBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\TCheckDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\TGuardianDAO.cs" />
