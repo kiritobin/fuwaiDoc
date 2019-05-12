@@ -7,44 +7,37 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// VDronePatient 的摘要说明
+    /// VCheck 的摘要说明
     /// </summary>
-    public class VDronePatient : IHttpHandler
+    public class VCheck : IHttpHandler
     {
-
+        VCheckBLL cbll = new VCheckBLL();
         public void ProcessRequest(HttpContext context)
         {
             string op = context.Request["op"];
             if (op == "all")
             {
-                selectVDronePatient(context);
+                selectVCheck(context);
             }
-            else if (op == "droneid")
+            else if (op == "bypatientid")
             {
-                selectVDronePatientBydroneid(context);
+                selectByPatientId(context);
             }
-           
         }
-
-        VDronePatientBLL vt = new VDronePatientBLL();
-
-        private void selectVDronePatient(HttpContext context)
+        private void selectVCheck(HttpContext context)
         {
-            String json = vt.selectVDronePatient();
+            String json = cbll.selectVCheck();
+            context.Response.Write(json);
+            context.Response.End();
+        }
+        private void selectByPatientId(HttpContext context)
+        {
+            String patientid = context.Request["patientid"];
+            String json = cbll.selectByPatientId(patientid);
             context.Response.Write(json);
             context.Response.End();
 
         }
-
-        private void selectVDronePatientBydroneid(HttpContext context)
-        {
-            String droneid = context.Request["droneid"];
-            String json = vt.selectVDronePatientBydroneid(droneid);
-            context.Response.Write(json);
-            context.Response.End();
-
-        }
-
         public bool IsReusable
         {
             get

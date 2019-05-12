@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Test</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container body-content">
+        <div class="row" style="height:600px">
+            <div class="col-md-3" style="height: 100%">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">SVN</a></li>
+                    <li><a href="#">iOS</a></li>
+                    <li><a href="#">VB.Net</a></li>
+                    <li><a href="#">Java</a></li>
+                    <li><a href="#">PHP</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div id="test" class="form-group">
+                    <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
+                        data-target="#addModal">添加</button>
+                    <div class="form-group">
+                        <table class="table table-bordered table-responsive table-striped">
+                            <tr>
+                                <th v-on:click="sortBy('id')">ID</th>
+                                <th>姓名</th>
+                                <th v-on:click="sortBy('age')">年龄</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
+                                <td>{{dataItem.id}}</td>
+                                <td>{{dataItem.name}}</td>
+                                <td>{{dataItem.age}}</td>
+                                <td>
+                                    <button @click="del()" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
+                                    <button @click="" class="btn btn-primary btn-sm">查询</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="pager" id="pager">
+                            <span class="form-inline">
+                                <select class="form-control" v-model="pagesize"
+                                    v-on:change="showPage(pageCurrent,$event,true)" number>
+                                    <option v-for="item in arrPageSize" value="{{item}}">{{item}}</option>
+                                </select>
+                            </span>
+                            <template v-for="item in pageCount+1">
+                                <span v-if="item==1" class="btn btn-default" v-on:click="showPage(1,$event)">
+                                    首页
+                                </span>
+                                <span v-if="item==1" class="btn btn-default"
+                                    v-on:click="showPage(pageCurrent-1,$event)">
+                                    上一页
+                                </span>
+                                <span v-if="item==1" class="btn btn-default" v-on:click="showPage(item,$event)">
+                                    {{item}}
+                                </span>
+                                <span v-if="item==1&&item<showPagesStart-1" class="btn btn-default disabled">
+                                    ...
+                                </span>
+                                <span
+                                    v-if="item>1&&item<=pageCount-1&&item>=showPagesStart&&item<=showPageEnd&&item<=pageCount"
+                                    class="btn btn-default" v-on:click="showPage(item,$event)">
+                                    {{item}}
+                                </span>
+                                <span v-if="item==pageCount&&item>showPageEnd+1" class="btn btn-default disabled">
+                                    ...
+                                </span>
+                                <span v-if="item==pageCount&&item!=1" class="btn btn-default"
+                                    v-on:click="showPage(item,$event)">
+                                    {{item}}
+                                </span>
+                                <span v-if="item==pageCount" class="btn btn-default"
+                                    v-on:click="showPage(pageCurrent+1,$event)">
+                                    下一页
+                                </span>
+                                <span v-if="item==pageCount" class="btn btn-default"
+                                    v-on:click="showPage(pageCount,$event)">
+                                    尾页
+                                </span>
+                            </template>
+                            <span class="form-inline">
+                                <input class="pageIndex form-control" style="width:60px;text-align:center" type="text"
+                                    v-model="pageCurrent | onlyNumeric"
+                                    v-on:keyup.enter="showPage(pageCurrent,$event,true)" />
+                            </span>
+                            <span>{{pageCurrent}}/{{pageCount}}</span>
+                        </div>
+                    </div>
+
+                    <!-- 添加学生 -->
+                    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addodalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        添加学生
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <label>学号：</label>
+                                        <input type="text" id="stuNo" v-model="add.id">
+                                    </p>
+                                    <p>
+                                        <label>姓名：</label>
+                                        <input type="text" id="stuName" v-model="add.name">
+                                    </p>
+                                    <p>
+                                        <label>年龄：</label>
+                                        <input type="number" id="stuAge" v-model="add.age">
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="add">
+                                        提交更改
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 编辑学生 -->
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addodalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        编辑学生
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <label>学号：</label>
+                                        <input type="text" v-model="this.editPeople.id" value="">
+                                    </p>
+                                    <p>
+                                        <label>姓名：</label>
+                                        <input type="text" v-model="this.editPeople.name" value="">
+                                    </p>
+                                    <p>
+                                        <label>年龄：</label>
+                                        <input type="number" v-model="this.editPeople.age" value="">
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update">
+                                        提交更改
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="vue.js"></script>
+    <script>
+        //只能输入正整数过滤器
+        Vue.filter('onlyNumeric', {
+            // model -> view
+            // 在更新 `<input>` 元素之前格式化值
+            read: function (val) {
+                return val;
+            },
+            // view -> model
+            // 在写回数据之前格式化值
+            write: function (val, oldVal) {
+                var number = +val.replace(/[^\d]/g, '')
+                return isNaN(number) ? 1 : parseFloat(number.toFixed(2))
+            }
+        })
+
+
+
+        //模拟获取数据
+        var getData = function () {
+            var result = [{ "name": "12", "age": "14", "id": "125" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }, { "name": "123", "age": "123", "id": "123" }];
+            // for (var i = 0; i < 500; i++) {
+            // 	result[i] ={name:'test'+i,id:i,age:(Math.random()*100).toFixed()};
+            // 	}
+            //操作数据json
+            var opJson = {
+                addPeople: {},
+                editPeople: {},
+                editlist: false,
+                checked: false,
+                selected: [],
+                editSid: ""
+            };
+            var newJson = $.extend(true, result, opJson);
+            console.log(JSON.stringify(newJson));
+            return newJson;
+        }
+
+        var vue = new Vue({
+            el: "#test",
+            ready: function () {
+                this.arrayDataAll = getData();
+                this.totalCount = this.arrayDataAll.length;
+                this.showPage(this.pageCurrent, null, true);
+            },
+            data: {
+                //总项目数
+                totalCount: 200,
+                //分页数
+                arrPageSize: [5, 10, 20, 30, 40],
+                //当前分页数
+                pageCount: 20,
+                //当前页面
+                pageCurrent: 1,
+                //分页大小
+                pagesize: 10,
+                //显示分页按钮数
+                showPages: 11,
+                //开始显示的分页按钮
+                showPagesStart: 1,
+                //结束显示的分页按钮
+                showPageEnd: 100,
+                //所有数据
+                arrayDataAll: [],
+                //分页数据
+                arrayData: [],
+                //排序字段
+                sortparam: "",
+                //排序方式
+                sorttype: 1
+
+            },
+            methods: {
+                //分页方法
+                showPage: function (pageIndex, $event, forceRefresh) {
+
+                    if (pageIndex > 0) {
+
+
+                        if (pageIndex > this.pageCount) {
+                            pageIndex = this.pageCount;
+                        }
+
+                        //判断数据是否需要更新
+                        var currentPageCount = Math.ceil(this.totalCount / this.pagesize);
+                        if (currentPageCount != this.pageCount) {
+                            pageIndex = 1;
+                            this.pageCount = currentPageCount;
+                        }
+                        else if (this.pageCurrent == pageIndex && currentPageCount == this.pageCount && typeof (forceRefresh) == "undefined") {
+                            console.log("not refresh");
+                            return;
+                        }
+
+                        //处理分页点中样式
+                        var buttons = $("#pager").find("span");
+                        for (var i = 0; i < buttons.length; i++) {
+                            if (buttons.eq(i).html() != pageIndex) {
+                                buttons.eq(i).removeClass("active");
+                            }
+                            else {
+                                buttons.eq(i).addClass("active");
+                            }
+                        }
+
+                        //从所有数据中去分页数据
+                        var newPageInfo = [];
+                        for (var i = 0; i < this.pagesize; i++) {
+                            var index = i + (pageIndex - 1) * this.pagesize;
+                            if (index > this.totalCount - 1) break;
+                            newPageInfo[newPageInfo.length] = this.arrayDataAll[index];
+                        }
+                        this.pageCurrent = pageIndex;
+                        this.arrayData = newPageInfo;
+
+                        //计算分页按钮数据
+                        if (this.pageCount > this.showPages) {
+                            if (pageIndex <= (this.showPages - 1) / 2) {
+                                this.showPagesStart = 1;
+                                this.showPageEnd = this.showPages - 1;
+                                console.log("showPage1")
+                            }
+                            else if (pageIndex >= this.pageCount - (this.showPages - 3) / 2) {
+                                this.showPagesStart = this.pageCount - this.showPages + 2;
+                                this.showPageEnd = this.pageCount;
+                                console.log("showPage2")
+                            }
+                            else {
+                                console.log("showPage3")
+                                this.showPagesStart = pageIndex - (this.showPages - 3) / 2;
+                                this.showPageEnd = pageIndex + (this.showPages - 3) / 2;
+                            }
+                        }
+                        console.log("showPagesStart:" + this.showPagesStart + ",showPageEnd:" + this.showPageEnd + ",pageIndex:" + pageIndex);
+                    }
+
+                }, sortBy: function (sortparam) {
+                    this.sortparam = sortparam;
+                    this.sorttype = this.sorttype == -1 ? 1 : -1;
+                },
+                //提交
+                add: function () {
+                    console.log(123);
+                },
+                del: function () {
+
+                },
+                //编辑
+                edit: function (item) {
+                    this.editPeople = {
+                        id: item.id,
+                        name: item.name,
+                        age: item.age
+                    };
+                    console.log(this.editPeople.id);
+                    console.log(this.editPeople.age);
+                    console.log(this.editPeople.name);
+                },
+                update: function () {
+
+                }
+            }
+        });
+        vue.$watch("arrayData", function (value) {
+            // console.log("==============arrayData begin==============");
+            // console.log(value==vue.arrayData);
+            // console.log(vue.arrayData);
+            // console.log("==============arrayData end==============");
+        }); 
+    </script>
+</body>
+
+</html>

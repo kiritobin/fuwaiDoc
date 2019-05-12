@@ -66,6 +66,8 @@
     <Content Include="action\VPatient.ashx" />
     <Content Include="action\VTreatment.ashx" />
     <Content Include="action\TGcontact.ashx" />
+    <Content Include="action\VDronePatient.ashx" />
+    <Content Include="action\VCheck.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -74,7 +76,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.min.css" />
     <Content Include="css\styles.css" />
+    <Content Include="home\bootstrap.min.css" />
+    <Content Include="home\index.html" />
+    <Content Include="home\jquery.min.js" />
+    <Content Include="home\vue.js" />
+    <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jsencrypt.min.js" />
     <Content Include="js\vue.js" />
@@ -91,6 +99,12 @@
     <Compile Include="action\TGcontact.ashx.cs">
       <DependentUpon>TGcontact.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\VCheck.ashx.cs">
+      <DependentUpon>VCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\VDronePatient.ashx.cs">
+      <DependentUpon>VDronePatient.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VMedicalHistory.ashx.cs">
       <DependentUpon>VMedicalHistory.ashx</DependentUpon>
     </Compile>
@@ -100,12 +114,14 @@
     <Compile Include="action\VTreatment.ashx.cs">
       <DependentUpon>VTreatment.ashx</DependentUpon>
     </Compile>
+    <Compile Include="BLL\DronePatientDAO.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
+    <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VTreatmentBLL.cs" />
