@@ -40,7 +40,7 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="guardianid">监护人id</param>
         /// <returns>DataTable</returns>
-        public DataTable SelectPatientByGuardianidID(string guardianid)
+        public DataTable SelectPatientByGuardianID(string guardianid)
         {
             string sql = "select * from V_Patient where guardianid = @guardianid";
             string[] param = { "@guardianid" };
@@ -53,7 +53,7 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="diseasestatusid">病情等级id</param>
         /// <returns>DataTable</returns>
-        public DataTable SelectPatientByDiseasestatusidID(string diseasestatusid)
+        public DataTable SelectPatientByDiseasestatusID(string diseasestatusid)
         {
             string sql = "select * from V_Patient where diseasestatusid = @diseasestatusid";
             string[] param = { "@diseasestatusid" };
@@ -66,7 +66,7 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="droneid">无人机id</param>
         /// <returns>DataTable</returns>
-        public DataTable SelectPatientByDroneidID(string droneid)
+        public DataTable SelectPatientByDroneID(string droneid)
         {
             string sql = "select * from V_Patient where droneid = @droneid";
             string[] param = { "@droneid" };

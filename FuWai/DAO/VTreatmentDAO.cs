@@ -42,7 +42,7 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="treatmentid">记录编号id</param>
         /// <returns>DataTable</returns>
-        public DataTable SelectTreatmentByTreatmentidID(string treatmentid)
+        public DataTable SelectTreatmentByTreatmentID(string treatmentid)
         {
             string sql = "select * from V_Treatment where treatmentid=@treatmentid";
             string[] param = { "@treatmentid" };

@@ -38,9 +38,9 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="guardianid">监护人id</param>
         /// <returns>json字符串</returns>
-        public string SelectPatientByGuardianidID(string guardianid)
+        public string SelectPatientByGuardianID(string guardianid)
         {
-            return JsonHelper.ToJson(adao.SelectPatientByGuardianidID(guardianid));
+            return JsonHelper.ToJson(adao.SelectPatientByGuardianID(guardianid));
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="diseasestatusid">病情等级id</param>
         /// <returns>json字符串</returns>
-        public string SelectPatientByDiseasestatusidID(string diseasestatusid)
+        public string SelectPatientByDiseasestatusID(string diseasestatusid)
         {
-            return JsonHelper.ToJson(adao.SelectPatientByDiseasestatusidID(diseasestatusid));
+            return JsonHelper.ToJson(adao.SelectPatientByDiseasestatusID(diseasestatusid));
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="droneid">无人机id</param>
         /// <returns>json字符串</returns>
-        public string SelectPatientByDroneidID(string droneid)
+        public string SelectPatientByDroneID(string droneid)
         {
-            return JsonHelper.ToJson(adao.SelectPatientByDroneidID(droneid));
+            return JsonHelper.ToJson(adao.SelectPatientByDroneID(droneid));
         }
     }
 }

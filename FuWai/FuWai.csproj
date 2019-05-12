@@ -63,6 +63,8 @@
     <Content Include="action\Login.ashx" />
     <Content Include="action\Drone.ashx" />
     <Content Include="action\VMedicalHistory.ashx" />
+    <Content Include="action\VPatient.ashx" />
+    <Content Include="action\VTreatment.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -88,6 +90,12 @@
     </Compile>
     <Compile Include="action\VMedicalHistory.ashx.cs">
       <DependentUpon>VMedicalHistory.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\VPatient.ashx.cs">
+      <DependentUpon>VPatient.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\VTreatment.ashx.cs">
+      <DependentUpon>VTreatment.ashx</DependentUpon>
     </Compile>
     <Compile Include="BLL\DronePatientBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
