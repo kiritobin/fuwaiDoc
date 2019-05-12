@@ -14,10 +14,23 @@ namespace FuWai.DAO
         /// <summary>
         /// 无人机信息查询
         /// </summary>
-        /// <returns></returns>
+        /// <returns>返回所有数据集合DataTable</returns>
         public DataTable SelectDrone() {
             string sql = "select * from T_Drone";
             return db.FillDataSet(sql, null, null).Tables[0];
+        }
+
+        /// <summary>
+        /// 通过无人机编号（id）查询
+        /// </summary>
+        /// <param name="droneid">无人机编号</param>
+        /// <returns>返回数据集合DataTable</returns>
+        public DataTable SelectDronebydroneid(string droneid)
+        {
+            string sql = "select * from T_Drone where droneid=@droneid";
+            string[] param = { "@droneid" };
+            object[] value = { droneid };
+            return db.FillDataSet(sql, param, value).Tables[0];
         }
 
         /// <summary>

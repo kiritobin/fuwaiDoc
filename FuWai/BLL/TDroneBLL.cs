@@ -14,14 +14,23 @@ namespace FuWai.BLL
         /// <summary>
         /// 无人机信息查询
         /// </summary>
-        /// <returns></returns>
+        /// <returns>返回json</returns>
         public String getDroneinfo()
         {
-            DataTable dt = td.SelectDrone();
-            String json = "";
-            json = JsonHelper.ToJson(dt);
-            return json;
+            return JsonHelper.ToJson(td.SelectDrone());
         }
+
+        /// <summary>
+        /// 通过无人机编号查询
+        /// </summary>
+        /// <param name="droneid">无人机编号</param>
+        /// <returns>返回json</returns>
+        public String getDroneinfobydroneid(string droneid)
+        {
+            return JsonHelper.ToJson(td.SelectDronebydroneid(droneid));
+        }
+
+
         /// <summary>
         /// 添加无人机信息
         /// </summary>
@@ -56,6 +65,11 @@ namespace FuWai.BLL
             return false;
         }
 
+        /// <summary>
+        /// 通过无人机编号删除无人机
+        /// </summary>
+        /// <param name="droneid">无人机编号</param>
+        /// <returns></returns>
         public Boolean deleteDrone(string droneid) {
             int row = td.deleteDrone(droneid);
             if (row > 0)
