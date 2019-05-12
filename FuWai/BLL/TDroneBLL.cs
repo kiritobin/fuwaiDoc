@@ -20,14 +20,7 @@ namespace FuWai.BLL
         {
             DataTable dt = td.SelectDrone();
             String json = "";
-            try
-            {
-                json = JsonHelper.ToJson(dt);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            json = JsonHelper.ToJson(dt);
             return json;
         }
     }
