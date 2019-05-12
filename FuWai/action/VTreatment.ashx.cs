@@ -33,6 +33,9 @@ namespace FuWai.action
 
         VTreatmentBLL vt = new VTreatmentBLL();
 
+        /// <summary>
+        /// 查询所有治疗记录
+        /// </summary>
         private void SelectAllTreatment(HttpContext context)
         {
             String json = vt.SelectAllTreatment();
@@ -41,6 +44,9 @@ namespace FuWai.action
 
         }
 
+        /// <summary>
+        /// 根据病人编号id所有治疗记录
+        /// </summary>
         private void SelectTreatmentByPatientID(HttpContext context)
         {
             String patientid = context.Request["patientid"];
@@ -50,6 +56,9 @@ namespace FuWai.action
 
         }
 
+        /// <summary>
+        /// 根据治疗记录编号id查询所有治疗记录
+        /// </summary>
         private void SelectTreatmentByTreatmentID(HttpContext context)
         {
             String treatmentid = context.Request["treatmentid"];

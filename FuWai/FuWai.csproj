@@ -100,6 +100,7 @@
     <Compile Include="BLL\DronePatientBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
+    <Compile Include="BLL\TCheckBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="BLL\VTreatmentBLL.cs" />
     <Compile Include="DAO\DronePatientDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\TCheckDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
