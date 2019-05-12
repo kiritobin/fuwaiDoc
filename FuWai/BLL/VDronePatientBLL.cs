@@ -18,11 +18,8 @@ namespace FuWai.BLL
         /// </summary>
         /// <returns></returns>
         public string selectVDronePatient()
-        {
-            DataTable dt = dao.selectVDronePatient();
-            string json = string.Empty;
-            json = JsonHelper.ToJson(dt);         
-            return json;
+        {         
+            return JsonHelper.ToJson(dao.selectVDronePatient());
         }
 
         /// <summary>
