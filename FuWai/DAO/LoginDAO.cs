@@ -17,7 +17,7 @@ namespace FuWai.DAO
         public int userLogin(String user, String pwd)
         {
             int row = 0;
-            String sql = "select count(id) from T_Admin where Adminid=@Adminid and pwd=@pwd";
+            String sql = "select count(Adminid) from T_Admin where Adminid=@Adminid and pwd=@pwd";
             string[] param = {"@Adminid", "@pwd" };
             object[] value = { user , pwd };
             row = Convert.ToInt32(db.ExecuteScalar(sql, param, value));

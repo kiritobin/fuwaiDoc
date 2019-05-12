@@ -60,6 +60,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="action\Login.ashx" />
+    <Content Include="action\Drone.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -77,11 +79,17 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Drone.ashx.cs">
+      <DependentUpon>Drone.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\Login.ashx.cs">
+      <DependentUpon>Login.ashx</DependentUpon>
+    </Compile>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
-    <Compile Include="BLL\VCheckBLL.cs" />
-    <Compile Include="DAO\VCheckDAO.cs" />
+    <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
