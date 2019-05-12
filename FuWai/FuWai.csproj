@@ -118,7 +118,6 @@
     <Compile Include="action\VTreatment.ashx.cs">
       <DependentUpon>VTreatment.ashx</DependentUpon>
     </Compile>
-    <Compile Include="BLL\DronePatientDAO.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TCheckBLL.cs" />
@@ -136,6 +135,7 @@
     <Compile Include="DAO\TGcontactDAO.cs" />
     <Compile Include="DAO\TGuardianDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
+    <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
     <Compile Include="DAO\VTreatmentDAO.cs" />
