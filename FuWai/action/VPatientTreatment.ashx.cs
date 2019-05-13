@@ -1,5 +1,4 @@
 ﻿using FuWai.BLL;
-using FuWai.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,30 +7,29 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// VTreatment 的摘要说明
+    /// VPatientTreatment 的摘要说明
     /// </summary>
-    public class VTreatment : IHttpHandler
+    public class VPatientTreatment : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
         {
-
             string op = context.Request["op"];
             if (op == "all")
             {
                 SelectAllTreatment(context);
             }
-            else if (op == "bypatientid")
+            else if (op == "patientid")
             {
                 SelectTreatmentByPatientID(context);
             }
-            else if (op == "bytreatmentid")
+            else if (op == "treatmentid")
             {
                 SelectTreatmentByTreatmentID(context);
             }
         }
 
-        VTreatmentBLL vt = new VTreatmentBLL();
+        VPatientTreatmentBLL vt = new VPatientTreatmentBLL();
 
         /// <summary>
         /// 查询所有治疗记录
