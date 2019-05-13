@@ -72,6 +72,7 @@
     <Content Include="action\TMedicalhistory.ashx" />
     <Content Include="action\TPatient.ashx" />
     <Content Include="action\PatientInfo.ashx" />
+    <Content Include="home\contact.html" />
     <Content Include="home\drone.html" />
     <Content Include="home\guardian.html" />
     <Content Include="标注点.html" />
