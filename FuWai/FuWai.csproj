@@ -78,6 +78,8 @@
     <Content Include="home\guardian.html" />
     <Content Include="标注点.html" />
     <Content Include="闪烁.html" />
+    <Content Include="action\TPContact.ashx" />
+    <Content Include="action\TTreatment.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,6 +135,12 @@
     <Compile Include="action\TPatient.ashx.cs">
       <DependentUpon>TPatient.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\TPContact.ashx.cs">
+      <DependentUpon>TPContact.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TTreatment.ashx.cs">
+      <DependentUpon>TTreatment.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VCheck.ashx.cs">
       <DependentUpon>VCheck.ashx</DependentUpon>
     </Compile>
@@ -157,6 +165,8 @@
     <Compile Include="BLL\TGuardianBLL.cs" />
     <Compile Include="BLL\TMedicalhistoryBLL.cs" />
     <Compile Include="BLL\TPatientBLL.cs" />
+    <Compile Include="BLL\TPContactBLL.cs" />
+    <Compile Include="BLL\TTreatmentBLL.cs" />
     <Compile Include="BLL\VCheckBLL.cs" />
     <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
@@ -170,6 +180,8 @@
     <Compile Include="DAO\TGuardianDAO.cs" />
     <Compile Include="DAO\TMedicalhistoryDAO.cs" />
     <Compile Include="DAO\TPatientDAO.cs" />
+    <Compile Include="DAO\TPContactDAO.cs" />
+    <Compile Include="DAO\TTreatmentDAO.cs" />
     <Compile Include="DAO\VCheckDAO.cs" />
     <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />

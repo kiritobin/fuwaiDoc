@@ -37,13 +37,14 @@ namespace FuWai.BLL
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
-        /// <param name="guardianid">监护人编号</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
+        /// <param name="weight">病人体重</param>
+        /// <param name="height">病人身高</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid,string tel)
+        public Boolean insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height)
         {
-            int row = td.insert(patientid, patientname, gender, guardianid, diseasestatusid, droneid,tel);
+            int row = td.insert(patientid, patientname, gender, diseasestatusid, droneid, weight, height);
             if (row > 0)
             {
                 return true;
@@ -56,13 +57,14 @@ namespace FuWai.BLL
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
-        /// <param name="guardianid">监护人编号</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
+        /// <param name="weight">病人体重</param>
+        /// <param name="height">病人身高</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean update(string patientid, string patientname, string gender,string tel)
+        public Boolean update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height)
         {
-            int row = td.update(patientid, patientname, gender,tel);
+            int row = td.update(patientid, patientname, gender, diseasestatusid, droneid, weight, height);
             if (row > 0)
             {
                 return true;
