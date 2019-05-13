@@ -21,7 +21,18 @@ namespace FuWai.DAO
             string sql = "select * from T_Medicalhistory";
             return db.FillDataSet(sql, null, null).Tables[0];
         }
-
+        /// <summary>
+        /// 通过病人编号查询病史记录
+        /// </summary>
+        /// <param name="patientid">病人编号</param>
+        /// <returns></returns>
+        public DataTable SelectByPatient(string patientid)
+        {
+            string sql = "select * from T_Medicalhistory where patientid=@patientid";
+            string[] param = { "@patientid" };
+            object[] value = { patientid };
+            return db.FillDataSet(sql, param, value).Tables[0];
+        }
         /// <summary>
         /// 通过病史编号（id）查询
         /// </summary>
