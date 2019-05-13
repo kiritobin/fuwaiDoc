@@ -64,21 +64,23 @@
     <Content Include="action\TDrone.ashx" />
     <Content Include="action\VMedicalHistory.ashx" />
     <Content Include="action\VPatient.ashx" />
-    <Content Include="action\VTreatment.ashx" />
     <Content Include="action\TGcontact.ashx" />
     <Content Include="action\VDronePatient.ashx" />
-    <Content Include="action\VCheck.ashx" />
     <Content Include="action\TCheck.ashx" />
     <Content Include="action\TDiseasestatus.ashx" />
     <Content Include="action\TGuardian.ashx" />
     <Content Include="action\TMedicalhistory.ashx" />
     <Content Include="action\TPatient.ashx" />
     <Content Include="action\PatientInfo.ashx" />
+    <Content Include="home\contact.html" />
+    <Content Include="home\drone.html" />
+    <Content Include="home\guardian.html" />
     <Content Include="标注点.html" />
     <Content Include="闪烁.html" />
     <Content Include="action\TPContact.ashx" />
     <Content Include="action\TTreatment.ashx" />
-    <Content Include="action\VGContact.ashx" />
+    <Content Include="action\VPatientCheck.ashx" />
+    <Content Include="action\VPatientTreatment.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -155,8 +157,11 @@
     <Compile Include="action\VPatient.ashx.cs">
       <DependentUpon>VPatient.ashx</DependentUpon>
     </Compile>
-    <Compile Include="action\VTreatment.ashx.cs">
-      <DependentUpon>VTreatment.ashx</DependentUpon>
+    <Compile Include="action\VPatientCheck.ashx.cs">
+      <DependentUpon>VPatientCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\VPatientTreatment.ashx.cs">
+      <DependentUpon>VPatientTreatment.ashx</DependentUpon>
     </Compile>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
@@ -174,7 +179,8 @@
     <Compile Include="BLL\VGContactBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
-    <Compile Include="BLL\VTreatmentBLL.cs" />
+    <Compile Include="BLL\VPatientCheckBLL.cs" />
+    <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
     <Compile Include="DAO\TDiseasestatusDAO.cs" />
@@ -189,8 +195,9 @@
     <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\VGContactDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
+    <Compile Include="DAO\VPatientCheckDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
-    <Compile Include="DAO\VTreatmentDAO.cs" />
+    <Compile Include="DAO\VPatientTreatmentDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

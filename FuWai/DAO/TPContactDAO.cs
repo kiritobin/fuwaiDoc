@@ -40,7 +40,7 @@ namespace FuWai.DAO
         /// <returns></returns>
         public int insertPContact(string pcontactphone,string patientid)
         {
-            string sql = "insert into T_PContact(pcontactphone,patientid) value(@pcontactphone,@patientid)";
+            string sql = "insert into T_PContact(pcontactphone,patientid) values (@pcontactphone,@patientid)";
             string[] param = { "@pcontactphone", "@patientid" };
             object[] value = { pcontactphone, patientid };
             return db.ExecuteNoneQuery(sql, param, value);

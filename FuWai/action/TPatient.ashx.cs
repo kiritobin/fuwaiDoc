@@ -49,11 +49,11 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String patientname = context.Request["patientname"];
             String gender = context.Request["gender"];
-            int guardianid = Convert.ToInt32(context.Request["guardianid"]);
-            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            int diseasestatusid = 1;
             String droneid = context.Request["droneid"];
-            String tel = context.Request["tel"];
-            if (tb.insert(patientid, patientname, gender, guardianid, diseasestatusid, droneid,tel))
+            Double weight= Convert.ToDouble(context.Request["weight"]);
+            Double height = Convert.ToDouble(context.Request["height"]);
+            if (tb.insert(patientid, patientname, gender, diseasestatusid, droneid, weight, height))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -71,12 +71,12 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String patientname = context.Request["patientname"];
             String gender = context.Request["gender"];
-            int guardianid = Convert.ToInt32(context.Request["guardianid"]);
-            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            int diseasestatusid = 1;
             String droneid = context.Request["droneid"];
-            String tel = context.Request["tel"];
+            Double weight = Convert.ToDouble(context.Request["weight"]);
+            Double height = Convert.ToDouble(context.Request["height"]);
 
-            if (tb.update(patientid, patientname, gender,tel))
+            if (tb.update(patientid, patientname, gender, diseasestatusid, droneid, weight, height))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();

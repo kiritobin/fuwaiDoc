@@ -17,7 +17,7 @@ namespace FuWai.DAO
         /// <returns>返回数据集DataTable</returns>
         public DataTable SelectGuardian()
         {
-            string sql = "select * from T_Guardian";
+            string sql = "select * from V_GContact";
             return db.FillDataSet(sql, null, null).Tables[0];
         }
 
@@ -39,13 +39,14 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="appellation">成员关系</param>
         /// <param name="guardianname">监护人姓名</param>
+        /// <param name="guardianid">监护人编号</param>
         /// <returns>返回int</returns>
-        public int insert(string appellation, string guardianname)
+        public int insert(string appellation, string guardianname, string patientid)
         {
-            string sql = "insert into T_Guardian values(@appellation,@guardianname)";
+            string sql = "insert into T_Guardian values(@appellation,@guardianname,@patientid)";
 
-            string[] param = { "@appellation", "@guardianname" };
-            object[] value = { appellation, guardianname };
+            string[] param = { "@appellation", "@guardianname","@patientid" };
+            object[] value = { appellation, guardianname, patientid };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }

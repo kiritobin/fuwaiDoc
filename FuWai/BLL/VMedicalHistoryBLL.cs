@@ -22,7 +22,14 @@ namespace FuWai.BLL
             json = JsonHelper.ToJson(dt);
             return json;
         }
-
+        /// <summary>
+        /// 查询所有病人病史记录
+        /// </summary>
+        /// <returns></returns>
+        public String SelectAll()
+        {
+            return JsonHelper.ToJson(vmh.SelectAll());
+        }
         /// <summary>
         /// 病人编号查询病史
         /// </summary>

@@ -32,14 +32,16 @@
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
                                 <th v-on:click="sortBy('id')">编号</th>
-                                <th>姓名</th>
-                                <th>关系</th>
+                                <th>型号</th>
+                                <th>飞行地点</th>
+                                <th>飞行次数</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.guardianid}}</td>
-                                <td>{{dataItem.guardianname}}</td>
-                                <td>{{dataItem.appellation}}</td>
+                                <td>{{dataItem.droneid}}</td>
+                                <td>{{dataItem.dronemodel}}</td>
+                                <td>{{dataItem.position}}</td>
+                                <td>{{dataItem.flycount}}</td>
                                 <td>
                                     <button @click="del(dataItem.guardianid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
@@ -142,12 +144,20 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>姓名：</label>
-                                        <input type="text" v-model="editPeople.guardianname" id="ename" value="">
+                                        <label>编号：</label>
+                                        <input type="text" readonly v-model="editPeople.droneid" id="ename" value="">
                                     </p>
                                     <p>
-                                        <label>关系：</label>
-                                        <input type="text" v-model="editPeople.appellation" id="erelation" value="">
+                                        <label>型号：</label>
+                                        <input type="text" v-model="editPeople.dronemodel" id="erelation" value="">
+                                    </p>
+                                    <p>
+                                        <label>起飞地点：</label>
+                                        <input type="text" v-model="editPeople.position" id="ename" value="">
+                                    </p>
+                                    <p>
+                                        <label>飞行次数：</label>
+                                        <input type="text" v-model="editPeople.flycount" id="erelation" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -168,6 +178,12 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="vue.js"></script>
     <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
         function add() {
             var guardianname = $("#name").val();
             var appellation = $("#relation").val();
@@ -177,7 +193,7 @@
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TGuardian.ashx',
+                    url: '../action/TDrone.ashx',
                     data: {
                         guardianname: guardianname,
                         appellation: appellation,
@@ -304,10 +320,12 @@
             el: "#test",
             ready: function () {
                 var _this = this;
+                var userid = GetQueryString("userid");
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TGuardian.ashx',
+                    url: '../action/TDrone.ashx',
                     data: {
+
                         op: "load"
                     },
                     dataType: 'json',
@@ -436,9 +454,11 @@
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        guardianid:item.guardianid,
-                        appellation: item.appellation,
-                        guardianname: item.guardianname
+                        droneid: item.droneid,
+                        dronemodel: item.dronemodel,
+                        position: item.position,
+                        flycount:item.flycount,
+                        status: item.status
                     };
                 },
                 update: function (item) {

@@ -20,7 +20,15 @@ namespace FuWai.BLL
         {
             return JsonHelper.ToJson(td.SelectMedicalhistory());
         }
-
+        /// <summary>
+        /// 通过病人编号查询病史记录
+        /// </summary>
+        /// <param name="patientid">病人编号</param>
+        /// <returns></returns>
+        public String SelectByPatient(string patientid)
+        {
+            return JsonHelper.ToJson(td.SelectByPatient(patientid));
+        }
         /// <summary>
         /// 通过病史编号查询
         /// </summary>

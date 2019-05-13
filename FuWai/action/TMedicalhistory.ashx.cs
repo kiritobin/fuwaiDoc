@@ -26,6 +26,9 @@ namespace FuWai.action
             else if (op == "delete")
             {
                 delete(context);
+            }else if (op == "select")
+            {
+                SelectByPatient(context);
             }
         }
 
@@ -38,7 +41,14 @@ namespace FuWai.action
             context.Response.End();
 
         }
+        private void SelectByPatient(HttpContext context)
+        {
+            String patientid = context.Request["patientid"];
+            String json = medic.SelectByPatient(patientid);
+            context.Response.Write(json);
+            context.Response.End();
 
+        }
         private void insert(HttpContext context)
         {
             String medicalhistoryreason = context.Request["medicalhistoryreason"];
