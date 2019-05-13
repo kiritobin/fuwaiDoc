@@ -14,11 +14,11 @@
         <div class="row" style="height:600px">
             <div class="col-md-3" style="height: 100%">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">病人信息管理</a></li>
+                    <li><a href="index.html">病人信息管理</a></li>
                     <li><a href="../标注点.html">标注点</a></li>
                     <li><a href="../闪烁.html">闪烁</a></li>
-                    <li><a href="guardian.html">监护人管理</a></li>
-                    <li><a href="drone.html">无人机管理</a></li>
+                    <li><a href="#">监护人管理</a></li>
+                    <li class="active"><a href="#">无人机管理</a></li>
                     <li><a href="#">PHP</a></li>
                 </ul>
             </div>
@@ -33,27 +33,16 @@
                             <tr>
                                 <th v-on:click="sortBy('id')">编号</th>
                                 <th>姓名</th>
-                                <th v-on:click="sortBy('age')">性别</th>
-                                <th>身高</th>
-                                <th>体重</th>
-                                <th>无人机编号</th>
+                                <th>关系</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.patientid}}</td>
-                                <td>{{dataItem.patientname}}</td>
-                                <td>{{dataItem.gender}}</td>
-                                <td>{{dataItem.weight}}</td>
-                                <td>{{dataItem.height}}</td>
-                                <td>{{dataItem.droneid}}</td>
+                                <td>{{dataItem.guardianid}}</td>
+                                <td>{{dataItem.guardianname}}</td>
+                                <td>{{dataItem.appellation}}</td>
                                 <td>
-                                    <button @click="del(dataItem.patientid)" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="del(dataItem.guardianid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">监护人</div></a>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">联系方式</div></a>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">病史记录</div></a>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">检查记录</div></a>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">治疗记录</div></a>
                                 </td>
                             </tr>
                         </table>
@@ -117,36 +106,17 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        添加病人
+                                        添加监护人
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>编号：</label>
-                                        <input type="text" id="No">
-                                    </p>
-                                    <p>
                                         <label>姓名：</label>
-                                        <input type="text" id="aName">
+                                        <input type="text" id="name">
                                     </p>
                                     <p>
-                                        <label>性别：</label>
-                                        <select id="gender">
-                                            <option value="男">男</option>
-                                            <option value="女">女</option>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label>身高：</label>
-                                        <input type="text" id="aweight">
-                                    </p>
-                                    <p>
-                                        <label>体重：</label>
-                                        <input type="text" id="aheight">
-                                    </p>
-                                    <p>
-                                        <label>无人机编号：</label>
-                                        <select id="drone"></select>
+                                        <label>关系：</label>
+                                        <input type="text" id="relation">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -167,37 +137,21 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        编辑病人
+                                        编辑监护人
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>编号：</label>
-                                        <input type="text" readonly v-model="editPeople.patientid" id="eNo" value="">
-                                    </p>
-                                    <p>
                                         <label>姓名：</label>
-                                        <input type="text" v-model="editPeople.patientname" id="eName" value="">
+                                        <input type="text" v-model="editPeople.guardianname" id="ename" value="">
                                     </p>
                                     <p>
-                                        <label>性别：</label>
-                                        <input type="text" v-model="editPeople.gender" id="egender" value="">
-                                    </p>
-                                    <p>
-                                        <label>身高：</label>
-                                        <input type="text" v-model="editPeople.height" id="eheight">
-                                    </p>
-                                    <p>
-                                        <label>体重：</label>
-                                        <input type="text" v-model="editPeople.weight" id="wweight">
-                                    </p>
-                                    <p>
-                                        <label>无人机编号：</label>
-                                        <select id="edrone"></select>
+                                        <label>关系：</label>
+                                        <input type="text" v-model="editPeople.appellation" id="erelation" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update()">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.guardianid)">
                                         提交更改
                                     </button>
                                 </div>
@@ -215,26 +169,18 @@
     <script src="vue.js"></script>
     <script>
         function add() {
-            var patientid = $("#No").val();
-            var patientname = $("#aName").val();
-            var gender = $("#gender").val();
-            var height = $("#aheight").val();
-            var weight = $("#aweight").val();
-            var droneid = $("#drone").val();
-            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == ""||weight=="") {
+            var guardianname = $("#name").val();
+            var appellation = $("#relation").val();
+            if (guardianname == "" || appellation == "") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TPatient.ashx',
+                    url: '../action/TGuardian.ashx',
                     data: {
-                        patientid: patientid,
-                        patientname: patientname,
-                        gender: gender,
-                        weight: weight,
-                        height: height,
-                        droneid: droneid,
+                        guardianname: guardianname,
+                        appellation: appellation,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -263,12 +209,12 @@
                 })
             }
         }
-        function dele(patientid) {
+        function dele(guardianid) {
             $.ajax({
                 type: 'Post',
-                url: '../action/TPatient.ashx',
+                url: '../action/TGuardian.ashx',
                 data: {
-                    patientid: patientid,
+                    guardianid: guardianid,
                     op: "delete"
                 },
                 dataType: 'text',
@@ -296,27 +242,20 @@
                 }
             })
         }
-        function update() {
-            var patientid = $("#eNo").val();
-            var patientname = $("#eName").val();
-            var gender = $("#egender").val();
-            var height = $("#eheight").val();
-            var weight = $("#eweight").val();
-            var droneid = $("#edrone").val();
-            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid=="") {
+        function update(guardianid) {
+            var guardianname = $("#ename").val();
+            var appellation = $("#erelation").val();
+            if (guardianname == "" || appellation == "") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TPatient.ashx',
+                    url: '../action/TGuardian.ashx',
                     data: {
-                        patientid: patientid,
-                        patientname: patientname,
-                        gender: gender,
-                        height: height,
-                        weight: weight,
-                        droneid: droneid,
+                        guardianid: guardianid,
+                        guardianname: guardianname,
+                        appellation: appellation,
                         op: "update"
                     },
                     dataType: 'text',
@@ -367,7 +306,7 @@
                 var _this = this;
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TPatient.ashx',
+                    url: '../action/TGuardian.ashx',
                     data: {
                         op: "load"
                     },
@@ -494,6 +433,17 @@
                     console.log(item);
                     dele(item);
                 },
+                //编辑
+                edit: function (item) {
+                    this.editPeople = {
+                        guardianid:item.guardianid,
+                        appellation: item.appellation,
+                        guardianname: item.guardianname
+                    };
+                },
+                update: function (item) {
+                    update(item);
+                },
                 search: function () {
                     $.ajax({
                         type: 'Post',
@@ -509,15 +459,19 @@
                             var contact = JSON.parse(arr[0]);
                             var disease = JSON.parse(arr[1]);
                             var drone = JSON.parse(arr[2]);
-
+                            $("#contact").empty();
+                            $("#disease").empty();
                             $("#drone").empty();
-                            $("#edrone").empty();
-                            $.each(drone, function (index, item) {
-                                $("#drone").append(
-                                    "<option value=" + item.droneid + ">" + item.dronemodel + "(" + item.droneid + ")" + "</option>");
+                            $.each(contact, function (index, item) {
+                                $("#contact").append( 
+                                    "<option value=" + item.guardianid + ">" + item.guardianname + "(" + item.appellation+")" + "</option>");
+                            });
+                            $.each(disease, function (index, item) {
+                                $("#disease").append(
+                                    "<option value=" + item.diseasestatusid + ">" + item.statusname + "</option>");
                             });
                             $.each(drone, function (index, item) {
-                                $("#edrone").append(
+                                $("#drone").append(
                                     "<option value=" + item.droneid + ">" + item.dronemodel + "(" + item.droneid + ")" + "</option>");
                             });
                         },
@@ -534,22 +488,7 @@
                             }
                         }
                     })
-                },
-                //编辑
-                edit: function (item) {
-                    this.editPeople = {
-                        patientid: item.patientid,
-                        patientname: item.patientname,
-                        gender: item.gender,
-                        height: item.height,
-                        weight: item.weight
-                    };
-                    this.search();
-                },
-                update: function () {
-                    update();
                 }
-                
             }
         });
         vue.$watch("arrayData", function (value) {

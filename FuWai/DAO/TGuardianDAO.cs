@@ -17,7 +17,7 @@ namespace FuWai.DAO
         /// <returns>返回数据集DataTable</returns>
         public DataTable SelectGuardian()
         {
-            string sql = "select * from T_Guardian";
+            string sql = "select * from V_GContact";
             return db.FillDataSet(sql, null, null).Tables[0];
         }
 
