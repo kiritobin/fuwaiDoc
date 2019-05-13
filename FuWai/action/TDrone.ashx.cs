@@ -28,7 +28,7 @@ namespace FuWai.action
             }
             else if (op == "delete")
             {
-                update(context);
+                delete(context);
             }
         }
         TDroneBLL tb = new TDroneBLL();
@@ -46,7 +46,7 @@ namespace FuWai.action
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
             int flycount = Convert.ToInt32(context.Request["flycount"]);
-            int status = Convert.ToInt32(context.Request["status"]);
+            int status = 1;
 
             if (tb.insert(droneid, dronemodel, position, flycount, status))
             {
@@ -67,7 +67,7 @@ namespace FuWai.action
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
             int flycount = Convert.ToInt32(context.Request["flycount"]);
-            int status = Convert.ToInt32(context.Request["status"]);
+            int status = 1;
 
             if (tb.update(droneid, dronemodel, position, flycount, status))
             {
