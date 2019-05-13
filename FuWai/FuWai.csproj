@@ -78,7 +78,6 @@
     <Content Include="闪烁.html" />
     <Content Include="action\TPContact.ashx" />
     <Content Include="action\TTreatment.ashx" />
-    <None Include="Properties\PublishProfiles\fuWai.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
