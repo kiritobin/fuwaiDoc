@@ -41,36 +41,37 @@ namespace FuWai.DAO
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
-        /// <param name="guardianid">监护人编号</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
+        /// <param name="weight">病人体重</param>
+        /// <param name="height">病人身高</param>
         /// <returns>返回int</returns>
-        public int insert(string patientid, string patientname, string gender, int guardianid, int diseasestatusid, string droneid,string tel)
+        public int insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height)
         {
-            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@guardianid,@diseasestatusid,@droneid,@tel)";
+            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@diseasestatusid,@droneid,@weight,@height)";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@guardianid", "@diseasestatusid", "@droneid" ,"@tel"};
-            object[] value = { patientid, patientname, gender, guardianid, diseasestatusid, droneid ,tel};
+            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid" , "@weight", "@height" };
+            object[] value = { patientid, patientname, gender, diseasestatusid, droneid , weight , height };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
         /// <summary>
-        /// 修改无人机信息
+        /// 修改病人信息
         /// </summary>
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
-        /// <param name="guardianid">监护人编号</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
+        /// <param name="weight">病人体重</param>
+        /// <param name="height">病人身高</param>
         /// <returns>返回int</returns>
-        /// <returns>返回int</returns>
-        public int update(string patientid, string patientname, string gender,string tel)
+        public int update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height)
         {
-            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,tel=@tel where patientid=@patientid ";
+            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,diseasestatusid=@diseasestatusid，droneid=@droneid,weight=@weight，height=@height where patientid=@patientid ";
 
-            string[] param = { "@patientid", "@patientname", "@gender","@tel" };
-            object[] value = { patientid, patientname, gender,tel};
+            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid", "@weight", "@height" };
+            object[] value = { patientid, patientname, gender, diseasestatusid, droneid,weight, height };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
