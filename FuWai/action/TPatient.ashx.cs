@@ -49,7 +49,7 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String patientname = context.Request["patientname"];
             String gender = context.Request["gender"];
-            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            int diseasestatusid = 1;
             String droneid = context.Request["droneid"];
             Double weight= Convert.ToDouble(context.Request["weight"]);
             Double height = Convert.ToDouble(context.Request["height"]);
@@ -71,7 +71,7 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String patientname = context.Request["patientname"];
             String gender = context.Request["gender"];
-            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            int diseasestatusid = 1;
             String droneid = context.Request["droneid"];
             Double weight = Convert.ToDouble(context.Request["weight"]);
             Double height = Convert.ToDouble(context.Request["height"]);

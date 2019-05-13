@@ -68,7 +68,7 @@ namespace FuWai.DAO
         /// <returns>返回int</returns>
         public int update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height)
         {
-            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,diseasestatusid=@diseasestatusid，droneid=@droneid,weight=@weight，height=@height where patientid=@patientid ";
+            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,diseasestatusid=@diseasestatusid,droneid=@droneid,weight=@weight,height=@height where patientid=@patientid ";
 
             string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid", "@weight", "@height" };
             object[] value = { patientid, patientname, gender, diseasestatusid, droneid,weight, height };
