@@ -24,7 +24,15 @@ namespace FuWai.DAO
 
             return db.FillDataSet(sql, param, vlaue).Tables[0];
         }
-
+        /// <summary>
+        /// 查询所有病人病史记录
+        /// </summary>
+        /// <returns></returns>
+        public DataTable SelectAll()
+        {
+            string sql = "select * from V_MedicalHistory";
+            return db.FillDataSet(sql, null, null).Tables[0];
+        }
         /// <summary>
         /// 病人病史信息查询
         /// </summary>
