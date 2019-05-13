@@ -18,6 +18,9 @@ namespace FuWai.action
             if (op == "load")
             {
                 loadDrop(context);
+            }else if (op == "select")
+            {
+                SelectAll(context);
             }
         }
 
@@ -27,6 +30,14 @@ namespace FuWai.action
         {
             String patientid = context.Request["patientid"];
             String json = vmh.getDroneinfobypatientid(patientid);
+            context.Response.Write(json);
+            context.Response.End();
+
+        }
+
+        private void SelectAll(HttpContext context)
+        {
+            String json = vmh.SelectAll();
             context.Response.Write(json);
             context.Response.End();
 

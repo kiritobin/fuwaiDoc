@@ -7,37 +7,40 @@ using System.Web;
 namespace FuWai.action
 {
     /// <summary>
-    /// VCheck 的摘要说明
+    /// VPatientCheck 的摘要说明
     /// </summary>
-    public class VCheck : IHttpHandler
+    public class VPatientCheck : IHttpHandler
     {
-        VCheckBLL cbll = new VCheckBLL();
+        VPatientCheckBLL cbll = new VPatientCheckBLL();
+
         public void ProcessRequest(HttpContext context)
         {
             string op = context.Request["op"];
             if (op == "all")
             {
-                selectVCheck(context);
+                selectVPatientCheck(context);
             }
-            else if (op == "bypatientid")
+            else if (op == "patientid")
             {
-                selectByPatientId(context);
+                selectCheckByPatientId(context);
             }
         }
-        private void selectVCheck(HttpContext context)
+
+        private void selectVPatientCheck(HttpContext context)
         {
-            String json = cbll.selectVCheck();
+            String json = cbll.selectVPatientCheck();
             context.Response.Write(json);
             context.Response.End();
         }
-        private void selectByPatientId(HttpContext context)
+        private void selectCheckByPatientId(HttpContext context)
         {
             String patientid = context.Request["patientid"];
-            String json = cbll.selectByPatientId(patientid);
+            String json = cbll.selectCheckByPatientId(patientid);
             context.Response.Write(json);
             context.Response.End();
 
         }
+
         public bool IsReusable
         {
             get

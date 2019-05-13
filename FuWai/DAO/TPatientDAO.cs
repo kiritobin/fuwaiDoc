@@ -75,6 +75,7 @@ namespace FuWai.DAO
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
+
         /// <summary>
         /// 删除病人信息
         /// </summary>
