@@ -27,10 +27,9 @@ namespace FuWai.DAO
         /// <returns>datatable的表格</returns>
         public DataTable selectVGContactByPatientId(string patientid)
         {
-            String sql = "select * from(select patientid,guardianid,appellation,guardianname, "+
-                         "stuff((select ',' + contactphone from V_GContact where c.guardianid = guardianid " +
-                         "for xml path('')),1,1,'') as cp from V_GContact c group by guardianid,patientid,appellation,guardianname) as d "+
-                         "where patientid=@patientid";
+            String sql = @"select * from(select patientid,guardianid,appellation,guardianname,stuff((select ',' + contactphone from V_GContact where c.guardianid = guardianid 
+                    for xml path('')),1,1,'') as cp from V_GContact c group by guardianid,patientid,appellation,guardianname) as d 
+            where patientid=@patientid";
             String[] param = { "@patientid" };
             object[] value = { patientid };
             return db.FillDataSet(sql, param, value).Tables[0];

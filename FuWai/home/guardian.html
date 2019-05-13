@@ -25,7 +25,7 @@
             <div class="col-md-9">
                 <div id="test" class="form-group">
                     <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
-                            data-target="#addModal" id="search" @click="search()">
+                            data-target="#addModal" id="search">
                         添加
                     </button>
                     <div class="form-group">
@@ -34,15 +34,18 @@
                                 <th v-on:click="sortBy('id')">编号</th>
                                 <th>姓名</th>
                                 <th>关系</th>
+                                <th>联系号码</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
                                 <td>{{dataItem.guardianid}}</td>
                                 <td>{{dataItem.guardianname}}</td>
                                 <td>{{dataItem.appellation}}</td>
+                                <td>{{dataItem.cp}}</td>
                                 <td>
                                     <button @click="del(dataItem.guardianid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
+                                    <a v-bind:href="['guardiantel.html?userid='+dataItem.guardianid]"><div class="btn btn-primary btn-sm">号码管理</div></a>
                                 </td>
                             </tr>
                         </table>
@@ -175,6 +178,7 @@
         }
 
         function add() {
+            var patientid = GetQueryString("userid");
             var guardianname = $("#name").val();
             var appellation = $("#relation").val();
             if (guardianname == "" || appellation == "") {
@@ -185,6 +189,7 @@
                     type: 'Post',
                     url: '../action/TGuardian.ashx',
                     data: {
+                        patientid:patientid,
                         guardianname: guardianname,
                         appellation: appellation,
                         op: "insert"
@@ -310,13 +315,13 @@
             el: "#test",
             ready: function () {
                 var _this = this;
-                var userid = GetQueryString("userid");
+                var patientid = GetQueryString("userid");
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TGuardian.ashx',
+                    url: '../action/VGContact.ashx',
                     data: {
-
-                        op: "load"
+                        patientid: patientid,
+                        op: "bypatientid"
                     },
                     dataType: 'json',
                     success: function (data) {
@@ -339,7 +344,6 @@
                         }
                     }
                 })
-                //search(_this);
             },
             data: {
                 //总项目数
@@ -452,51 +456,6 @@
                 update: function (item) {
                     update(item);
                 },
-                search: function () {
-                    $.ajax({
-                        type: 'Post',
-                        url: '../action/PatientInfo.ashx',
-                        data: {
-                            op: "search"
-                        },
-                        dataType: 'text',
-                        success: function (data) {
-                            var arr = [];
-                            arr = data.split('|-|');
-
-                            var contact = JSON.parse(arr[0]);
-                            var disease = JSON.parse(arr[1]);
-                            var drone = JSON.parse(arr[2]);
-                            $("#contact").empty();
-                            $("#disease").empty();
-                            $("#drone").empty();
-                            $.each(contact, function (index, item) {
-                                $("#contact").append( 
-                                    "<option value=" + item.guardianid + ">" + item.guardianname + "(" + item.appellation+")" + "</option>");
-                            });
-                            $.each(disease, function (index, item) {
-                                $("#disease").append(
-                                    "<option value=" + item.diseasestatusid + ">" + item.statusname + "</option>");
-                            });
-                            $.each(drone, function (index, item) {
-                                $("#drone").append(
-                                    "<option value=" + item.droneid + ">" + item.dronemodel + "(" + item.droneid + ")" + "</option>");
-                            });
-                        },
-                        error: function (XMLHttpRequest, textStatus) { //请求失败
-                            if (textStatus == 'timeout') {
-                                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                                xmlhttp.abort();
-                                alert("请求超时");
-                            } else if (textStatus == "error") {
-                                alert("服务器内部错误");
-                            }
-                            else if (textStatus == "parsererror") {
-                                alert("返回类型错误");
-                            }
-                        }
-                    })
-                }
             }
         });
         vue.$watch("arrayData", function (value) {

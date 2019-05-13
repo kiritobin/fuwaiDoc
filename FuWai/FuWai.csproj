@@ -75,6 +75,7 @@
     <Content Include="home\contact.html" />
     <Content Include="home\drone.html" />
     <Content Include="home\guardian.html" />
+    <Content Include="home\guardiantel.html" />
     <Content Include="标注点.html" />
     <Content Include="闪烁.html" />
     <Content Include="action\TPContact.ashx" />
