@@ -36,9 +36,9 @@ namespace FuWai.BLL
         /// <param name="appellation">成员关系</param>
         /// <param name="guardianname">监护人姓名</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string appellation, string guardianname)
+        public Boolean insert(string appellation, string guardianname, string guardianid)
         {
-            int row = td.insert(appellation, guardianname);
+            int row = td.insert(appellation, guardianname, guardianid);
             if (row > 0)
             {
                 return true;

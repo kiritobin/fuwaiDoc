@@ -48,8 +48,9 @@ namespace FuWai.action
         {
             String appellation = context.Request["appellation"];
             String guardianname = context.Request["guardianname"];
+            String patientid = context.Request["patientid"];
 
-            if (tb.insert(appellation, guardianname))
+            if (tb.insert(appellation, guardianname, patientid))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
