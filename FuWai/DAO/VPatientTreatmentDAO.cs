@@ -1,24 +1,24 @@
-﻿using System;
+﻿using FuWai.DBHelper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
-using System.Data;
-using System.Data.Sql;
-using FuWai.DBHelper;
 
 namespace FuWai.DAO
 {
-    public class VTreatmentDAO
+    public class VPatientTreatmentDAO
     {
+
         SQLHelper db = new SQLHelper();
 
         /// <summary>
-        /// 查询所有治疗记录
+        /// 查询病人所有治疗记录
         /// </summary>
         /// <returns>DataTable</returns>
         public DataTable SelectAllTreatment()
         {
-            string sql = "select * from V_Treatment";
+            string sql = "select * from V_PatientTreatment";
             string[] param = { };
             object[] values = { };
             return db.FillDataSet(sql, param, values).Tables[0];
@@ -31,7 +31,7 @@ namespace FuWai.DAO
         /// <returns>DataTable</returns>
         public DataTable SelectTreatmentByPatientID(string patientid)
         {
-            string sql = "select * from V_Treatment where patientid=@patientid";
+            string sql = "select * from V_PatientTreatment where patientid=@patientid";
             string[] param = { "@patientid" };
             object[] values = { patientid };
             return db.FillDataSet(sql, param, values).Tables[0];
@@ -44,10 +44,11 @@ namespace FuWai.DAO
         /// <returns>DataTable</returns>
         public DataTable SelectTreatmentByTreatmentID(string treatmentid)
         {
-            string sql = "select * from V_Treatment where treatmentid=@treatmentid";
+            string sql = "select * from V_PatientTreatment where treatmentid=@treatmentid";
             string[] param = { "@treatmentid" };
             object[] values = { treatmentid };
             return db.FillDataSet(sql, param, values).Tables[0];
         }
+
     }
 }

@@ -64,7 +64,6 @@
     <Content Include="action\TDrone.ashx" />
     <Content Include="action\VMedicalHistory.ashx" />
     <Content Include="action\VPatient.ashx" />
-    <Content Include="action\VTreatment.ashx" />
     <Content Include="action\TGcontact.ashx" />
     <Content Include="action\VDronePatient.ashx" />
     <Content Include="action\TCheck.ashx" />
@@ -80,6 +79,7 @@
     <Content Include="action\TPContact.ashx" />
     <Content Include="action\TTreatment.ashx" />
     <Content Include="action\VPatientCheck.ashx" />
+    <Content Include="action\VPatientTreatment.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -153,8 +153,8 @@
     <Compile Include="action\VPatientCheck.ashx.cs">
       <DependentUpon>VPatientCheck.ashx</DependentUpon>
     </Compile>
-    <Compile Include="action\VTreatment.ashx.cs">
-      <DependentUpon>VTreatment.ashx</DependentUpon>
+    <Compile Include="action\VPatientTreatment.ashx.cs">
+      <DependentUpon>VPatientTreatment.ashx</DependentUpon>
     </Compile>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VPatientCheckBLL.cs" />
-    <Compile Include="BLL\VTreatmentBLL.cs" />
+    <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
     <Compile Include="DAO\TDiseasestatusDAO.cs" />
@@ -186,7 +186,7 @@
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientCheckDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
-    <Compile Include="DAO\VTreatmentDAO.cs" />
+    <Compile Include="DAO\VPatientTreatmentDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

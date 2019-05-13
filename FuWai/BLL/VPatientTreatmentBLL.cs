@@ -7,9 +7,10 @@ using System.Web;
 
 namespace FuWai.BLL
 {
-    public class VTreatmentBLL
+    public class VPatientTreatmentBLL
     {
-        VTreatmentDAO tdao = new VTreatmentDAO();
+
+        VPatientTreatmentDAO tdao = new VPatientTreatmentDAO();
         /// <summary>
         /// 查询所有治疗记录
         /// </summary>
@@ -38,5 +39,6 @@ namespace FuWai.BLL
         {
             return JsonHelper.ToJson(tdao.SelectTreatmentByTreatmentID(treatmentid));
         }
+
     }
 }
