@@ -1,23 +1,24 @@
-﻿using System;
+﻿using FuWai.DAO;
+using FuWai.DBHelper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
-using System.Data;
-using FuWai.DAO;
-using FuWai.DBHelper;
 
 namespace FuWai.BLL
 {
-    public class VCheckBLL
+    public class VPatientCheckBLL
     {
-        VCheckDAO dao = new VCheckDAO();
+
+        VPatientCheckDAO dao = new VPatientCheckDAO();
         /// <summary>
         /// 查询所有检查记录
         /// </summary>
         /// <returns>datatable的表格</returns>
-        public string selectVCheck()
+        public string selectVPatientCheck()
         {
-            DataTable dt = dao.selectVCheck();
+            DataTable dt = dao.selectVPatientCheck();
             string jsonString = string.Empty;
             jsonString = JsonHelper.ToJson(dt);
             return jsonString;
@@ -27,10 +28,11 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public string selectByPatientId(string patientid)
+        public string selectCheckByPatientId(string patientid)
         {
-            DataTable dt = dao.selectByPatientId(patientid);
+            DataTable dt = dao.selectCheckByPatientId(patientid);
             return JsonHelper.ToJson(dt);
         }
+
     }
 }
