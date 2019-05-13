@@ -36,7 +36,7 @@ namespace FuWai.BLL
         /// <returns></returns>
         public String getDroneinfobypatientid(string patientid)
         {
-            DataTable dt = vmh.SelectVMedicalHistorybymedicalhistoryid(patientid);
+            DataTable dt = vmh.SelectVMedicalHistorybypatientid(patientid);
             String json = "";
             json = JsonHelper.ToJson(dt);
             return json;

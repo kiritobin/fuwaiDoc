@@ -51,9 +51,9 @@ namespace FuWai.BLL
         /// <param name="contactphone">联系方式</param>
         /// <param name="guardianid">监护人编号</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean update(string contactphone, string guardianid)
+        public Boolean update(string contactphone, string gcontactid)
         {
-            int row = td.update(contactphone, guardianid);
+            int row = td.update(contactphone, gcontactid);
             if (row > 0)
             {
                 return true;
@@ -69,6 +69,20 @@ namespace FuWai.BLL
         public Boolean delete(string gcontactid)
         {
             int row = td.delete(gcontactid);
+            if (row > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 判断删除监护人有没有外键约束
+        /// </summary>
+        /// <param name="gcontactid"></param>
+        /// <returns></returns>
+        public Boolean isdelete(string guardianid)
+        {
+            int row = td.isdelete(guardianid);
             if (row > 0)
             {
                 return true;

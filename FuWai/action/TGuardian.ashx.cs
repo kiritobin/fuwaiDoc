@@ -35,6 +35,7 @@ namespace FuWai.action
         }
 
         TGuardianBLL tb = new TGuardianBLL();
+        TGcontactBLL gcontact = new TGcontactBLL();
 
         private void load(HttpContext context)
         {
@@ -84,17 +85,24 @@ namespace FuWai.action
         private void delete(HttpContext context)
         {
             String guardianid = context.Request["guardianid"];
-
-            if (tb.delete(guardianid))
+            if (gcontact.isdelete(guardianid))
             {
-                context.Response.Write("删除成功");
+                context.Response.Write("删除监护人必须先删除其所有联系号码");
                 context.Response.End();
-
             }
             else
             {
-                context.Response.Write("删除失败");
-                context.Response.End();
+                if (tb.delete(guardianid))
+                {
+                    context.Response.Write("删除成功");
+                    context.Response.End();
+
+                }
+                else
+                {
+                    context.Response.Write("删除失败");
+                    context.Response.End();
+                }
             }
         }
 

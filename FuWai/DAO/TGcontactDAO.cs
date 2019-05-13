@@ -56,12 +56,12 @@ namespace FuWai.DAO
         /// <param name="contactphone">联系方式</param>
         /// <param name="guardianid">监护人编号</param>
         /// <returns>返回int</returns>
-        public int update(string contactphone, string guardianid)
+        public int update(string contactphone, string gcontactid)
         {
-            string sql = "update T_Gcontact set contactphone=@contactphone where guardianid=@guardianid ";
+            string sql = "update T_Gcontact set contactphone=@contactphone where gcontactid=@gcontactid ";
 
-            string[] param = { "@contactphone", "@guardianid" };
-            object[] value = { contactphone, guardianid };
+            string[] param = { "@contactphone", "@gcontactid" };
+            object[] value = { contactphone, gcontactid };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -81,5 +81,19 @@ namespace FuWai.DAO
             return db.ExecuteNoneQuery(sql, param, value);
         }
 
+        /// <summary>
+        /// 判断删除监护人有没有外键约束
+        /// </summary>
+        /// <param name="gcontactid"></param>
+        /// <returns></returns>
+        public int isdelete(string guardianid)
+        {
+            string sql = "select count(gcontactid) from T_Gcontact where guardianid=@guardianid";
+
+            string[] param = { "@guardianid" };
+            object[] value = { guardianid };
+
+            return Convert.ToInt32(db.ExecuteScalar(sql, param, value));
+        }
     }
 }

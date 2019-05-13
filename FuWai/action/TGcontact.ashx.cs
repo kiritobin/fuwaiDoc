@@ -20,6 +20,10 @@ namespace FuWai.action
             {
                 load(context);
             }
+            else if (op== "byguardianidload")
+            {
+                byguardianidload(context);
+            }
             else if (op == "insert")
             {
                 insert(context);
@@ -44,6 +48,14 @@ namespace FuWai.action
 
         }
 
+        private void byguardianidload(HttpContext context)
+        {
+            String guardianid = context.Request["guardianid"];
+            String json = tb.getGcontactinfobyguardianid(guardianid);
+            context.Response.Write(json);
+            context.Response.End();
+        }
+
         private void insert(HttpContext context)
         {
             String contactphone = context.Request["contactphone"];
@@ -65,9 +77,9 @@ namespace FuWai.action
         private void update(HttpContext context)
         {
             String contactphone = context.Request["contactphone"];
-            String guardianid = context.Request["guardianid"];
+            String gcontactid = context.Request["gcontactid"];
 
-            if (tb.update(contactphone, guardianid))
+            if (tb.update(contactphone, gcontactid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
