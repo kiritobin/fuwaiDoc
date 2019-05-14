@@ -70,9 +70,9 @@ namespace FuWai.action
         private void update(HttpContext context)
         {
             String medicalhistoryreason = context.Request["medicalhistoryreason"];
-            String patientid = context.Request["patientid"];
+            String medicalhistoryid = context.Request["medicalhistoryid"];
 
-            if (medic.update(medicalhistoryreason, patientid))
+            if (medic.update(medicalhistoryreason, medicalhistoryid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();

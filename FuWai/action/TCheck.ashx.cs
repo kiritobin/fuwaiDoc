@@ -38,13 +38,12 @@ namespace FuWai.action
         }
         private void insert(HttpContext context)
         {
-            String checkid = context.Request["checkid"];
             String bloodpressure = context.Request["bloodpressure"];
             double bodytemp = Convert.ToDouble(context.Request["bodytemp"]);
             String checkdate = context.Request["checkdate"];
             String patientid = context.Request["patientid"];
 
-            if (tb.insert(checkid, bloodpressure, bodytemp, checkdate, patientid))
+            if (tb.insert(bloodpressure, bodytemp, checkdate, patientid))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
