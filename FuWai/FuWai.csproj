@@ -84,6 +84,7 @@
     <Content Include="action\VPatientCheck.ashx" />
     <Content Include="action\VPatientTreatment.ashx" />
     <Content Include="action\VGContact.ashx" />
+    <None Include="Properties\PublishProfiles\a.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
