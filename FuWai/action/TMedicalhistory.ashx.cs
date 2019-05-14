@@ -53,8 +53,9 @@ namespace FuWai.action
         {
             String medicalhistoryreason = context.Request["medicalhistoryreason"];
             String patientid = context.Request["patientid"];
+            String remark = context.Request["remark"];
 
-            if (medic.insert(medicalhistoryreason, patientid))
+            if (medic.insert(medicalhistoryreason, patientid, remark))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -71,8 +72,9 @@ namespace FuWai.action
         {
             String medicalhistoryreason = context.Request["medicalhistoryreason"];
             String medicalhistoryid = context.Request["medicalhistoryid"];
+            String remark = context.Request["remark"];
 
-            if (medic.update(medicalhistoryreason, medicalhistoryid))
+            if (medic.update(medicalhistoryreason, medicalhistoryid, remark))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
