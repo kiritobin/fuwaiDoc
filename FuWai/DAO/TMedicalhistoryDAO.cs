@@ -52,12 +52,12 @@ namespace FuWai.DAO
         /// <param name="medicalhistoryreason">病因</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public int insert(string medicalhistoryreason, string patientid,string remark)
+        public int insert(string medicalhistoryreason, string patientid, string remark, string doctor)
         {
-            string sql = "insert into T_Medicalhistory values(@medicalhistoryreason,@patientid,@remark)";
+            string sql = "insert into T_Medicalhistory values(@medicalhistoryreason,@patientid,@remark,@doctor)";
 
-            string[] param = { "@medicalhistoryreason", "@patientid", "@remark" };
-            object[] value = { medicalhistoryreason, patientid, remark };
+            string[] param = { "@medicalhistoryreason", "@patientid", "@remark", "@doctor" };
+            object[] value = { medicalhistoryreason, patientid, remark, doctor };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -68,12 +68,12 @@ namespace FuWai.DAO
         /// <param name="medicalhistoryreason">病因</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public int update(string medicalhistoryreason, string medicalhistoryid, string remark)
+        public int update(string medicalhistoryreason, string medicalhistoryid, string remark,string doctor)
         {
-            string sql = "update T_Medicalhistory set medicalhistoryreason=@medicalhistoryreason,remark=@remark where medicalhistoryid=@medicalhistoryid";
+            string sql = "update T_Medicalhistory set medicalhistoryreason=@medicalhistoryreason,remark=@remark,doctor=@doctor where medicalhistoryid=@medicalhistoryid";
 
-            string[] param = { "@medicalhistoryreason", "@medicalhistoryid", "@remark" };
-            object[] value = { medicalhistoryreason, medicalhistoryid, remark };
+            string[] param = { "@medicalhistoryreason", "@medicalhistoryid", "@remark", "@doctor" };
+            object[] value = { medicalhistoryreason, medicalhistoryid, remark, doctor };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }

@@ -44,9 +44,9 @@ namespace FuWai.BLL
         /// <param name="treatmentEdate">结束时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public bool insertTreatment(string treatmentid, string treatmentBdate, string treatmentEdate, string patientid)
+        public bool insertTreatment(string treatmentBdate, string treatmentEdate, string patientid, string drug, string doctor)
         {
-            int row = dao.insertTreatment(treatmentid, treatmentBdate, treatmentEdate, patientid);
+            int row = dao.insertTreatment(treatmentBdate, treatmentEdate, patientid, drug, doctor);
             if (row > 0)
             {
                 return true;
@@ -88,9 +88,9 @@ namespace FuWai.BLL
         /// <param name="treatmentBdate"></param>
         /// <param name="treatmentEdate"></param>
         /// <returns></returns>
-        public bool updateTreatmentId(string treatmentid, string treatmentBdate, string treatmentEdate)
+        public bool updateTreatmentId(string treatmentid, string treatmentBdate, string treatmentEdate, string drug, string doctor)
         {
-            int row = dao.updateTreatmentId(treatmentid, treatmentBdate, treatmentEdate);
+            int row = dao.updateTreatmentId(treatmentid, treatmentBdate, treatmentEdate, drug, doctor);
             if (row > 0)
             {
                 return true;
@@ -105,9 +105,9 @@ namespace FuWai.BLL
         /// <param name="treatmentEdate">结束时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public bool updatePatientId(string treatmentid, string treatmentBdate, string treatmentEdate, string patientid)
+        public bool updatePatientId(string treatmentBdate, string treatmentEdate, string patientid, string drug, string doctor)
         {
-            int row = dao.updatePatientId(treatmentid, treatmentBdate, treatmentEdate, patientid);
+            int row = dao.updatePatientId(treatmentBdate, treatmentEdate, patientid, drug, doctor);
             if (row > 0)
             {
                 return true;
