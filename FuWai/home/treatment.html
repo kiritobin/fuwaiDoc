@@ -40,8 +40,6 @@
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
                                 <td>{{dataItem.bloodpressure}}</td>
                                 <td>{{dataItem.bodytemp}}</td>
-                                <td>{{dataItem.drug}}</td>
-                                <td>{{dataItem.doctor}}</td>
                                 <td>{{dataItem.checkdate}}</td>
                                 <td>
                                     <button @click="del(dataItem.checkid)" class="btn btn-danger btn-sm">删除</button>
@@ -122,14 +120,6 @@
                                         <input type="text" id="atemp">
                                     </p>
                                     <p>
-                                        <label>治疗药品：</label>
-                                        <input type="text" id="adrug">
-                                    </p>
-                                    <p>
-                                        <label>主治医师：</label>
-                                        <input type="text" id="adoctor">
-                                    </p>
-                                    <p>
                                         <label>检查日期：</label>
                                         <input type="text" id="adate">
                                     </p>
@@ -165,14 +155,6 @@
                                         <input type="text" v-model="editPeople.bodytemp" id="etemp" value="">
                                     </p>
                                     <p>
-                                        <label>治疗药品：</label>
-                                        <input type="text" v-model="editPeople.drug" id="edrug" value="">
-                                    </p>
-                                    <p>
-                                        <label>主治医师：</label>
-                                        <input type="text" v-model="editPeople.doctor" id="edoctor" value="">
-                                    </p>
-                                    <p>
                                         <label>检查日期：</label>
                                         <input type="text" v-model="editPeople.checkdate" id="edate" value="">
                                     </p>
@@ -206,9 +188,8 @@
             var bloodpressure = $("#ablood").val();
             var bodytemp = $("#atemp").val();
             var checkdate = $("#adate").val();
-            var drug = $("#adrug").val();
-            var doctor = $("#adoctor").val();
-            if (bloodpressure == "" || bodytemp == "" || checkdate == "" || drug == "" || doctor=="") {
+
+            if (bloodpressure == "" || bodytemp == "" || checkdate=="") {
                 alert("含有未填项");
             }
             else {
@@ -220,8 +201,6 @@
                         bloodpressure: bloodpressure,
                         bodytemp: bodytemp,
                         checkdate: checkdate,
-                        drug: drug,
-                        doctor: doctor
                         op: "insert"
                     },
                     dataType: 'text',
@@ -290,9 +269,7 @@
             var bodytemp = $("#etemp").val();
             var checkdate = $("#edate").val();
             var patientid = GetQueryString("userid");
-            var drug = GetQueryString("edrug");
-            var doctor = GetQueryString("edoctor");
-            if (bloodpressure == "" || bodytemp == "" || checkdate==""||drug==""||doctor=="") {
+            if (bloodpressure == "" || bodytemp == "" || checkdate=="") {
                 alert("含有未填项");
             }
             else {
@@ -305,8 +282,6 @@
                         bloodpressure: bloodpressure,
                         bodytemp: bodytemp,
                         checkdate: checkdate,
-                        drug: drug,
-                        doctor: doctor,
                         op: "update"
                     },
                     dataType: 'text',
@@ -358,7 +333,7 @@
                 var patientid = GetQueryString("userid");
                 $.ajax({
                     type: 'Post',
-                    url: '../action/VPatientCheck.ashx',
+                    url: '../action/VPatientTreatment.ashx',
                     data: {
                         patientid: patientid,
                         op: "patientid"
