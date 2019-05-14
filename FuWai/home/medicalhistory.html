@@ -33,11 +33,13 @@
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
                                 <th>病因</th>
+                                <th>诊断医师</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
                                 <td>{{dataItem.medicalhistoryreason}}</td>
+                                <td>{{dataItem.doctor}}</td>
                                 <td>{{dataItem.remark}}</td>
                                 <td>
                                     <button @click="del(dataItem.medicalhistoryid)" class="btn btn-danger btn-sm">删除</button>
@@ -114,6 +116,10 @@
                                         <input type="text" id="adisease">
                                     </p>
                                     <p>
+                                        <label>诊断医师：</label>
+                                        <input type="text" id="adoctor">
+                                    </p>
+                                    <p>
                                         <label>备注：</label>
                                         <input type="text" id="aremark">
                                     </p>
@@ -143,6 +149,10 @@
                                     <p>
                                         <label>病因：</label>
                                         <input type="text" v-model="editPeople.medicalhistoryreason" id="edisease" value="">
+                                    </p>
+                                    <p>
+                                        <label>诊断医师：</label>
+                                        <input type="text" v-model="editPeople.doctor" id="edoctor" value="">
                                     </p>
                                     <p>
                                         <label>备注：</label>
@@ -177,7 +187,8 @@
             var patientid = GetQueryString("userid");
             var medicalhistoryreason = $("#adisease").val();
             var remark = $("#aremark").val();
-            if (medicalhistoryreason == "" || remark=="") {
+            var doctor = $("#adoctor").val();
+            if (medicalhistoryreason == "" || remark == "" || doctor=="") {
                 alert("含有未填项");
             }
             else {
@@ -185,6 +196,7 @@
                     type: 'Post',
                     url: '../action/TMedicalhistory.ashx',
                     data: {
+                        doctor: doctor,
                         patientid:patientid,
                         medicalhistoryreason: medicalhistoryreason,
                         remark: remark,
@@ -254,7 +266,8 @@
         function update(medicalhistoryid) {
             var remark = $("#eremark").val();
             var medicalhistoryreason = $("#edisease").val();
-            if (medicalhistoryreason == "" || remark=="") {
+            var doctor = $("#edoctor").val();
+            if (medicalhistoryreason == "" || remark == "" || doctor=="") {
                 alert("含有未填项");
             }
             else {
@@ -262,6 +275,7 @@
                     type: 'Post',
                     url: '../action/TMedicalhistory.ashx',
                     data: {
+                        doctor: doctor,
                         medicalhistoryid: medicalhistoryid,
                         medicalhistoryreason: medicalhistoryreason,
                         remark: remark,
@@ -448,7 +462,8 @@
                     this.editPeople = {
                         medicalhistoryreason: item.medicalhistoryreason,
                         medicalhistoryid: item.medicalhistoryid,
-                        remark:item.remark
+                        remark: item.remark,
+                        doctor:item.doctor
                     };
                 },
                 update: function (item) {
