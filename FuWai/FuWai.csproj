@@ -81,7 +81,7 @@
     <Content Include="js\ajaxfileupload.js" />
     <Content Include="user\4.jpg" />
     <Content Include="user\9.jpg" />
-    <Content Include="user\zhu.jpg" />
+    <Content Include="user\2.jpg" />
     <Content Include="标注点.html" />
     <Content Include="闪烁.html" />
     <Content Include="action\TPContact.ashx" />
