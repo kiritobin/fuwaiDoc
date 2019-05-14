@@ -42,9 +42,9 @@ namespace FuWai.BLL
         /// <param name="weight">病人体重</param>
         /// <param name="height">病人身高</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height)
+        public Boolean insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height, string headimg, string address, string xy)
         {
-            int row = td.insert(patientid, patientname, gender, diseasestatusid, droneid, weight, height);
+            int row = td.insert(patientid, patientname, gender, diseasestatusid, droneid, weight, height, headimg, address, xy);
             if (row > 0)
             {
                 return true;
@@ -62,9 +62,9 @@ namespace FuWai.BLL
         /// <param name="weight">病人体重</param>
         /// <param name="height">病人身高</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height)
+        public Boolean update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height, string headimg, string address, string xy)
         {
-            int row = td.update(patientid, patientname, gender, diseasestatusid, droneid, weight, height);
+            int row = td.update(patientid, patientname, gender, diseasestatusid, droneid, weight, height, headimg, address, xy);
             if (row > 0)
             {
                 return true;
