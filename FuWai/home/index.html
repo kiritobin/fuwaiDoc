@@ -1,658 +1,84 @@
 ﻿<!DOCTYPE html>
-<html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>阜外医院</title>
-    <link rel="stylesheet" href="../css/bootstrap.css" />
-    <style>
-        img{
-            width:30px;
-            height:30px;
-        }
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> 阜外医院 </title>
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	
 </head>
 
 <body>
-    <div class="container body-content">
-        <h2></h2>
-        <div class="row" style="height:600px">
-            <div class="col-md-3" style="height: 100%">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">病人信息管理</a></li>
-                    <li><a href="drone.html">无人机管理</a></li>
-                    <li><a href="../标注点.html">标注点</a></li>
-                    <li><a href="../闪烁.html">闪烁</a></li>
-                </ul>
-            </div>
-            <div class="col-md-9">
-                <div id="test" class="form-group">
-                    <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
-                            data-target="#addModal" id="search" @click="search()">
-                        添加
-                    </button>
-                    <div class="form-group">
-                        <table class="table table-bordered table-responsive table-striped">
-                            <tr>
-                                <th>头像</th>
-                                <th v-on:click="sortBy('id')">编号</th>
-                                <th>姓名</th>
-                                <th v-on:click="sortBy('age')">性别</th>
-                                <th>身高</th>
-                                <th>体重</th>
-                                <th>地址</th>
-                                <th>坐标</th>
-                                <th>无人机编号</th>
-                                <th>操作</th>
-                            </tr>
-                            <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td><img v-bind:src="dataItem.headimg" alt="" class="img-circle" /></td>
-                                <td>{{dataItem.patientid}}</td>
-                                <td>{{dataItem.patientname}}</td>
-                                <td>{{dataItem.gender}}</td>
-                                <td>{{dataItem.weight}}</td>
-                                <td>{{dataItem.height}}</td>
-                                <td>{{dataItem.address}}</td>
-                                <td>{{dataItem.xy}}</td>
-                                <td>{{dataItem.droneid}}</td>
-                                <td>
-                                    <button @click="del(dataItem.patientid)" class="btn btn-danger btn-sm">删除</button>
-                                    <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
-                                    <a v-bind:href="['guardian.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">监护人</div></a>
-                                    <a v-bind:href="['contact.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">联系方式</div></a>
-                                    <a v-bind:href="['medicalhistory.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">病史记录</div></a>
-                                    <a v-bind:href="['record.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">检查记录</div></a>
-                                    <a v-bind:href="['treatment.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">治疗记录</div></a>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="pager" id="pager">
-                            <span class="form-inline">
-                                <select class="form-control" v-model="pagesize"
-                                        v-on:change="showPage(pageCurrent,$event,true)" number>
-                                    <option v-for="item in arrPageSize" value="{{item}}">{{item}}</option>
-                                </select>
-                            </span>
-                            <template v-for="item in pageCount+1">
-                                <span v-if="item==1" class="btn btn-default" v-on:click="showPage(1,$event)">
-                                    首页
-                                </span>
-                                <span v-if="item==1" class="btn btn-default"
-                                      v-on:click="showPage(pageCurrent-1,$event)">
-                                    上一页
-                                </span>
-                                <span v-if="item==1" class="btn btn-default" v-on:click="showPage(item,$event)">
-                                    {{item}}
-                                </span>
-                                <span v-if="item==1&&item<showPagesStart-1" class="btn btn-default disabled">
-                                    ...
-                                </span>
-                                <span v-if="item>1&&item<=pageCount-1&&item>=showPagesStart&&item<=showPageEnd&&item<=pageCount"
-                                      class="btn btn-default" v-on:click="showPage(item,$event)">
-                                    {{item}}
-                                </span>
-                                <span v-if="item==pageCount&&item>showPageEnd+1" class="btn btn-default disabled">
-                                    ...
-                                </span>
-                                <span v-if="item==pageCount&&item!=1" class="btn btn-default"
-                                      v-on:click="showPage(item,$event)">
-                                    {{item}}
-                                </span>
-                                <span v-if="item==pageCount" class="btn btn-default"
-                                      v-on:click="showPage(pageCurrent+1,$event)">
-                                    下一页
-                                </span>
-                                <span v-if="item==pageCount" class="btn btn-default"
-                                      v-on:click="showPage(pageCount,$event)">
-                                    尾页
-                                </span>
-                            </template>
-                            <span class="form-inline">
-                                <input class="pageIndex form-control" style="width:60px;text-align:center" type="text"
-                                       v-model="pageCurrent | onlyNumeric"
-                                       v-on:keyup.enter="showPage(pageCurrent,$event,true)" />
-                            </span>
-                            <span>{{pageCurrent}}/{{pageCount}}</span>
-                        </div>
-                    </div>
+	<div id="container" class="effect mainnav-sm navbar-fixed mainnav-fixed">
+		<header id="navbar">
+			<div>
+				<a class="mainnav-toggle" href="#"> <i class="fa fa-navicon fa-lg"></i> </a>
+			</div>
+		</header>
+		
+		<div class="boxed">
+			<div id="content-container" style="height: 800px;padding-top: 1px;">
+				<iframe name="fuwai" src="test.html" frameborder="0" height="100%" width="100%"></iframe>
+			</div>
+			<nav id="mainnav-container">
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand">
+						<i class="fa fa-forumbee brand-icon"></i>
+						<div class="brand-title">
+							<span class="brand-text">阜外医院</span>
+						</div>
+					</a>
+				</div>
 
-                    <!-- 添加学生 -->
-                    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addodalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        添加病人
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        <img src="#" alt="" id="changeimg" />
-                                        <label>头像：</label>
-                                        <input type="file" id="file1" name="file" />
-                                        <input type="button" id="save" value="保存" @click="upload('file1')" />
-                                    </p>
-                                    <p>
-                                        <label>编号：</label>
-                                        <input type="text" id="No">
-                                    </p>
-                                    <p>
-                                        <label>姓名：</label>
-                                        <input type="text" id="aName">
-                                    </p>
-                                    <p>
-                                        <label>性别：</label>
-                                        <select id="gender">
-                                            <option value="男">男</option>
-                                            <option value="女">女</option>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label>身高：</label>
-                                        <input type="text" id="aweight">
-                                    </p>
-                                    <p>
-                                        <label>体重：</label>
-                                        <input type="text" id="aheight">
-                                    </p>
-                                    <p>
-                                        <label>地址：</label>
-                                        <input type="text" id="aaddress">
-                                    </p>
-                                    <p>
-                                        <label>坐标：</label>
-                                        <input type="text" id="ax" placeholder="x坐标">
-                                        <input type="text" id="ay" placeholder="y坐标">
-                                    </p>
-                                    <p>
-                                        <label>无人机编号：</label>
-                                        <select id="drone"></select>
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="add()">
-                                        提交更改
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 编辑学生 -->
-                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addodalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        编辑病人
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        <img v-bind:src="editPeople.headimg" alt="" id="echangeimg" />
-                                        <label>头像：</label>
-                                        <input type="file" id="file2" name="file2">
-                                        <input type="button" id="esave" value="保存" @click="upload('file2')">
-                                    </p>
-                                    <p>
-                                        <label>编号：</label>
-                                        <input type="text" readonly v-model="editPeople.patientid" id="eNo" value="">
-                                    </p>
-                                    <p>
-                                        <label>姓名：</label>
-                                        <input type="text" v-model="editPeople.patientname" id="eName" value="">
-                                    </p>
-                                    <p>
-                                        <label>性别：</label>
-                                        <input type="text" v-model="editPeople.gender" id="egender" value="">
-                                    </p>
-                                    <p>
-                                        <label>身高：</label>
-                                        <input type="text" v-model="editPeople.height" id="eheight">
-                                    </p>
-                                    <p>
-                                        <label>体重：</label>
-                                        <input type="text" v-model="editPeople.weight" id="eweight">
-                                    </p>
-                                    <p>
-                                        <label>地址：</label>
-                                        <input type="text" v-model="editPeople.address" id="eaddress">
-                                    </p>
-                                    <p>
-                                        <label>坐标：</label>
-                                        <input type="text" v-model="editPeople.xy" id="ex">
-                                    </p>
-                                    <p>
-                                        <label>无人机编号：</label>
-                                        <select id="edrone"></select>
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update()">
-                                        提交更改
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div id="mainnav">
+					<div id="mainnav-menu-wrap">
+						<div class="nano">
+							<div class="nano-content">
+								<ul id="mainnav-menu" class="list-group">
+									<li>
+										<a href="patient.html" target='fuwai'>
+											<i class="fa fa-th"></i>
+											<span class="menu-title">病人管理</span>
+										</a>
+									</li>
 
+									<li>
+										<a href="drone.html" target='fuwai'>
+											<i class="fa fa-fighter-jet"></i>
+											<span class="menu-title">无人机管理</span>
+										</a>
+									</li>
+									<li>
+										<a href="test.html" target='fuwai'>
+											<i class="fa fa-laptop"></i>
+											<span class="menu-title">控制中心</span>
+										</a>
 
-    <script src="jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/ajaxfileupload.js"></script>
-    <script src="vue.js"></script>
-    <script>
-        function add() {
-            var patientid = $("#No").val();
-            var patientname = $("#aName").val();
-            var gender = $("#gender").val();
-            var height = $("#aheight").val();
-            var weight = $("#aweight").val();
-            var droneid = $("#drone").val();
-            var address = $("#aaddress").val();
-            var x = $("#ax").val();
-            var y = $("#ay").val();
-            var xy = x + "," + y;
-            var headimg = $("#changeimg")[0].src;
-            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || x == "" || y == "") {
-                alert("含有未填项");
-            }
-            else {
-                $.ajax({
-                    type: 'Post',
-                    url: '../action/TPatient.ashx',
-                    data: {
-                        patientid: patientid,
-                        patientname: patientname,
-                        gender: gender,
-                        weight: weight,
-                        height: height,
-                        droneid: droneid,
-                        address: address,
-                        xy: xy,
-                        headimg: headimg,
-                        op: "insert"
-                    },
-                    dataType: 'text',
-                    success: function (data) {
-                        console.log(data);
-                        if ("添加成功") {
-                            alert("添加成功");
-                            window.location.reload();
-                        }
-                        else {
-                            alert("添加失败");
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus) { //请求失败
-                        if (textStatus == 'timeout') {
-                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                            xmlhttp.abort();
-                            alert("请求超时");
-                        } else if (textStatus == "error") {
-                            alert("服务器内部错误");
-                        }
-                        else if (textStatus == "parsererror") {
-                            alert("返回类型错误");
-                        }
-                    }
-                })
-            }
-        }
-        function dele(patientid) {
-            $.ajax({
-                type: 'Post',
-                url: '../action/TPatient.ashx',
-                data: {
-                    patientid: patientid,
-                    op: "delete"
-                },
-                dataType: 'text',
-                success: function (data) {
-                    console.log(data);
-                    if ("删除成功") {
-                        alert("删除成功");
-                        window.location.reload();
-                    }
-                    else {
-                        alert("删除失败");
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus) { //请求失败
-                    if (textStatus == 'timeout') {
-                        var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                        xmlhttp.abort();
-                        alert("请求超时");
-                    } else if (textStatus == "error") {
-                        alert("服务器内部错误");
-                    }
-                    else if (textStatus == "parsererror") {
-                        alert("返回类型错误");
-                    }
-                }
-            })
-        }
-        function update() {
-            var patientid = $("#eNo").val();
-            var patientname = $("#eName").val();
-            var gender = $("#egender").val();
-            var height = $("#eheight").val();
-            var weight = $("#eweight").val();
-            var droneid = $("#edrone").val();
-            var address = $("#eaddress").val();
-            var xy = $("#ex").val();
-            var headimg = $("#echangeimg")[0].src;
-            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == "") {
-                alert("含有未填项");
-            }
-            else {
-                $.ajax({
-                    type: 'Post',
-                    url: '../action/TPatient.ashx',
-                    data: {
-                        patientid: patientid,
-                        patientname: patientname,
-                        gender: gender,
-                        height: height,
-                        weight: weight,
-                        droneid: droneid,
-                        address: address,
-                        xy: xy,
-                        headimg: headimg,
-                        op: "update"
-                    },
-                    dataType: 'text',
-                    success: function (data) {
-                        console.log(data);
-                        if ("修改成功") {
-                            alert("修改成功");
-                            window.location.reload();
-                        }
-                        else {
-                            alert("修改失败");
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus) { //请求失败
-                        if (textStatus == 'timeout') {
-                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                            xmlhttp.abort();
-                            alert("请求超时");
-                        } else if (textStatus == "error") {
-                            alert("服务器内部错误");
-                        }
-                        else if (textStatus == "parsererror") {
-                            alert("返回类型错误");
-                        }
-                    }
-                })
-            }
-        }
+									</li>
+								</ul>
 
-        function ajaxFileUpload(file1) {
-            $.ajaxFileUpload(
-                {
-                    url: '../action/upload.ashx', //用于文件上传的服务器端请求地址
-                    secureuri: false, //是否需要安全协议，一般设置为false
-                    fileElementId: file1, //文件上传域的ID
-                    dataType: 'json', //返回值类型 一般设置为json
-                    success: function (data, status)  //服务器成功响应处理函数
-                    {
-                        console.log(data);
-                        if (typeof (data.error) != 'undefined') {
-                            if (data.error != '') {
-                                alert(data.error);
-                            } else {
-                                if (file1 == "file1") {
-                                    $("#changeimg").attr("src", data.filepath);
-                                }
-                                else if (file1 == "file2"){
-                                    $("#echangeimg").attr("src", data.filepath);
-                                }
-                                alert(data.msg);
-                            }
-                        }
-                    },
-                    error: function (data, status, e)//服务器响应失败处理函数
-                    {
-                        alert(e);
-                    }
-                }
-            );
-            return false;
-        }
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
 
-        //只能输入正整数过滤器
-        Vue.filter('onlyNumeric', {
-            // model -> view
-            // 在更新 `<input>` 元素之前格式化值
-            read: function (val) {
-                return val;
-            },
-            // view -> model
-            // 在写回数据之前格式化值
-            write: function (val, oldVal) {
-                var number = +val.replace(/[^\d]/g, '')
-                return isNaN(number) ? 1 : parseFloat(number.toFixed(2))
-            }
-        })
+		<footer id="footer">
+			<p class="pad-lft"> &copy; 云南工商学院 </p>
+		</footer>
 
+		<button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
 
-        var vue = new Vue({
-            el: "#test",
-            ready: function () {
-                var _this = this;
-                $.ajax({
-                    type: 'Post',
-                    url: '../action/TPatient.ashx',
-                    data: {
-                        op: "load"
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        //getData(data);
-                        _this.arrayDataAll = data;
-                        _this.totalCount = _this.arrayDataAll.length;
-                        _this.showPage(_this.pageCurrent, null, true);
-                    },
-                    error: function (XMLHttpRequest, textStatus) { //请求失败
-                        if (textStatus == 'timeout') {
-                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                            xmlhttp.abort();
-                            alert("请求超时");
-                        } else if (textStatus == "error") {
-                            alert("服务器内部错误");
-                        }
-                        else if (textStatus == "parsererror") {
-                            alert("返回类型错误");
-                        }
-                    }
-                })
-                //search(_this);
-            },
-            data: {
-                //总项目数
-                totalCount: 200,
-                //分页数
-                arrPageSize: [5, 10, 20, 30, 40],
-                //当前分页数
-                pageCount: 20,
-                //当前页面
-                pageCurrent: 1,
-                //分页大小
-                pagesize: 10,
-                //显示分页按钮数
-                showPages: 11,
-                //开始显示的分页按钮
-                showPagesStart: 1,
-                //结束显示的分页按钮
-                showPageEnd: 100,
-                //所有数据
-                arrayDataAll: [],
-                //分页数据
-                arrayData: [],
-                //排序字段
-                sortparam: "",
-                //排序方式
-                sorttype: 1
+	</div>
 
-            },
-            methods: {
-                //分页方法
-                showPage: function (pageIndex, $event, forceRefresh) {
-                    if (pageIndex > 0) {
-                        if (pageIndex > this.pageCount) {
-                            pageIndex = this.pageCount;
-                        }
-
-                        //判断数据是否需要更新
-                        var currentPageCount = Math.ceil(this.totalCount / this.pagesize);
-                        if (currentPageCount != this.pageCount) {
-                            pageIndex = 1;
-                            this.pageCount = currentPageCount;
-                        }
-                        else if (this.pageCurrent == pageIndex && currentPageCount == this.pageCount && typeof (forceRefresh) == "undefined") {
-                            console.log("not refresh");
-                            return;
-                        }
-
-                        //处理分页点中样式
-                        var buttons = $("#pager").find("span");
-                        for (var i = 0; i < buttons.length; i++) {
-                            if (buttons.eq(i).html() != pageIndex) {
-                                buttons.eq(i).removeClass("active");
-                            }
-                            else {
-                                buttons.eq(i).addClass("active");
-                            }
-                        }
-
-                        //从所有数据中去分页数据
-                        var newPageInfo = [];
-                        for (var i = 0; i < this.pagesize; i++) {
-                            var index = i + (pageIndex - 1) * this.pagesize;
-                            if (index > this.totalCount - 1) break;
-                            newPageInfo[newPageInfo.length] = this.arrayDataAll[index];
-                        }
-                        this.pageCurrent = pageIndex;
-                        this.arrayData = newPageInfo;
-
-                        //计算分页按钮数据
-                        if (this.pageCount > this.showPages) {
-                            if (pageIndex <= (this.showPages - 1) / 2) {
-                                this.showPagesStart = 1;
-                                this.showPageEnd = this.showPages - 1;
-                                console.log("showPage1")
-                            }
-                            else if (pageIndex >= this.pageCount - (this.showPages - 3) / 2) {
-                                this.showPagesStart = this.pageCount - this.showPages + 2;
-                                this.showPageEnd = this.pageCount;
-                                console.log("showPage2")
-                            }
-                            else {
-                                console.log("showPage3")
-                                this.showPagesStart = pageIndex - (this.showPages - 3) / 2;
-                                this.showPageEnd = pageIndex + (this.showPages - 3) / 2;
-                            }
-                        }
-                        console.log("showPagesStart:" + this.showPagesStart + ",showPageEnd:" + this.showPageEnd + ",pageIndex:" + pageIndex);
-                    }
-
-                }, sortBy: function (sortparam) {
-                    this.sortparam = sortparam;
-                    this.sorttype = this.sorttype == -1 ? 1 : -1;
-                },
-                //提交
-                add: function () {
-                    add();
-                },
-                del: function (item) {
-                    console.log(item);
-                    dele(item);
-                },
-                search: function () {
-                    $.ajax({
-                        type: 'Post',
-                        url: '../action/PatientInfo.ashx',
-                        data: {
-                            op: "search"
-                        },
-                        dataType: 'text',
-                        success: function (data) {
-                            var arr = [];
-                            arr = data.split('|-|');
-
-                            var contact = JSON.parse(arr[0]);
-                            var disease = JSON.parse(arr[1]);
-                            var drone = JSON.parse(arr[2]);
-
-                            $("#drone").empty();
-                            $("#edrone").empty();
-                            $.each(drone, function (index, item) {
-                                $("#drone").append(
-                                    "<option value=" + item.droneid + ">" + item.dronemodel + "(" + item.droneid + ")" + "</option>");
-                            });
-                            $.each(drone, function (index, item) {
-                                $("#edrone").append(
-                                    "<option value=" + item.droneid + ">" + item.dronemodel + "(" + item.droneid + ")" + "</option>");
-                            });
-                        },
-                        error: function (XMLHttpRequest, textStatus) { //请求失败
-                            if (textStatus == 'timeout') {
-                                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                                xmlhttp.abort();
-                                alert("请求超时");
-                            } else if (textStatus == "error") {
-                                alert("服务器内部错误");
-                            }
-                            else if (textStatus == "parsererror") {
-                                alert("返回类型错误");
-                            }
-                        }
-                    })
-                },
-                //编辑
-                edit: function (item) {
-                    this.editPeople = {
-                        patientid: item.patientid,
-                        patientname: item.patientname,
-                        gender: item.gender,
-                        height: item.height,
-                        weight: item.weight,
-                        headimg: item.headimg,
-                        address: item.address,
-                        xy: item.xy
-                    };
-                    this.search();
-                },
-                update: function () {
-                    update();
-                },
-                upload: function (file1) {
-                    ajaxFileUpload(file1);
-                }
-
-            }
-        });
-        vue.$watch("arrayData", function (value) {
-            // console.log("==============arrayData begin==============");
-            // console.log(value==vue.arrayData);
-            // console.log(vue.arrayData);
-            // console.log("==============arrayData end==============");
-        });
-    </script>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="plugins/nanoscrollerjs/jquery.nanoscroller.min.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 
 </html>

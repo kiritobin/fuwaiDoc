@@ -1,0 +1,180 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		body,
+		html,
+		#allmap {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+			font-family: "微软雅黑";
+		}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=notj5jZfhhHQvej1zwAkF1V7pU4jGtY7"></script>
+	<title>为多个点注册单击事件</title>
+	<style>
+		#content {
+			position: absolute;
+			width: 100%;
+			bottom: 0px;
+			text-align: center;
+			z-index: 2;
+			overflow: hidden;
+		}
+
+		.modal-content {
+			background-color: rgba(61,89,171,0.15);
+			height: 250px;
+		}
+		span{
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="allmap"></div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+		<div id="content">
+			<div class="modal-content">
+				<div class="container" style="margin-bottom:0;border: none solid #ddd;border-radius: 3px">
+					<div class="row clearfix">
+						<div class="col-md-12 column">
+							<div class="row clearfix">
+								<div class="col-md-3 column" style="margin-top:18px">
+									<table class="table table-bordered table-hover table-condensed">
+										<thead>
+											<tr>
+												<th colspan="2">
+													<span>基本信息</span>
+													<img src="" alt="" style="height:100px;width:100px;margin-left: 60px;">
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<span>编号</span>
+												</td>
+												<td>
+													<span>TB - Monthly</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span>姓名</span>
+												</td>
+												<td>
+													<span>TB - Monthly</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span>性别</span>
+												</td>
+												<td>
+													<span>TB - Monthly</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-6 column" style="margin-top:60px">
+									<div class="tabbable" id="tabs-902637">
+										<ul class="nav nav-tabs">
+											<li class="active">
+												<a href=" " data-toggle="tab"><span>病史</span></a>
+											</li>
+											<li>
+												<a href="#panel-01" data-toggle="tab"><span>治疗</span></a>
+											</li>
+											<li>
+												<a href="#panel-02" data-toggle="tab"><span>检查</span></a>
+											</li>
+											<li>
+												<a href="#panel-03" data-toggle="tab"><span>联系人</span></a>
+											</li>
+										</ul>
+										<div class="tab-content">
+											<div class="tab-pane active" id="panel-01">
+												<p>
+													<span>111111</span>
+												</p>
+											</div>
+											<div class="tab-pane" id="panel-02">
+												<p>
+													<span>222222</span>
+												</p>
+											</div>
+											<div class="tab-pane" id="panel-03">
+												<p>
+													<span>张三</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3 column" style="margin-top:5px">
+									<h3>
+										<span>实时心电图</span>
+									</h3>
+									<p>
+										<img src="E:\bbs\mz\ml.jpg" alt="" style="height:180px;width:340px">
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+
+</html>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#myModal").modal("hide");
+
+	});
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(102.728547, 25.043682);
+	map.centerAndZoom(point, 15);
+	var mapStyle = {
+        style: "dark"  //设置地图风格为高端黑					
+    }
+    map.setMapStyle(mapStyle);
+
+	var json_data = [[102.715466, 25.041667], [102.715239, 25.044353], [102.719749, 25.043919]];
+	var pointArray = new Array();
+	for (var i = 0; i < json_data.length; i++) {
+		var marker = new BMap.Marker(new BMap.Point(json_data[i][0], json_data[i][1])); // 创建点
+		map.addOverlay(marker);    //增加点
+		pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
+		marker.addEventListener("click", attribute);
+	}
+
+	
+	//让所有点在视野范围内
+	map.setViewport(pointArray);
+	//获取覆盖物位置
+	function attribute(e) {
+		var p = e.target;
+		$("#myModal").modal("show");
+		//$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影
+		$(".modal-backdrop").removeClass("modal-backdrop fade in");
+	}	
+</script>
