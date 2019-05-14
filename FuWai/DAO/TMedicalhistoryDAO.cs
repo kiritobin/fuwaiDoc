@@ -52,12 +52,12 @@ namespace FuWai.DAO
         /// <param name="medicalhistoryreason">病因</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public int insert(string medicalhistoryreason, string patientid)
+        public int insert(string medicalhistoryreason, string patientid, string remark, string doctor)
         {
-            string sql = "insert into T_Medicalhistory values(@medicalhistoryreason,@patientid)";
+            string sql = "insert into T_Medicalhistory values(@medicalhistoryreason,@patientid,@remark,@doctor)";
 
-            string[] param = { "@medicalhistoryreason", "@patientid"};
-            object[] value = { medicalhistoryreason, patientid };
+            string[] param = { "@medicalhistoryreason", "@patientid", "@remark", "@doctor" };
+            object[] value = { medicalhistoryreason, patientid, remark, doctor };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -68,12 +68,12 @@ namespace FuWai.DAO
         /// <param name="medicalhistoryreason">病因</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public int update(string medicalhistoryreason, string patientid)
+        public int update(string medicalhistoryreason, string medicalhistoryid, string remark,string doctor)
         {
-            string sql = "update T_Medicalhistory set medicalhistoryreason=@medicalhistoryreason ,patientid=@patientid";
+            string sql = "update T_Medicalhistory set medicalhistoryreason=@medicalhistoryreason,remark=@remark,doctor=@doctor where medicalhistoryid=@medicalhistoryid";
 
-            string[] param = { "@medicalhistoryreason", "@patientid"};
-            object[] value = { medicalhistoryreason, patientid };
+            string[] param = { "@medicalhistoryreason", "@medicalhistoryid", "@remark", "@doctor" };
+            object[] value = { medicalhistoryreason, medicalhistoryid, remark, doctor };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }

@@ -45,10 +45,11 @@ namespace FuWai.action
             String droneid = context.Request["droneid"];
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
+            String xy = context.Request["xy"];
             int flycount = Convert.ToInt32(context.Request["flycount"]);
-            int status = 1;
+            int status = Convert.ToInt32(context.Request["status"]);
 
-            if (tb.insert(droneid, dronemodel, position, flycount, status))
+            if (tb.insert(droneid, dronemodel, position, flycount, status,xy))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -66,10 +67,11 @@ namespace FuWai.action
             String droneid = context.Request["droneid"];
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
+            String xy = context.Request["xy"];
             int flycount = Convert.ToInt32(context.Request["flycount"]);
-            int status = 1;
+            int status = Convert.ToInt32(context.Request["status"]);
 
-            if (tb.update(droneid, dronemodel, position, flycount, status))
+            if (tb.update(droneid, dronemodel, position, flycount, status,xy))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();

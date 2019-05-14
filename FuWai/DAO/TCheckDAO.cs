@@ -20,11 +20,11 @@ namespace FuWai.DAO
         /// <param name="checkdate">检查时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns>int 大于0添加成功，否则添加失败</returns>
-        public int insert(string checkid, string bloodpressure, double bodytemp, string checkdate, string patientid)
+        public int insert(string bloodpressure, double bodytemp, string checkdate, string patientid)
         {
-            string sql = "insert into T_Check values(@checkid,@bloodpressure,@bodytemp,@checkdate,@patientid)";
-            string[] param = { "@checkid", "@bloodpressure", "@bodytemp", "@checkdate", "@patientid" };
-            object[] values = { checkid, bloodpressure, bodytemp, checkdate, patientid };
+            string sql = "insert into T_Check values(@bloodpressure,@bodytemp,@checkdate,@patientid)";
+            string[] param = { "@bloodpressure", "@bodytemp", "@checkdate", "@patientid" };
+            object[] values = { bloodpressure, bodytemp, checkdate, patientid };
 
             return db.ExecuteNoneQuery(sql, param, values);
         }
@@ -54,7 +54,7 @@ namespace FuWai.DAO
         /// <returns>int >0删除成功 否则删除失败</returns>
         public int delete(string checkid)
         {
-            string sql = "delete from T_Check = where checkid=@checkid";
+            string sql = "delete from T_Check where checkid=@checkid";
             string[] param = { "@checkid" };
             object[] values = { checkid };
             return db.ExecuteNoneQuery(sql, param, values);

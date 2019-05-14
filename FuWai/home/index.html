@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>阜外医院</title>
     <link rel="stylesheet" href="../css/bootstrap.css" />
+    <style>
+        img{
+            width:30px;
+            height:30px;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,20 +35,26 @@
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
+                                <th>头像</th>
                                 <th v-on:click="sortBy('id')">编号</th>
                                 <th>姓名</th>
                                 <th v-on:click="sortBy('age')">性别</th>
                                 <th>身高</th>
                                 <th>体重</th>
+                                <th>地址</th>
+                                <th>坐标</th>
                                 <th>无人机编号</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
+                                <td><img v-bind:src="dataItem.headimg" alt="" class="img-circle" /></td>
                                 <td>{{dataItem.patientid}}</td>
                                 <td>{{dataItem.patientname}}</td>
                                 <td>{{dataItem.gender}}</td>
                                 <td>{{dataItem.weight}}</td>
                                 <td>{{dataItem.height}}</td>
+                                <td>{{dataItem.address}}</td>
+                                <td>{{dataItem.xy}}</td>
                                 <td>{{dataItem.droneid}}</td>
                                 <td>
                                     <button @click="del(dataItem.patientid)" class="btn btn-danger btn-sm">删除</button>
@@ -50,8 +62,8 @@
                                     <a v-bind:href="['guardian.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">监护人</div></a>
                                     <a v-bind:href="['contact.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">联系方式</div></a>
                                     <a v-bind:href="['medicalhistory.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">病史记录</div></a>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">检查记录</div></a>
-                                    <a v-bind:href="['history.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">治疗记录</div></a>
+                                    <a v-bind:href="['record.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">检查记录</div></a>
+                                    <a v-bind:href="['treatment.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">治疗记录</div></a>
                                 </td>
                             </tr>
                         </table>
@@ -120,6 +132,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>
+                                        <img src="#" alt="" id="changeimg" />
+                                        <label>头像：</label>
+                                        <input type="file" id="file1" name="file" />
+                                        <input type="button" id="save" value="保存" @click="upload('file1')" />
+                                    </p>
+                                    <p>
                                         <label>编号：</label>
                                         <input type="text" id="No">
                                     </p>
@@ -141,6 +159,15 @@
                                     <p>
                                         <label>体重：</label>
                                         <input type="text" id="aheight">
+                                    </p>
+                                    <p>
+                                        <label>地址：</label>
+                                        <input type="text" id="aaddress">
+                                    </p>
+                                    <p>
+                                        <label>坐标：</label>
+                                        <input type="text" id="ax" placeholder="x坐标">
+                                        <input type="text" id="ay" placeholder="y坐标">
                                     </p>
                                     <p>
                                         <label>无人机编号：</label>
@@ -170,6 +197,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>
+                                        <img v-bind:src="editPeople.headimg" alt="" id="echangeimg" />
+                                        <label>头像：</label>
+                                        <input type="file" id="file2" name="file2">
+                                        <input type="button" id="esave" value="保存" @click="upload('file2')">
+                                    </p>
+                                    <p>
                                         <label>编号：</label>
                                         <input type="text" readonly v-model="editPeople.patientid" id="eNo" value="">
                                     </p>
@@ -188,6 +221,14 @@
                                     <p>
                                         <label>体重：</label>
                                         <input type="text" v-model="editPeople.weight" id="eweight">
+                                    </p>
+                                    <p>
+                                        <label>地址：</label>
+                                        <input type="text" v-model="editPeople.address" id="eaddress">
+                                    </p>
+                                    <p>
+                                        <label>坐标：</label>
+                                        <input type="text" v-model="editPeople.xy" id="ex">
                                     </p>
                                     <p>
                                         <label>无人机编号：</label>
@@ -210,6 +251,7 @@
 
     <script src="jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/ajaxfileupload.js"></script>
     <script src="vue.js"></script>
     <script>
         function add() {
@@ -219,7 +261,12 @@
             var height = $("#aheight").val();
             var weight = $("#aweight").val();
             var droneid = $("#drone").val();
-            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == ""||weight=="") {
+            var address = $("#aaddress").val();
+            var x = $("#ax").val();
+            var y = $("#ay").val();
+            var xy = x + "," + y;
+            var headimg = $("#changeimg")[0].src;
+            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || x == "" || y == "") {
                 alert("含有未填项");
             }
             else {
@@ -233,6 +280,9 @@
                         weight: weight,
                         height: height,
                         droneid: droneid,
+                        address: address,
+                        xy: xy,
+                        headimg: headimg,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -301,7 +351,10 @@
             var height = $("#eheight").val();
             var weight = $("#eweight").val();
             var droneid = $("#edrone").val();
-            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid=="") {
+            var address = $("#eaddress").val();
+            var xy = $("#ex").val();
+            var headimg = $("#echangeimg")[0].src;
+            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == "") {
                 alert("含有未填项");
             }
             else {
@@ -315,6 +368,9 @@
                         height: height,
                         weight: weight,
                         droneid: droneid,
+                        address: address,
+                        xy: xy,
+                        headimg: headimg,
                         op: "update"
                     },
                     dataType: 'text',
@@ -343,6 +399,40 @@
                 })
             }
         }
+
+        function ajaxFileUpload(file1) {
+            $.ajaxFileUpload(
+                {
+                    url: '../action/upload.ashx', //用于文件上传的服务器端请求地址
+                    secureuri: false, //是否需要安全协议，一般设置为false
+                    fileElementId: file1, //文件上传域的ID
+                    dataType: 'json', //返回值类型 一般设置为json
+                    success: function (data, status)  //服务器成功响应处理函数
+                    {
+                        console.log(data);
+                        if (typeof (data.error) != 'undefined') {
+                            if (data.error != '') {
+                                alert(data.error);
+                            } else {
+                                if (file1 == "file1") {
+                                    $("#changeimg").attr("src", data.filepath);
+                                }
+                                else if (file1 == "file2"){
+                                    $("#echangeimg").attr("src", data.filepath);
+                                }
+                                alert(data.msg);
+                            }
+                        }
+                    },
+                    error: function (data, status, e)//服务器响应失败处理函数
+                    {
+                        alert(e);
+                    }
+                }
+            );
+            return false;
+        }
+
         //只能输入正整数过滤器
         Vue.filter('onlyNumeric', {
             // model -> view
@@ -540,14 +630,20 @@
                         patientname: item.patientname,
                         gender: item.gender,
                         height: item.height,
-                        weight: item.weight
+                        weight: item.weight,
+                        headimg: item.headimg,
+                        address: item.address,
+                        xy: item.xy
                     };
                     this.search();
                 },
                 update: function () {
                     update();
+                },
+                upload: function (file1) {
+                    ajaxFileUpload(file1);
                 }
-                
+
             }
         });
         vue.$watch("arrayData", function (value) {

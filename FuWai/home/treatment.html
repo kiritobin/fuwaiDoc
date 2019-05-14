@@ -14,8 +14,8 @@
         <div class="row" style="height:600px">
             <div class="col-md-3" style="height: 100%">
                 <ul class="nav nav-pills nav-stacked">
-                    <li><a href="index.html">病人信息管理</a></li>
-                    <li class="active"><a href="#">无人机管理</a></li>
+                    <li class="active"><a href="index.html">病人信息管理</a></li>
+                    <li><a href="drone.html">无人机管理</a></li>
                     <li><a href="../标注点.html">标注点</a></li>
                     <li><a href="../闪烁.html">闪烁</a></li>
                 </ul>
@@ -26,26 +26,25 @@
                             data-target="#addModal" id="search">
                         添加
                     </button>
+                    <button class="btn btn-primary btn-sm addBox" onclick="javascript:history.back(-1)">
+                        返回
+                    </button>
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
-                                <th v-on:click="sortBy('id')">编号</th>
-                                <th>型号</th>
-                                <th>起飞地点</th>
-                                <th>飞行次数</th>
-                                <th>状态</th>
-                                <th>坐标</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>治疗药品</th>
+                                <th>主治医师</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.droneid}}</td>
-                                <td>{{dataItem.dronemodel}}</td>
-                                <td>{{dataItem.position}}</td>
-                                <td>{{dataItem.flycount}}</td>
-                                <td>{{dataItem.xy}}</td>
-                                <td>{{dataItem.status}}</td>
+                                <td>{{dataItem.treatmentBdate}}</td>
+                                <td>{{dataItem.treatmentEdate}}</td>
+                                <td>{{dataItem.drug}}</td>
+                                <td>{{dataItem.doctor}}</td>
                                 <td>
-                                    <button @click="del(dataItem.droneid)" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="del(dataItem.treatmentid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
                                 </td>
                             </tr>
@@ -110,33 +109,25 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        添加无人机
+                                        添加治疗记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>编号：</label>
-                                        <input type="text" id="aid">
+                                        <label>开始时间：</label>
+                                        <input type="text" id="abegin">
                                     </p>
                                     <p>
-                                        <label>型号：</label>
-                                        <input type="text" id="amodel">
+                                        <label>结束时间：</label>
+                                        <input type="text" id="aend">
                                     </p>
                                     <p>
-                                        <label>起飞地点：</label>
-                                        <input type="text" id="aposition">
+                                        <label>治疗药品：</label>
+                                        <input type="text" id="adrug">
                                     </p>
                                     <p>
-                                        <label>坐标：</label>
-                                        <input type="text" id="ax" placeholder="x坐标">
-                                        <input type="text" id="ay" placeholder="y坐标">
-                                    </p>
-                                    <p>
-                                        <label>状态：</label>
-                                        <select id="astatus">
-                                            <option value="0">离线</option>
-                                            <option value="1">在线</option>
-                                        </select>
+                                        <label>主治医师：</label>
+                                        <input type="text" id="adoctor">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -157,40 +148,29 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        编辑无人机
+                                        编辑治疗记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>编号：</label>
-                                        <input type="text" v-model="editPeople.droneid" id="eid" value="">
+                                        <label>开始时间：</label>
+                                        <input type="text" v-model="editPeople.treatmentBdate" id="ebegin" value="">
                                     </p>
                                     <p>
-                                        <label>型号：</label>
-                                        <input type="text" v-model="editPeople.dronemodel" id="emodel" value="">
+                                        <label>结束时间：</label>
+                                        <input type="text" v-model="editPeople.treatmentEdate" id="eend" value="">
                                     </p>
                                     <p>
-                                        <label>起飞地点：</label>
-                                        <input type="text" v-model="editPeople.position" id="eposition" value="">
+                                        <label>治疗药品：</label>
+                                        <input type="text" v-model="editPeople.drug" id="edrug" value="">
                                     </p>
                                     <p>
-                                        <label>飞行次数：</label>
-                                        <input type="text" v-model="editPeople.flycount" id="ecount" value="">
-                                    </p>
-                                    <p>
-                                        <label>坐标：</label>
-                                        <input type="text" v-model="editPeople.xy" id="exy" value="">
-                                    </p>
-                                    <p>
-                                        <label>状态：</label>
-                                        <select id="estatus">
-                                            <option value="0">离线</option>
-                                            <option value="1">在线</option>
-                                        </select>
+                                        <label>主治医师：</label>
+                                        <input type="text" v-model="editPeople.doctor" id="edoctor" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.droneid)">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.treatmentid)">
                                         提交更改
                                     </button>
                                 </div>
@@ -207,28 +187,31 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="vue.js"></script>
     <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
 
         function add() {
-            var droneid = $("#aid").val();
-            var dronemodel = $("#amodel").val();
-            var position = $("#aposition").val();
-            var status = $("#astatus").val();
-            var x = $("#ax").val();
-            var y = $("#ay").val();
-            var xy = x + "," + y;
-            if (droneid == "" || dronemodel == "" || position=="") {
+            var patientid = GetQueryString("userid");
+            var treatmentBdate = $("#abegin").val();
+            var treatmentEdate = $("#aend").val();
+            var drug = $("#adrug").val();
+            var doctor = $("#adoctor").val();
+            if (treatmentBdate == "" || treatmentEdate == "" || drug == "" || doctor=="") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TDrone.ashx',
+                    url: '../action/TTreatment.ashx',
                     data: {
-                        droneid: droneid,
-                        dronemodel: dronemodel,
-                        position: position,
-                        status: status,
-                        xy: xy,
+                        patientid:patientid,
+                        treatmentBdate: treatmentBdate,
+                        treatmentEdate: treatmentEdate,
+                        drug: drug,
+                        doctor: doctor,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -257,18 +240,20 @@
                 })
             }
         }
-        function dele(droneid) {
+        function dele(treatmentid) {
             $.ajax({
                 type: 'Post',
-                url: '../action/TDrone.ashx',
+                url: '../action/TTreatment.ashx',
                 data: {
-                    droneid: droneid,
-                    op: "delete"
+                    treatmentid: treatmentid,
+                    op: "deleteByTreatmentId"
                 },
                 dataType: 'text',
                 success: function (data) {
-                    console.log(data);
-                    if ("删除成功") {
+                    if (data =="删除监护人必须先删除其所有联系号码") {
+                        alert("删除监护人必须先删除其所有联系号码");
+                    }
+                    else if (data == "删除成功") {
                         alert("删除成功");
                         window.location.reload();
                     }
@@ -290,27 +275,26 @@
                 }
             })
         }
-        function update(droneid) {
-            var dronemodel = $("#emodel").val();
-            var position = $("#eposition").val();
-            var flycount = $("#ecount").val();
-            var status = $("#astatus").val();
-            var xy = $("#exy").val();
-            if (dronemodel == "" || position == "" || flycount=="") {
+        function update(treatmentid) {
+            var patientid = GetQueryString("userid");
+            var treatmentBdate = $("#ebegin").val();
+            var treatmentEdate = $("#eend").val();
+            var drug = $("#edrug").val();
+            var doctor = $("#edoctor").val();
+            if (treatmentBdate == "" || treatmentEdate == "" || drug == "" || doctor=="") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TDrone.ashx',
+                    url: '../action/TTreatment.ashx',
                     data: {
-                        droneid: droneid,
-                        dronemodel: dronemodel,
-                        position: position,
-                        flycount: flycount,
-                        status: status,
-                        xy:xy,
-                        op: "update"
+                        treatmentid: treatmentid,
+                        treatmentBdate: treatmentBdate,
+                        treatmentEdate: treatmentEdate,
+                        drug: drug,
+                        doctor: doctor,
+                        op: "updateTreatmentId"
                     },
                     dataType: 'text',
                     success: function (data) {
@@ -358,26 +342,18 @@
             el: "#test",
             ready: function () {
                 var _this = this;
+                var patientid = GetQueryString("userid");
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TDrone.ashx',
+                    url: '../action/VPatientTreatment.ashx',
                     data: {
-                        op: "load"
+                        patientid: patientid,
+                        op: "patientid"
                     },
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
                         //getData(data);
-                        if (data.length != 0) {
-                            $.each(data, function (index, item) {
-                                if (item.status == 0) {
-                                    item.status = "离线";
-                                } else {
-                                    item.status = "在线";
-                                }
-                                return;
-                            })
-                        }
                         _this.arrayDataAll = data;
                         _this.totalCount = _this.arrayDataAll.length;
                         _this.showPage(_this.pageCurrent, null, true);
@@ -395,7 +371,6 @@
                         }
                     }
                 })
-                //search(_this);
             },
             data: {
                 //总项目数
@@ -500,12 +475,11 @@
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        droneid: item.droneid,
-                        dronemodel: item.dronemodel,
-                        position: item.position,
-                        flycount:item.flycount,
-                        status: item.status,
-                        xy:item.xy
+                        treatmentid: item.treatmentid,
+                        treatmentBdate: item.treatmentBdate,
+                        treatmentEdate: item.treatmentEdate,
+                        drug: item.drug,
+                        doctor:item.doctor
                     };
                 },
                 update: function (item) {

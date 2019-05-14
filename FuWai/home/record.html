@@ -14,8 +14,8 @@
         <div class="row" style="height:600px">
             <div class="col-md-3" style="height: 100%">
                 <ul class="nav nav-pills nav-stacked">
-                    <li><a href="index.html">病人信息管理</a></li>
-                    <li class="active"><a href="#">无人机管理</a></li>
+                    <li class="active"><a href="index.html">病人信息管理</a></li>
+                    <li><a href="drone.html">无人机管理</a></li>
                     <li><a href="../标注点.html">标注点</a></li>
                     <li><a href="../闪烁.html">闪烁</a></li>
                 </ul>
@@ -26,26 +26,23 @@
                             data-target="#addModal" id="search">
                         添加
                     </button>
+                    <button class="btn btn-primary btn-sm addBox" onclick="javascript:history.back(-1)">
+                        返回
+                    </button>
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
-                                <th v-on:click="sortBy('id')">编号</th>
-                                <th>型号</th>
-                                <th>起飞地点</th>
-                                <th>飞行次数</th>
-                                <th>状态</th>
-                                <th>坐标</th>
+                                <th>血压</th>
+                                <th>体温</th>
+                                <th>检查日期</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.droneid}}</td>
-                                <td>{{dataItem.dronemodel}}</td>
-                                <td>{{dataItem.position}}</td>
-                                <td>{{dataItem.flycount}}</td>
-                                <td>{{dataItem.xy}}</td>
-                                <td>{{dataItem.status}}</td>
+                                <td>{{dataItem.bloodpressure}}</td>
+                                <td>{{dataItem.bodytemp}}</td>
+                                <td>{{dataItem.checkdate}}</td>
                                 <td>
-                                    <button @click="del(dataItem.droneid)" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="del(dataItem.checkid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
                                 </td>
                             </tr>
@@ -110,33 +107,21 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        添加无人机
+                                        添加检查记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>编号：</label>
-                                        <input type="text" id="aid">
+                                        <label>血压：</label>
+                                        <input type="text" id="ablood">
                                     </p>
                                     <p>
-                                        <label>型号：</label>
-                                        <input type="text" id="amodel">
+                                        <label>体温：</label>
+                                        <input type="text" id="atemp">
                                     </p>
                                     <p>
-                                        <label>起飞地点：</label>
-                                        <input type="text" id="aposition">
-                                    </p>
-                                    <p>
-                                        <label>坐标：</label>
-                                        <input type="text" id="ax" placeholder="x坐标">
-                                        <input type="text" id="ay" placeholder="y坐标">
-                                    </p>
-                                    <p>
-                                        <label>状态：</label>
-                                        <select id="astatus">
-                                            <option value="0">离线</option>
-                                            <option value="1">在线</option>
-                                        </select>
+                                        <label>检查日期：</label>
+                                        <input type="text" id="adate">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -157,40 +142,25 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        编辑无人机
+                                        编辑检查记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>编号：</label>
-                                        <input type="text" v-model="editPeople.droneid" id="eid" value="">
+                                        <label>血压：</label>
+                                        <input type="text" v-model="editPeople.bloodpressure" id="eblood" value="">
                                     </p>
                                     <p>
-                                        <label>型号：</label>
-                                        <input type="text" v-model="editPeople.dronemodel" id="emodel" value="">
+                                        <label>体温：</label>
+                                        <input type="text" v-model="editPeople.bodytemp" id="etemp" value="">
                                     </p>
                                     <p>
-                                        <label>起飞地点：</label>
-                                        <input type="text" v-model="editPeople.position" id="eposition" value="">
-                                    </p>
-                                    <p>
-                                        <label>飞行次数：</label>
-                                        <input type="text" v-model="editPeople.flycount" id="ecount" value="">
-                                    </p>
-                                    <p>
-                                        <label>坐标：</label>
-                                        <input type="text" v-model="editPeople.xy" id="exy" value="">
-                                    </p>
-                                    <p>
-                                        <label>状态：</label>
-                                        <select id="estatus">
-                                            <option value="0">离线</option>
-                                            <option value="1">在线</option>
-                                        </select>
+                                        <label>检查日期：</label>
+                                        <input type="text" v-model="editPeople.checkdate" id="edate" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.droneid)">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.checkid)">
                                         提交更改
                                     </button>
                                 </div>
@@ -207,28 +177,29 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="vue.js"></script>
     <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
 
         function add() {
-            var droneid = $("#aid").val();
-            var dronemodel = $("#amodel").val();
-            var position = $("#aposition").val();
-            var status = $("#astatus").val();
-            var x = $("#ax").val();
-            var y = $("#ay").val();
-            var xy = x + "," + y;
-            if (droneid == "" || dronemodel == "" || position=="") {
+            var patientid = GetQueryString("userid");
+            var bloodpressure = $("#ablood").val();
+            var bodytemp = $("#atemp").val();
+            var checkdate = $("#adate").val();
+            if (bloodpressure == "" || bodytemp == "" || checkdate == "" ) {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TDrone.ashx',
+                    url: '../action/TCheck.ashx',
                     data: {
-                        droneid: droneid,
-                        dronemodel: dronemodel,
-                        position: position,
-                        status: status,
-                        xy: xy,
+                        patientid:patientid,
+                        bloodpressure: bloodpressure,
+                        bodytemp: bodytemp,
+                        checkdate: checkdate,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -257,18 +228,20 @@
                 })
             }
         }
-        function dele(droneid) {
+        function dele(checkid) {
             $.ajax({
                 type: 'Post',
-                url: '../action/TDrone.ashx',
+                url: '../action/TCheck.ashx',
                 data: {
-                    droneid: droneid,
+                    checkid: checkid,
                     op: "delete"
                 },
                 dataType: 'text',
                 success: function (data) {
-                    console.log(data);
-                    if ("删除成功") {
+                    if (data =="删除监护人必须先删除其所有联系号码") {
+                        alert("删除监护人必须先删除其所有联系号码");
+                    }
+                    else if (data == "删除成功") {
                         alert("删除成功");
                         window.location.reload();
                     }
@@ -290,26 +263,24 @@
                 }
             })
         }
-        function update(droneid) {
-            var dronemodel = $("#emodel").val();
-            var position = $("#eposition").val();
-            var flycount = $("#ecount").val();
-            var status = $("#astatus").val();
-            var xy = $("#exy").val();
-            if (dronemodel == "" || position == "" || flycount=="") {
+        function update(checkid) {
+            var bloodpressure = $("#eblood").val();
+            var bodytemp = $("#etemp").val();
+            var checkdate = $("#edate").val();
+            var patientid = GetQueryString("userid");
+            if (bloodpressure == "" || bodytemp == "" || checkdate=="") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TDrone.ashx',
+                    url: '../action/TCheck.ashx',
                     data: {
-                        droneid: droneid,
-                        dronemodel: dronemodel,
-                        position: position,
-                        flycount: flycount,
-                        status: status,
-                        xy:xy,
+                        patientid: patientid,
+                        checkid: checkid,
+                        bloodpressure: bloodpressure,
+                        bodytemp: bodytemp,
+                        checkdate: checkdate,
                         op: "update"
                     },
                     dataType: 'text',
@@ -358,26 +329,18 @@
             el: "#test",
             ready: function () {
                 var _this = this;
+                var patientid = GetQueryString("userid");
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TDrone.ashx',
+                    url: '../action/VPatientCheck.ashx',
                     data: {
-                        op: "load"
+                        patientid: patientid,
+                        op: "patientid"
                     },
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
                         //getData(data);
-                        if (data.length != 0) {
-                            $.each(data, function (index, item) {
-                                if (item.status == 0) {
-                                    item.status = "离线";
-                                } else {
-                                    item.status = "在线";
-                                }
-                                return;
-                            })
-                        }
                         _this.arrayDataAll = data;
                         _this.totalCount = _this.arrayDataAll.length;
                         _this.showPage(_this.pageCurrent, null, true);
@@ -395,7 +358,6 @@
                         }
                     }
                 })
-                //search(_this);
             },
             data: {
                 //总项目数
@@ -500,12 +462,10 @@
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        droneid: item.droneid,
-                        dronemodel: item.dronemodel,
-                        position: item.position,
-                        flycount:item.flycount,
-                        status: item.status,
-                        xy:item.xy
+                        bloodpressure: item.bloodpressure,
+                        bodytemp: item.bodytemp,
+                        checkdate: item.checkdate,
+                        checkid: item.checkid
                     };
                 },
                 update: function (item) {

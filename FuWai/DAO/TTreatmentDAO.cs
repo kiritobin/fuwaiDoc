@@ -54,11 +54,11 @@ namespace FuWai.DAO
         /// <param name="treatmentEdate">结束时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public int insertTreatment(string treatmentid, string treatmentBdate, string treatmentEdate, string patientid)
+        public int insertTreatment(string treatmentBdate, string treatmentEdate, string patientid,string drug,string doctor)
         {
-            string sql = "insert into T_Treatment(treatmentid,treatmentBdate,treatmentEdate,patientid) value(@treatmentid,@treatmentBdate,@treatmentEdate,@patientid)";
-            string[] param = { "@treatmentid", "@treatmentBdate", "@treatmentEdate", "@patientid" };
-            object[] value = { treatmentid, treatmentBdate, treatmentEdate, patientid };
+            string sql = "insert into T_Treatment(treatmentBdate,treatmentEdate,patientid,drug,doctor) values (@treatmentBdate,@treatmentEdate,@patientid,@drug,@doctor)";
+            string[] param = { "@treatmentBdate", "@treatmentEdate", "@patientid", "@drug", "@doctor" };
+            object[] value = { treatmentBdate, treatmentEdate, patientid,drug, doctor };
             return db.ExecuteNoneQuery(sql, param, value);
         }
         /// <summary>
@@ -92,11 +92,11 @@ namespace FuWai.DAO
         /// <param name="treatmentBdate"></param>
         /// <param name="treatmentEdate"></param>
         /// <returns></returns>
-        public int updateTreatmentId(string treatmentid, string treatmentBdate, string treatmentEdate)
+        public int updateTreatmentId(string treatmentid, string treatmentBdate, string treatmentEdate, string drug, string doctor)
         {
-            string sql = "update T_Treatment set treatmentBdate=@treatmentBdate or treatmentEdate=@treatmentEdate where treatmentid=@treatmentid";
-            string[] param = { "@treatmentBdate", "@treatmentEdate", "treatmentid" };
-            object[] value = { treatmentBdate, treatmentEdate, treatmentid };
+            string sql = "update T_Treatment set treatmentBdate=@treatmentBdate,treatmentEdate=@treatmentEdate,drug=@drug,doctor=@doctor where treatmentid=@treatmentid";
+            string[] param = { "@treatmentBdate", "@treatmentEdate", "treatmentid", "@drug", "@doctor" };
+            object[] value = { treatmentBdate, treatmentEdate, treatmentid, drug, doctor };
             return db.ExecuteNoneQuery(sql, param, value);
         }
         /// <summary>
@@ -107,11 +107,11 @@ namespace FuWai.DAO
         /// <param name="treatmentEdate">结束时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public int updatePatientId(string treatmentid, string treatmentBdate, string treatmentEdate, string patientid)
+        public int updatePatientId(string treatmentBdate, string treatmentEdate, string patientid, string drug, string doctor)
         {
-            string sql = "update T_Treatment set treatmentid=@treatmentid or treatmentBdate=@treatmentBdate or treatmentEdate=@treatmentEdate where patientid=@patientid";
-            string[] param = { "@treatmentBdate", "@treatmentEdate", "treatmentid", "@patientid" };
-            object[] value = { treatmentBdate, treatmentEdate, treatmentid, patientid };
+            string sql = "update T_Treatment set treatmentBdate=@treatmentBdate,treatmentEdate=@treatmentEdate,drug=@drug,doctor=@doctor where patientid=@patientid";
+            string[] param = { "@treatmentBdate", "@treatmentEdate", "@patientid", "@drug", "@doctor" };
+            object[] value = { treatmentBdate, treatmentEdate, patientid, drug, doctor };
             return db.ExecuteNoneQuery(sql, param, value);
         }
     }

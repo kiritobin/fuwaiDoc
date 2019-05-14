@@ -20,9 +20,9 @@ namespace FuWai.BLL
         /// <param name="checkdate">检查时间</param>
         /// <param name="patientid">病人编号</param>
         /// <returns>boolean true添加成功，false添加失败</returns>
-        public Boolean insert(string checkid, string bloodpressure, double bodytemp, string checkdate, string patientid)
+        public Boolean insert(string bloodpressure, double bodytemp, string checkdate, string patientid)
         {
-            int row = td.insert(checkid, bloodpressure, bodytemp, checkdate, patientid);
+            int row = td.insert(bloodpressure, bodytemp, checkdate, patientid);
             if (row > 0) return true;
             return false;
         }
