@@ -65,7 +65,6 @@
     <Content Include="action\VMedicalHistory.ashx" />
     <Content Include="action\VPatient.ashx" />
     <Content Include="action\TGcontact.ashx" />
-    <Content Include="action\VDronePatient.ashx" />
     <Content Include="action\TCheck.ashx" />
     <Content Include="action\TDiseasestatus.ashx" />
     <Content Include="action\TGuardian.ashx" />
@@ -147,9 +146,6 @@
     <Compile Include="action\TTreatment.ashx.cs">
       <DependentUpon>TTreatment.ashx</DependentUpon>
     </Compile>
-    <Compile Include="action\VDronePatient.ashx.cs">
-      <DependentUpon>VDronePatient.ashx</DependentUpon>
-    </Compile>
     <Compile Include="action\VGContact.ashx.cs">
       <DependentUpon>VGContact.ashx</DependentUpon>
     </Compile>
@@ -176,7 +172,6 @@
     <Compile Include="BLL\TPatientBLL.cs" />
     <Compile Include="BLL\TPContactBLL.cs" />
     <Compile Include="BLL\TTreatmentBLL.cs" />
-    <Compile Include="BLL\VDronePatientBLL.cs" />
     <Compile Include="BLL\VGContactBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
@@ -192,7 +187,6 @@
     <Compile Include="DAO\TPatientDAO.cs" />
     <Compile Include="DAO\TPContactDAO.cs" />
     <Compile Include="DAO\TTreatmentDAO.cs" />
-    <Compile Include="DAO\VDronePatientDAO.cs" />
     <Compile Include="DAO\VGContactDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientCheckDAO.cs" />

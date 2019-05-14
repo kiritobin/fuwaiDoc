@@ -45,9 +45,9 @@ namespace FuWai.BLL
         /// <param name="medicalhistoryreason">病因</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public Boolean insert(string medicalhistoryreason, string patientid)
+        public Boolean insert(string medicalhistoryreason, string patientid,string remark)
         {
-            int row = td.insert(medicalhistoryreason, patientid);
+            int row = td.insert(medicalhistoryreason, patientid, remark);
             if (row > 0)
             {
                 return true;
@@ -61,9 +61,9 @@ namespace FuWai.BLL
         /// <param name="medicalhistoryreason">病因</param>
         /// <param name="patientid">病人编号</param>
         /// <returns></returns>
-        public Boolean update(string medicalhistoryreason, string medicalhistoryid)
+        public Boolean update(string medicalhistoryreason, string medicalhistoryid ,string remark)
         {
-            int row = td.update(medicalhistoryreason, medicalhistoryid);
+            int row = td.update(medicalhistoryreason, medicalhistoryid, remark);
             if (row > 0)
             {
                 return true;
