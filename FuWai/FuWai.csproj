@@ -78,6 +78,7 @@
     <Content Include="home\treatment.html" />
     <Content Include="home\record.html" />
     <Content Include="home\medicalhistory.html" />
+    <Content Include="js\ajaxfileupload.js" />
     <Content Include="user\4.jpg" />
     <Content Include="user\9.jpg" />
     <Content Include="user\zhu.jpg" />
@@ -88,6 +89,7 @@
     <Content Include="action\VPatientCheck.ashx" />
     <Content Include="action\VPatientTreatment.ashx" />
     <Content Include="action\VGContact.ashx" />
+    <Content Include="action\upload.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -148,6 +150,9 @@
     </Compile>
     <Compile Include="action\TTreatment.ashx.cs">
       <DependentUpon>TTreatment.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\upload.ashx.cs">
+      <DependentUpon>upload.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\VGContact.ashx.cs">
       <DependentUpon>VGContact.ashx</DependentUpon>
