@@ -29,20 +29,26 @@
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
+                                <th>头像</th>
                                 <th v-on:click="sortBy('id')">编号</th>
                                 <th>姓名</th>
                                 <th v-on:click="sortBy('age')">性别</th>
                                 <th>身高</th>
                                 <th>体重</th>
+                                <th>地址</th>
+                                <th>坐标</th>
                                 <th>无人机编号</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
+                                <td><img src="#" alt="" /></td>
                                 <td>{{dataItem.patientid}}</td>
                                 <td>{{dataItem.patientname}}</td>
                                 <td>{{dataItem.gender}}</td>
                                 <td>{{dataItem.weight}}</td>
                                 <td>{{dataItem.height}}</td>
+                                <td>{{dataItem.address}}</td>
+                                <td>{{dataItem.xy}}</td>
                                 <td>{{dataItem.droneid}}</td>
                                 <td>
                                     <button @click="del(dataItem.patientid)" class="btn btn-danger btn-sm">删除</button>

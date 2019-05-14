@@ -32,17 +32,19 @@
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
-                                <th>血压</th>
-                                <th>体温</th>
-                                <th>检查日期</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>治疗药品</th>
+                                <th>主治医师</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.bloodpressure}}</td>
-                                <td>{{dataItem.bodytemp}}</td>
-                                <td>{{dataItem.checkdate}}</td>
+                                <td>{{dataItem.treatmentBdate}}</td>
+                                <td>{{dataItem.treatmentEdate}}</td>
+                                <td>{{dataItem.drug}}</td>
+                                <td>{{dataItem.doctor}}</td>
                                 <td>
-                                    <button @click="del(dataItem.checkid)" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="del(dataItem.treatmentid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
                                 </td>
                             </tr>
@@ -107,21 +109,25 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        添加检查记录
+                                        添加治疗记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>血压：</label>
-                                        <input type="text" id="ablood">
+                                        <label>开始时间：</label>
+                                        <input type="text" id="abegin">
                                     </p>
                                     <p>
-                                        <label>体温：</label>
-                                        <input type="text" id="atemp">
+                                        <label>结束时间：</label>
+                                        <input type="text" id="aend">
                                     </p>
                                     <p>
-                                        <label>检查日期：</label>
-                                        <input type="text" id="adate">
+                                        <label>治疗药品：</label>
+                                        <input type="text" id="adrug">
+                                    </p>
+                                    <p>
+                                        <label>主治医师：</label>
+                                        <input type="text" id="adoctor">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -142,25 +148,29 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        编辑检查记录
+                                        编辑治疗记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>血压：</label>
-                                        <input type="text" v-model="editPeople.bloodpressure" id="eblood" value="">
+                                        <label>开始时间：</label>
+                                        <input type="text" v-model="editPeople.treatmentBdate" id="ebegin" value="">
                                     </p>
                                     <p>
-                                        <label>体温：</label>
-                                        <input type="text" v-model="editPeople.bodytemp" id="etemp" value="">
+                                        <label>结束时间：</label>
+                                        <input type="text" v-model="editPeople.treatmentEdate" id="eend" value="">
                                     </p>
                                     <p>
-                                        <label>检查日期：</label>
-                                        <input type="text" v-model="editPeople.checkdate" id="edate" value="">
+                                        <label>治疗药品：</label>
+                                        <input type="text" v-model="editPeople.drug" id="edrug" value="">
+                                    </p>
+                                    <p>
+                                        <label>主治医师：</label>
+                                        <input type="text" v-model="editPeople.doctor" id="edoctor" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.checkid)">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.treatmentid)">
                                         提交更改
                                     </button>
                                 </div>
@@ -185,22 +195,23 @@
 
         function add() {
             var patientid = GetQueryString("userid");
-            var bloodpressure = $("#ablood").val();
-            var bodytemp = $("#atemp").val();
-            var checkdate = $("#adate").val();
-
-            if (bloodpressure == "" || bodytemp == "" || checkdate=="") {
+            var treatmentBdate = $("#abegin").val();
+            var treatmentEdate = $("#aend").val();
+            var drug = $("#adrug").val();
+            var doctor = $("#adoctor").val();
+            if (treatmentBdate == "" || treatmentEdate == "" || drug == "" || doctor=="") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TCheck.ashx',
+                    url: '../action/TTreatment.ashx',
                     data: {
                         patientid:patientid,
-                        bloodpressure: bloodpressure,
-                        bodytemp: bodytemp,
-                        checkdate: checkdate,
+                        treatmentBdate: treatmentBdate,
+                        treatmentEdate: treatmentEdate,
+                        drug: drug,
+                        doctor: doctor,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -229,13 +240,13 @@
                 })
             }
         }
-        function dele(checkid) {
+        function dele(treatmentid) {
             $.ajax({
                 type: 'Post',
-                url: '../action/TCheck.ashx',
+                url: '../action/TTreatment.ashx',
                 data: {
-                    checkid: checkid,
-                    op: "delete"
+                    treatmentid: treatmentid,
+                    op: "deleteByTreatmentId"
                 },
                 dataType: 'text',
                 success: function (data) {
@@ -264,25 +275,26 @@
                 }
             })
         }
-        function update(checkid) {
-            var bloodpressure = $("#eblood").val();
-            var bodytemp = $("#etemp").val();
-            var checkdate = $("#edate").val();
+        function update(treatmentid) {
             var patientid = GetQueryString("userid");
-            if (bloodpressure == "" || bodytemp == "" || checkdate=="") {
+            var treatmentBdate = $("#ebegin").val();
+            var treatmentEdate = $("#eend").val();
+            var drug = $("#edrug").val();
+            var doctor = $("#edoctor").val();
+            if (treatmentBdate == "" || treatmentEdate == "" || drug == "" || doctor=="") {
                 alert("含有未填项");
             }
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TCheck.ashx',
+                    url: '../action/TTreatment.ashx',
                     data: {
-                        patientid: patientid,
-                        checkid: checkid,
-                        bloodpressure: bloodpressure,
-                        bodytemp: bodytemp,
-                        checkdate: checkdate,
-                        op: "update"
+                        treatmentid: treatmentid,
+                        treatmentBdate: treatmentBdate,
+                        treatmentEdate: treatmentEdate,
+                        drug: drug,
+                        doctor: doctor,
+                        op: "updateTreatmentId"
                     },
                     dataType: 'text',
                     success: function (data) {
@@ -463,10 +475,11 @@
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        bloodpressure: item.bloodpressure,
-                        bodytemp: item.bodytemp,
-                        checkdate: item.checkdate,
-                        checkid: item.checkid
+                        treatmentid: item.treatmentid,
+                        treatmentBdate: item.treatmentBdate,
+                        treatmentEdate: item.treatmentEdate,
+                        drug: item.drug,
+                        doctor:item.doctor
                     };
                 },
                 update: function (item) {
