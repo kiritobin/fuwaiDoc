@@ -81,13 +81,13 @@ namespace FuWai.action
 
             if (tb.delete(checkid))
             {
-                context.Response.Write("修改成功");
+                context.Response.Write("删除成功");
                 context.Response.End();
 
             }
             else
             {
-                context.Response.Write("修改失败");
+                context.Response.Write("删除失败");
                 context.Response.End();
             }
         }

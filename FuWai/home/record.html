@@ -160,7 +160,7 @@
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.medicalhistoryid)">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.checkid)">
                                         提交更改
                                     </button>
                                 </div>
@@ -265,10 +265,10 @@
             })
         }
         function update(checkid) {
-            var bloodpressure = $("#ablood").val();
-            var bodytemp = $("#atemp").val();
-            var checkdate = $("#adate").val();
-
+            var bloodpressure = $("#eblood").val();
+            var bodytemp = $("#etemp").val();
+            var checkdate = $("#edate").val();
+            var patientid = GetQueryString("userid");
             if (bloodpressure == "" || bodytemp == "" || checkdate=="") {
                 alert("含有未填项");
             }
@@ -277,6 +277,7 @@
                     type: 'Post',
                     url: '../action/TCheck.ashx',
                     data: {
+                        patientid: patientid,
                         checkid: checkid,
                         bloodpressure: bloodpressure,
                         bodytemp: bodytemp,
