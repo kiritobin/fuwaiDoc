@@ -34,6 +34,8 @@
                             <tr>
                                 <th>血压</th>
                                 <th>体温</th>
+                                <th>治疗药品</th>
+                                <th>主治医师</th>
                                 <th>检查日期</th>
                                 <th>操作</th>
                             </tr>
@@ -221,7 +223,7 @@
                         bodytemp: bodytemp,
                         checkdate: checkdate,
                         drug: drug,
-                        doctor: doctor
+                        doctor: doctor,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -491,7 +493,9 @@
                         bloodpressure: item.bloodpressure,
                         bodytemp: item.bodytemp,
                         checkdate: item.checkdate,
-                        checkid: item.checkid
+                        checkid: item.checkid,
+                        drug: item.drug,
+                        doctor: item.doctor
                     };
                 },
                 update: function (item) {
