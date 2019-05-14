@@ -92,11 +92,13 @@ namespace FuWai.action
         /// <returns></returns>
         private void insert(HttpContext context)
         {
-            String treatmentid = context.Request["treatmentid"];
             String treatmentBdate = context.Request["treatmentBdate"];
             String treatmentEdate = context.Request["treatmentEdate"];
             String patientid = context.Request["patientid"];
-            bool result = tbll.insertTreatment(treatmentid, treatmentBdate, treatmentEdate, patientid);
+            String drug = context.Request["drug"];
+            String doctor = context.Request["doctor"];
+
+            bool result = tbll.insertTreatment( treatmentBdate, treatmentEdate, patientid, drug, doctor);
             if (result)
             {
                 context.Response.Write("添加成功");
@@ -160,7 +162,10 @@ namespace FuWai.action
             String treatmentid = context.Request["treatmentid"];
             String treatmentBdate = context.Request["treatmentBdate"];
             String treatmentEdate = context.Request["treatmentEdate"];
-            bool result = tbll.updateTreatmentId(treatmentid, treatmentBdate, treatmentEdate);
+            String drug = context.Request["drug"];
+            String doctor = context.Request["doctor"];
+
+            bool result = tbll.updateTreatmentId(treatmentid, treatmentBdate, treatmentEdate, drug, doctor);
             if (result)
             {
                 context.Response.Write("更新成功");
@@ -182,11 +187,13 @@ namespace FuWai.action
         /// <returns></returns>
         private void updatePatientId(HttpContext context)
         {
-            String treatmentid = context.Request["treatmentid"];
             String treatmentBdate = context.Request["treatmentBdate"];
             String treatmentEdate = context.Request["treatmentEdate"];
             String patientid = context.Request["patientid"];
-            bool result = tbll.updatePatientId(treatmentid, treatmentBdate, treatmentEdate, patientid);
+            String drug = context.Request["drug"];
+            String doctor = context.Request["doctor"];
+
+            bool result = tbll.updatePatientId( treatmentBdate, treatmentEdate, patientid, drug, doctor);
             if (result)
             {
                 context.Response.Write("更新成功");
