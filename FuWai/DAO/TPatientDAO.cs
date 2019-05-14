@@ -46,12 +46,12 @@ namespace FuWai.DAO
         /// <param name="weight">病人体重</param>
         /// <param name="height">病人身高</param>
         /// <returns>返回int</returns>
-        public int insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height)
+        public int insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height,string headimg,string address,string xy)
         {
-            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@diseasestatusid,@droneid,@weight,@height)";
+            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@diseasestatusid,@droneid,@weight,@height,@headimg,@address,@xy)";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid" , "@weight", "@height" };
-            object[] value = { patientid, patientname, gender, diseasestatusid, droneid , weight , height };
+            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid" , "@weight", "@height", "@headimg", "@address" , "@xy" };
+            object[] value = { patientid, patientname, gender, diseasestatusid, droneid , weight , height, headimg, address, xy };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -66,12 +66,13 @@ namespace FuWai.DAO
         /// <param name="weight">病人体重</param>
         /// <param name="height">病人身高</param>
         /// <returns>返回int</returns>
-        public int update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height)
+        public int update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height, string headimg, string address, string xy)
         {
-            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,diseasestatusid=@diseasestatusid,droneid=@droneid,weight=@weight,height=@height where patientid=@patientid ";
+            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,diseasestatusid=@diseasestatusid,"+
+                "droneid=@droneid,weight=@weight,height=@height,headimg=@headimg,address=@address,xy=@xy where patientid=@patientid ";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid", "@weight", "@height" };
-            object[] value = { patientid, patientname, gender, diseasestatusid, droneid,weight, height };
+            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid", "@weight", "@height", "@headimg", "@address", "@xy" };
+            object[] value = { patientid, patientname, gender, diseasestatusid, droneid,weight, height, headimg, address, xy };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
