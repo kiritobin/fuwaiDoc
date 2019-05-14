@@ -33,6 +33,7 @@
                                 <th>型号</th>
                                 <th>起飞地点</th>
                                 <th>飞行次数</th>
+                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
@@ -40,6 +41,7 @@
                                 <td>{{dataItem.dronemodel}}</td>
                                 <td>{{dataItem.position}}</td>
                                 <td>{{dataItem.flycount}}</td>
+                                <td>{{dataItem.status}}</td>
                                 <td>
                                     <button @click="del(dataItem.droneid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
@@ -122,6 +124,13 @@
                                         <label>起飞地点：</label>
                                         <input type="text" id="aposition">
                                     </p>
+                                    <p>
+                                        <label>状态：</label>
+                                        <select id="astatus">
+                                            <option value="0">离线</option>
+                                            <option value="1">在线</option>
+                                        </select>
+                                    </p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal" @click="add()">
@@ -147,7 +156,7 @@
                                 <div class="modal-body">
                                     <p>
                                         <label>编号：</label>
-                                        <input type="text"  v-model="editPeople.droneid" id="eid" value="">
+                                        <input type="text" v-model="editPeople.droneid" id="eid" value="">
                                     </p>
                                     <p>
                                         <label>型号：</label>
@@ -160,6 +169,13 @@
                                     <p>
                                         <label>飞行次数：</label>
                                         <input type="text" v-model="editPeople.flycount" id="ecount" value="">
+                                    </p>
+                                    <p>
+                                        <label>状态：</label>
+                                        <select id="estatus">
+                                            <option value="0">离线</option>
+                                            <option value="1">在线</option>
+                                        </select>
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -185,6 +201,7 @@
             var droneid = $("#aid").val();
             var dronemodel = $("#amodel").val();
             var position = $("#aposition").val();
+            var status = $("#astatus").val();
             if (droneid == "" || dronemodel == "" || position=="") {
                 alert("含有未填项");
             }
@@ -196,6 +213,7 @@
                         droneid: droneid,
                         dronemodel: dronemodel,
                         position: position,
+                        status: status,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -261,6 +279,7 @@
             var dronemodel = $("#emodel").val();
             var position = $("#eposition").val();
             var flycount = $("#ecount").val();
+            var status = $("#astatus").val();
             if (dronemodel == "" || position == "" || flycount=="") {
                 alert("含有未填项");
             }
@@ -273,6 +292,7 @@
                         dronemodel: dronemodel,
                         position: position,
                         flycount: flycount,
+                        status: status,
                         op: "update"
                     },
                     dataType: 'text',
@@ -331,6 +351,16 @@
                     success: function (data) {
                         console.log(data);
                         //getData(data);
+                        if (data.length != 0) {
+                            $.each(data, function (index, item) {
+                                if (item.status == 0) {
+                                    item.status = "离线";
+                                } else {
+                                    item.status = "在线";
+                                }
+                                return;
+                            })
+                        }
                         _this.arrayDataAll = data;
                         _this.totalCount = _this.arrayDataAll.length;
                         _this.showPage(_this.pageCurrent, null, true);
