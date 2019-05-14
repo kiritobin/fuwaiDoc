@@ -133,9 +133,13 @@
                                 <div class="modal-body">
                                     <p>
                                         <img src="#" alt="" id="changeimg" />
-                                        <label>头像：</label>
+                                        <label>头像：</label>                                     
+
                                         <input type="file" id="file1" name="file" />
-                                        <input type="button" id="save" value="保存" @click="upload('file1')" />
+
+                                        <button class="btn btn-primary btn-sm addBox"  id="save" value="保存" @click="upload('file1')">保存</button>
+                                       
+                                        <!--<input type="button" id="save" value="保存" @click="upload('file1')" />-->
                                     </p>
                                     <p>
                                         <label>编号：</label>
@@ -200,7 +204,11 @@
                                         <img v-bind:src="editPeople.headimg" alt="" id="echangeimg" />
                                         <label>头像：</label>
                                         <input type="file" id="file2" name="file2">
-                                        <input type="button" id="esave" value="保存" @click="upload('file2')">
+                                        <button class="btn btn-primary btn-sm addBox" id="esave" value="保存" @click="upload('file2')">
+                                            保存
+                                        </button>
+
+                                        <!--<input type="button" id="esave" value="保存" @click="upload('file2')">-->
                                     </p>
                                     <p>
                                         <label>编号：</label>
