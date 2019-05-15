@@ -92,5 +92,20 @@ namespace FuWai.DAO
             return db.ExecuteNoneQuery(sql, param, value);
         }
 
+        /// <summary>
+        /// 删除病人信息判断是否有外键约束
+        /// </summary>
+        /// <param name="patientid">编号</param>
+        /// <returns>返回int</returns>
+        public int isdelete(string patientid)
+        {
+
+            string sql = "select count(*) from T_PContact where patientid=@patientid ";
+
+            string[] param = { "@patientid" };
+            object[] value = { patientid };
+
+            return Convert.ToInt32(db.ExecuteScalar(sql, param, value));
+        }
     }
 }
