@@ -16,7 +16,7 @@
     <div class="wrapper">
 
         <div class="container">
-            <h1>Welcome</h1>
+            <h1>阜外医院无人机远程监控中心</h1>
             <form class="form">
                 <input type="text" id="user" placeholder="用户名">
                 <input type="password" id="pwd" placeholder="密码">
@@ -64,11 +64,12 @@
                 //alert("含有未填项目");
                 swal({
                     title: "含有未填项目!",
-                    //text: "含有未填项目",
-                    type: "error",
+                    type: "warning",
                     confirmButtonText: "OK",
                 });
-
+                $(".confirm").click(function () {
+                    window.location.reload();
+                })
             }
             else {
                 $.ajax({
@@ -83,7 +84,14 @@
                     success: function (data) {
                         //alert(data);
                         if (data == "登录成功") {
-                            window.location.href = "home/index.html";
+                            swal({
+                                title: "登录成功",
+                                type: "success",
+                                confirmButtonText: "ok"
+                            });
+                            $(".confirm").click(function () {
+                                window.location.href = "home/index.html";
+                            })
                         }
                         else {
                             //alert("");
@@ -102,7 +110,7 @@
                             //alert("请求超时");
                             swal({
                                 title: "请求超时!",
-                                type: "error",
+                                type: "warning",
                                 confirmButtonText: "OK"
                             });
                         } else if (textStatus == "error") {
