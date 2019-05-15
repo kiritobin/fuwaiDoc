@@ -84,11 +84,15 @@
     <Content Include="home\guardian.html" />
     <Content Include="home\guardiantel.html" />
     <Content Include="home\img\av1.png" />
+    <Content Include="home\img\心电图.png" />
+    <Content Include="home\img\心电图02.png" />
+    <Content Include="home\img\无人机.png" />
     <Content Include="home\index.html" />
     <Content Include="home\js\bootstrap.js" />
     <Content Include="home\js\bootstrap.min.js" />
     <Content Include="home\js\jquery-2.1.1.min.js" />
     <Content Include="home\js\scripts.js" />
+    <Content Include="home\level.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
@@ -595,8 +599,6 @@
     <Content Include="user\4.jpg" />
     <Content Include="user\9.jpg" />
     <Content Include="user\2.jpg" />
-    <Content Include="标注点.html" />
-    <Content Include="闪烁.html" />
     <Content Include="action\TPContact.ashx" />
     <Content Include="action\TTreatment.ashx" />
     <Content Include="action\VPatientCheck.ashx" />
