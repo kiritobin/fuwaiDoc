@@ -87,5 +87,20 @@ namespace FuWai.BLL
             return false;
         }
 
+        /// <summary>
+        /// 删除病人信息判断是否有外键约束
+        /// </summary>
+        /// <param name="patientid">编号</param>
+        /// <returns>true</returns>
+        public Boolean isdelete(string patientid)
+        {
+            int row = td.isdelete(patientid);
+            if (row > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
