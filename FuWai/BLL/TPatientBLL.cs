@@ -90,8 +90,8 @@ namespace FuWai.BLL
         /// <summary>
         /// 删除病人信息判断是否有外键约束
         /// </summary>
-        /// <param name="patientid">编号</param>
-        /// <returns>true</returns>
+        /// <param name="patientid">病人编号</param>
+        /// <returns></returns>
         public Boolean isdelete(string patientid)
         {
             int row = td.isdelete(patientid);
