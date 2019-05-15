@@ -367,6 +367,14 @@
                             }, 100);
                         });
                     }
+                    else if (data =="删除失败，请先删除联系方式") {
+                        swal({
+                            title: "删除失败，请先删除联系方式",
+                            type: "error",
+                            confirmButtonText: "ok",
+                            allowOutsideClick: true,
+                        });
+                    }
                     else {
                         swal({
                             title: "删除失败",
