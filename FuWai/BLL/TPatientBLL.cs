@@ -25,7 +25,7 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="patientid">病人编号</param>
         /// <returns>返回json</returns>
-        public String getDroneinfobydroneid(string patientid)
+        public String getinfobydroneid(string patientid)
         {
             return JsonHelper.ToJson(td.SelectPatientByID(patientid));
         }
