@@ -78,6 +78,7 @@
     <Content Include="home\css\bootstrap.min.css" />
     <Content Include="home\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="home\css\style.css" />
+    <Content Include="css\sweet-alert.css" />
     <Content Include="home\drone.html" />
     <Content Include="home\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="home\guardian.html" />
@@ -88,6 +89,7 @@
     <Content Include="home\js\bootstrap.min.js" />
     <Content Include="home\js\jquery-2.1.1.min.js" />
     <Content Include="home\js\scripts.js" />
+    <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
     <Content Include="home\plugins\bootstrap-datepicker\bootstrap-datepicker.css" />
@@ -589,6 +591,7 @@
     <Content Include="home\record.html" />
     <Content Include="home\medicalhistory.html" />
     <Content Include="js\ajaxfileupload.js" />
+    <Content Include="tanc.html" />
     <Content Include="user\4.jpg" />
     <Content Include="user\9.jpg" />
     <Content Include="user\2.jpg" />
