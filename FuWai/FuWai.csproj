@@ -93,6 +93,7 @@
     <Content Include="home\js\jquery-2.1.1.min.js" />
     <Content Include="home\js\scripts.js" />
     <Content Include="home\level.html" />
+    <Content Include="home\map.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />

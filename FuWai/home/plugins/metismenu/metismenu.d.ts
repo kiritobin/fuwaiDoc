@@ -4,7 +4,6 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 
-
 interface MetisMenuOptions {
     toggle?: boolean;
     doubleTapToGo?: boolean;
