@@ -41,17 +41,19 @@ namespace FuWai.DAO
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
+        /// <param name="age">年龄</param>
+        /// <param name="addr">地址信息</param>
+        /// <param name="lat">x轴</param>
+        /// <param name="lng">y轴</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
-        /// <param name="weight">病人体重</param>
-        /// <param name="height">病人身高</param>
         /// <returns>返回int</returns>
-        public int insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height,string headimg,string address,string xy)
+        public int insert(string patientid, string patientname, string gender, int age, string addr, Double lat, Double lng, int diseasestatusid, string droneid)
         {
-            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@diseasestatusid,@droneid,@weight,@height,@headimg,@address,@xy)";
+            string sql = "insert into T_Patient values(@patientid,@patientname,@gender,@age,@addr,@lat,@lng,@diseasestatusid,@droneid)";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid" , "@weight", "@height", "@headimg", "@address" , "@xy" };
-            object[] value = { patientid, patientname, gender, diseasestatusid, droneid , weight , height, headimg, address, xy };
+            string[] param = { "@patientid", "@patientname", "@gender", "age", "addr", "lat", "lng", "@diseasestatusid", "@droneid" };
+            object[] value = { patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -61,18 +63,20 @@ namespace FuWai.DAO
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
+        /// <param name="age">年龄</param>
+        /// <param name="addr">地址信息</param>
+        /// <param name="lat">x轴</param>
+        /// <param name="lng">y轴</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
-        /// <param name="weight">病人体重</param>
-        /// <param name="height">病人身高</param>
         /// <returns>返回int</returns>
-        public int update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, Double weight, Double height, string headimg, string address, string xy)
+        public int update(string patientid, string patientname, string gender, int age, string addr, Double lat, Double lng, int diseasestatusid, string droneid)
         {
-            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,diseasestatusid=@diseasestatusid,"+
-                "droneid=@droneid,weight=@weight,height=@height,headimg=@headimg,address=@address,xy=@xy where patientid=@patientid ";
+            string sql = "update T_Patient set patientid=@patientid, patientname=@patientname ,gender=@gender,age=@age,addr=@addr,lat=@lat,lng=@lng,diseasestatusid=@diseasestatusid," +
+                "droneid=@droneid where patientid=@patientid ";
 
-            string[] param = { "@patientid", "@patientname", "@gender", "@diseasestatusid", "@droneid", "@weight", "@height", "@headimg", "@address", "@xy" };
-            object[] value = { patientid, patientname, gender, diseasestatusid, droneid,weight, height, headimg, address, xy };
+            string[] param = { "@patientid", "@patientname", "@gender", "age", "addr", "lat", "lng", "@diseasestatusid", "@droneid" };
+            object[] value = { patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
