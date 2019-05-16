@@ -682,6 +682,7 @@
     <Content Include="home\plugins\weather-icons\font\WeatherIcons-Regular.otf" />
     <Content Include="action\testlist.ashx" />
     <Content Include="action\map.ashx" />
+    <Content Include="action\TDiagnose.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -718,6 +719,9 @@
     </Compile>
     <Compile Include="action\TCheck.ashx.cs">
       <DependentUpon>TCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TDiagnose.ashx.cs">
+      <DependentUpon>TDiagnose.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\TDiseasestatus.ashx.cs">
       <DependentUpon>TDiseasestatus.ashx</DependentUpon>
@@ -771,6 +775,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TCheckBLL.cs" />
+    <Compile Include="BLL\TDiagnoseBLL.cs" />
     <Compile Include="BLL\TDiseasestatusBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
@@ -786,6 +791,7 @@
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
+    <Compile Include="DAO\TDiagnoseDAO.cs" />
     <Compile Include="DAO\TDiseasestatusDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />

@@ -26,16 +26,26 @@ namespace FuWai.action
             testmodel tm = new testmodel();
             tm.Patientid = "0001";
             tm.Level = "1";
-            tm.X = "198.7";
-            tm.Y = "63.7";
+            tm.X = "102.715239";
+            tm.Y = "25.044353";
             tmlist.Add(tm);
 
             testmodel tm1 = new testmodel();
             tm1.Patientid = "0002";
             tm1.Level = "1";
-            tm1.X = "19.4";
-            tm1.Y = "63.7";
+            tm1.X = "102.719749";
+            tm1.Y = "25.043919";
             tmlist.Add(tm1);
+
+        //    [
+        //    [102.715239, 25.044353],
+        //    [102.719749, 25.043919],
+        //    [102.718617, 25.04513],
+        //    [102.735955, 25.04526],
+        //    [102.736955, 25.04516],
+        //    [102.733676, 25.045627],
+        //    [102.738389, 25.043553]
+        //    ];
 
             String json = JsonSerializer(tmlist);
 

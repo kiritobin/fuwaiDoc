@@ -41,12 +41,14 @@ namespace FuWai.DAO
         /// <param name="position">停落位置</param>
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
+        /// <param name="lat">x</param>
+        /// <param name="lng">y</param>
         /// <returns>返回int</returns>
-        public int insert(string droneid,string dronemodel, string position,int flycount,int status,string xy) {
-            string sql = "insert into T_Drone values(@droneid,@dronemodel,@position,@flycount,@status,@xy)";
+        public int insert(string droneid,string dronemodel, string position,int flycount,int status,string lat,string lng) {
+            string sql = "insert into T_Drone values(@droneid,@dronemodel,@position,@flycount,@status,@lat,@lng)";
 
-            string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" ,"@xy"};
-            object[] value = { droneid, dronemodel, position, flycount, status ,xy};
+            string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" , "@lat", "@lng" };
+            object[] value = { droneid, dronemodel, position, flycount, status , lat , lng };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -58,12 +60,14 @@ namespace FuWai.DAO
         /// <param name="position">停落位置</param>
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
+        /// <param name="lat">x</param>
+        /// <param name="lng">y</param>
         /// <returns>返回int</returns>
-        public int update(string droneid, string dronemodel, string position, int flycount, int status,string xy) {
-            string sql = "update T_Drone set droneid=@droneid ,dronemodel=@dronemodel,position=@position,flycount=@flycount,status=@status,xy=@xy where droneid=@droneid ";
+        public int update(string droneid, string dronemodel, string position, int flycount, int status, string lat, string lng) {
+            string sql = "update T_Drone set droneid=@droneid ,dronemodel=@dronemodel,position=@position,flycount=@flycount,status=@status,lat=@lat,lng=@lng where droneid=@droneid ";
 
-            string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status","@xy" };
-            object[] value = { droneid, dronemodel, position, flycount, status ,xy};
+            string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status", "@lat", "@lng" };
+            object[] value = { droneid, dronemodel, position, flycount, status , lat, lng };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
