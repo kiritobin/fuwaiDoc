@@ -519,6 +519,10 @@
         }); // 创建标注
         map.addOverlay(marker2);
     }
+
+    function test(data) {
+        alert(JSON.stringify(data));
+    }
     handelAddMarker(new BMap.Point(102.717249, 25.043926), "./img/无人机.png");
     handelAddMarker(new BMap.Point(102.736389, 25.043435), "./img/无人机.png");
     var json_data = [
@@ -619,10 +623,11 @@
                     data: {
 
                     },
-                    dataType: 'text',
+                    dataType: 'json',
                     success: function (data) {
                         console.log(data);
                         _this.data = data;
+                        test(data);
                     },
                     error: function (XMLHttpRequest, textStatus) { //请求失败
                         if (textStatus == 'timeout') {
