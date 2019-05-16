@@ -26,8 +26,8 @@ namespace FuWai.action
             testmodel tm = new testmodel();
             tm.Patientid = "0001";
             tm.Level = "1";
-            tm.X = "198.7";
-            tm.Y = "63.7";
+            tm.X = "102.715239";
+            tm.Y = "25.044353";
             tmlist.Add(tm);
 
             testmodel tm1 = new testmodel();

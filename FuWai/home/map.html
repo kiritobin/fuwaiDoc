@@ -519,37 +519,35 @@
         }); // 创建标注
         map.addOverlay(marker2);
     }
-
+    var a = "";
     function test(data) {
-        alert(JSON.stringify(data));
-    }
-    handelAddMarker(new BMap.Point(102.717249, 25.043926), "./img/无人机.png");
-    handelAddMarker(new BMap.Point(102.736389, 25.043435), "./img/无人机.png");
-    var json_data = [
-        [102.715239, 25.044353],
-        [102.719749, 25.043919],
-        [102.718617, 25.04513],
-        [102.735955, 25.04526],
-        [102.736955, 25.04516],
-        [102.733676, 25.045627],
-        [102.738389, 25.043553]
-    ];
-    var pointArray = new Array();
-    for (var i = 0; i < json_data.length; i++) {
-        var marker = new BMap.Marker(new BMap.Point(json_data[i][0], json_data[i][1])); // 创建点
-        map.addOverlay(marker); //增加点
-        pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
-        marker.addEventListener("click", attribute);
+        handelAddMarker(new BMap.Point(102.717249, 25.043926), "./img/无人机.png");
+        handelAddMarker(new BMap.Point(102.736389, 25.043435), "./img/无人机.png");
+
+        var json = [{ "lng": 102.715239, "lat": 25.044353, "id": "123" }, { "lng": 102.719749, "lat": 25.043919, "id": "456" }];
+
+        for (var i = 0; i < json.length; i++) {
+            var marker = new BMap.Marker(new BMap.Point(json[i].lng, json[i].lat)); // 创建点
+            map.addOverlay(marker); //增加点
+           
+            marker.addEventListener("click", attribute);
+        }
+        //让所有点在视野范围内
+        //map.setViewport(json);
+
+        //删除键值
+        for (var j = 0; j < json.length; j++) {
+            delete json[j].lng;
+        }
+        console.log(json);
     }
 
-    //让所有点在视野范围内
-    map.setViewport(pointArray);
     //获取覆盖物位置
-    function attribute(e) {
-        var p = e.target;
+    function attribute() {
         $("#myModal").modal("show");
         //$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影
         $(".modal-backdrop").removeClass("modal-backdrop fade in");
+        console.log();
     }
 
     /**

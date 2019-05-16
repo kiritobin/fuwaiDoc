@@ -40,6 +40,7 @@
                                 <th v-on:click="sortBy('age')">性别</th>
                                 <th>身高</th>
                                 <th>体重</th>
+                                <th>年龄</th>
                                 <th>地址</th>
                                 <th>坐标</th>
                                 <th>无人机编号</th>
@@ -52,8 +53,9 @@
                                 <td>{{dataItem.gender}}</td>
                                 <td>{{dataItem.weight}}</td>
                                 <td>{{dataItem.height}}</td>
-                                <td>{{dataItem.address}}</td>
-                                <td>{{dataItem.xy}}</td>
+                                <td>{{dataItem.age}}</td>
+                                <td>{{dataItem.addr}}</td>
+                                <td>{{dataItem.lng}},{{dataItem.lat}}</td>
                                 <td>{{dataItem.droneid}}</td>
                                 <td>
                                     <button @click="del(dataItem.patientid)" class="btn btn-danger btn-sm">删除</button>
@@ -165,8 +167,8 @@
                                     </p>
                                     <p>
                                         <label>坐标：</label>
-                                        <input type="text" id="ax" placeholder="x坐标">
-                                        <input type="text" id="ay" placeholder="y坐标">
+                                        <input type="text" id="ax" placeholder="经度">
+                                        <input type="text" id="ay" placeholder="维度">
                                     </p>
                                     <p>
                                         <label>无人机编号：</label>
@@ -223,11 +225,12 @@
                                     </p>
                                     <p>
                                         <label>地址：</label>
-                                        <input type="text" v-model="editPeople.address" id="eaddress">
+                                        <input type="text" v-model="editPeople.addr" id="eaddress">
                                     </p>
                                     <p>
                                         <label>坐标：</label>
-                                        <input type="text" v-model="editPeople.xy" id="ex">
+                                        经度：<input type="text" v-model="editPeople.lng" id="ex">
+                                        纬度：<input type="text" v-model="editPeople.lat" id="ey">
                                     </p>
                                     <p>
                                         <label>无人机编号：</label>
@@ -262,11 +265,10 @@
             var weight = $("#aweight").val();
             var droneid = $("#drone").val();
             var address = $("#aaddress").val();
-            var x = $("#ax").val();
-            var y = $("#ay").val();
-            var xy = x + "," + y;
+            var lng = $("#ax").val();
+            var lat = $("#ay").val();
             var headimg = $("#changeimg")[0].src;
-            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || x == "" || y == "") {
+            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || lng == "" || lat == "") {
                 swal({
                     title: "含有未填项",
                     type: "warning",
@@ -286,7 +288,8 @@
                         height: height,
                         droneid: droneid,
                         address: address,
-                        xy: xy,
+                        lng: lng,
+                        lat:lat,
                         headimg: headimg,
                         op: "insert"
                     },
@@ -420,9 +423,10 @@
             var weight = $("#eweight").val();
             var droneid = $("#edrone").val();
             var address = $("#eaddress").val();
-            var xy = $("#ex").val();
+            var lng = $("#ex").val();
+            var lat = $("#ex").val();
             var headimg = $("#echangeimg")[0].src;
-            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == "") {
+            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == ""||lng==""||lat=="") {
                 swal({
                     title: "含有未填项",
                     type: "warning",
@@ -442,7 +446,8 @@
                         weight: weight,
                         droneid: droneid,
                         address: address,
-                        xy: xy,
+                        lng: lng,
+                        lat: lat,
                         headimg: headimg,
                         op: "update"
                     },
@@ -760,8 +765,9 @@
                         height: item.height,
                         weight: item.weight,
                         headimg: item.headimg,
-                        address: item.address,
-                        xy: item.xy
+                        addr: item.addr,
+                        lat: item.lat,
+                        lng: item.lng
                     };
                     this.search();
                 },
