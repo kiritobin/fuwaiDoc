@@ -55,7 +55,12 @@ namespace FuWai.action
             context.Response.End();
 
         }
-
+        /// <summary>
+        /// list转化为json（.net内部方法）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t">list对象</param>
+        /// <returns>json字符串</returns>
         public static string JsonSerializer<T>(T t)
         {
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));

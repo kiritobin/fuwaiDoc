@@ -682,8 +682,11 @@
     <Content Include="home\plugins\weather-icons\font\WeatherIcons-Regular.otf" />
     <Content Include="action\testlist.ashx" />
     <Content Include="action\map.ashx" />
+    <Content Include="action\TUsedrug.ashx" />
+    <Content Include="action\TOperation.ashx" />
+    <Content Include="action\VPatientUsedrug.ashx" />
     <Content Include="action\TDiagnose.ashx" />
-    <Content Include="action\VPatientOperation.ashx" />
+    <Content Include="action\VPatientDiagnose.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -746,6 +749,9 @@
     <Compile Include="action\TMedicalhistory.ashx.cs">
       <DependentUpon>TMedicalhistory.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\TOperation.ashx.cs">
+      <DependentUpon>TOperation.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\TPatient.ashx.cs">
       <DependentUpon>TPatient.ashx</DependentUpon>
     </Compile>
@@ -754,6 +760,9 @@
     </Compile>
     <Compile Include="action\TTreatment.ashx.cs">
       <DependentUpon>TTreatment.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TUsedrug.ashx.cs">
+      <DependentUpon>TUsedrug.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\upload.ashx.cs">
       <DependentUpon>upload.ashx</DependentUpon>
@@ -770,11 +779,14 @@
     <Compile Include="action\VPatientCheck.ashx.cs">
       <DependentUpon>VPatientCheck.ashx</DependentUpon>
     </Compile>
-    <Compile Include="action\VPatientOperation.ashx.cs">
-      <DependentUpon>VPatientOperation.ashx</DependentUpon>
+    <Compile Include="action\VPatientDiagnose.ashx.cs">
+      <DependentUpon>VPatientDiagnose.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\VPatientTreatment.ashx.cs">
       <DependentUpon>VPatientTreatment.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\VPatientUsedrug.ashx.cs">
+      <DependentUpon>VPatientUsedrug.ashx</DependentUpon>
     </Compile>
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
@@ -785,16 +797,20 @@
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
     <Compile Include="BLL\TMedicalhistoryBLL.cs" />
+    <Compile Include="BLL\TOperationBLL.cs" />
     <Compile Include="BLL\TPatientBLL.cs" />
     <Compile Include="BLL\TPContactBLL.cs" />
     <Compile Include="BLL\TTreatmentBLL.cs" />
+    <Compile Include="BLL\TUsedrugBLL.cs" />
     <Compile Include="BLL\VGContactBLL.cs" />
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VPatientCheckBLL.cs" />
-    <Compile Include="BLL\VPatientOperationBLL.cs" />
+    <Compile Include="BLL\VPatientDiagnoseBLL.cs" />
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
+    <Compile Include="BLL\VPatientUsedrugBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\TOperationDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
     <Compile Include="DAO\TDiagnoseDAO.cs" />
     <Compile Include="DAO\TDiseasestatusDAO.cs" />
@@ -805,12 +821,14 @@
     <Compile Include="DAO\TPatientDAO.cs" />
     <Compile Include="DAO\TPContactDAO.cs" />
     <Compile Include="DAO\TTreatmentDAO.cs" />
+    <Compile Include="DAO\TUsedrugDAO.cs" />
     <Compile Include="DAO\VGContactDAO.cs" />
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientCheckDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
-    <Compile Include="DAO\VPatientOperationDAO.cs" />
+    <Compile Include="DAO\VPatientDiagnoseDAO.cs" />
     <Compile Include="DAO\VPatientTreatmentDAO.cs" />
+    <Compile Include="DAO\VPatientUsedrugDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
