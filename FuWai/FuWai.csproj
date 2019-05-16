@@ -683,6 +683,7 @@
     <Content Include="action\testlist.ashx" />
     <Content Include="action\map.ashx" />
     <Content Include="action\TDiagnose.ashx" />
+    <Content Include="action\VPatientOperation.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -769,6 +770,9 @@
     <Compile Include="action\VPatientCheck.ashx.cs">
       <DependentUpon>VPatientCheck.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\VPatientOperation.ashx.cs">
+      <DependentUpon>VPatientOperation.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VPatientTreatment.ashx.cs">
       <DependentUpon>VPatientTreatment.ashx</DependentUpon>
     </Compile>
@@ -788,6 +792,7 @@
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VPatientCheckBLL.cs" />
+    <Compile Include="BLL\VPatientOperationBLL.cs" />
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
@@ -804,6 +809,7 @@
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientCheckDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
+    <Compile Include="DAO\VPatientOperationDAO.cs" />
     <Compile Include="DAO\VPatientTreatmentDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
