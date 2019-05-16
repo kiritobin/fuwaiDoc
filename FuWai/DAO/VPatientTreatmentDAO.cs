@@ -31,7 +31,7 @@ namespace FuWai.DAO
         /// <returns>DataTable</returns>
         public DataTable SelectTreatmentByPatientID(string patientid)
         {
-            string sql = "select * from V_PatientTreatment where patientid=@patientid";
+            string sql = "select * from V_PatientOperation where patientid=@patientid";
             string[] param = { "@patientid" };
             object[] values = { patientid };
             return db.FillDataSet(sql, param, values).Tables[0];

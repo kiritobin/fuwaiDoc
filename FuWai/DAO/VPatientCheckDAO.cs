@@ -28,7 +28,7 @@ namespace FuWai.DAO
         /// <returns></returns>
         public DataTable selectCheckByPatientId(string patientid)
         {
-            String sql = "select * from V_PatientCheck where patientid=@patientid";
+            String sql = "select * from V_PatientDiagnose where patientid=@patientid";
             String[] param = { "@patientid" };
             object[] value = { patientid };
             DataTable dt = db.FillDataSet(sql, param, value).Tables[0];

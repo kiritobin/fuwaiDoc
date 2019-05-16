@@ -71,12 +71,12 @@ namespace FuWai.DAO
         /// <param name="patientid">病人编号</param>
         /// <param name="remark">备注</param>
         /// <returns></returns>
-        public int update(int medicalhistoryid,string medicalhistoryname, string patientid, string remark)
+        public int update(int medicalhistoryid,string medicalhistoryname, string remark)
         {
-            string sql = "update T_Medicalhistory set medicalhistoryname=@medicalhistoryname,remark=@remark,doctor=@doctor where medicalhistoryid=@medicalhistoryid";
+            string sql = "update T_Medicalhistory set medicalhistoryname=@medicalhistoryname,remark=@remark where medicalhistoryid=@medicalhistoryid";
 
-            string[] param = { "@medicalhistoryid", "@medicalhistoryname", "@patientid", "@remark", "@doctor" };
-            object[] value = { medicalhistoryid, medicalhistoryname, patientid,remark };
+            string[] param = { "@medicalhistoryid", "@medicalhistoryname",  "@remark"};
+            object[] value = { medicalhistoryid, medicalhistoryname,remark };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }

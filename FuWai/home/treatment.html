@@ -31,19 +31,17 @@
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
-                                <th>开始时间</th>
-                                <th>结束时间</th>
-                                <th>治疗药品</th>
-                                <th>主治医师</th>
+                                <th>时间</th>
+                                <th>手术名称</th>
+                                <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.treatmentBdate}}</td>
-                                <td>{{dataItem.treatmentEdate}}</td>
-                                <td>{{dataItem.drug}}</td>
-                                <td>{{dataItem.doctor}}</td>
+                                <td>{{dataItem.operationtime}}</td>
+                                <td>{{dataItem.operationname}}</td>
+                                <td>{{dataItem.remark}}</td>
                                 <td>
-                                    <button @click="del(dataItem.treatmentid)" class="btn btn-danger btn-sm">删除</button>
+                                    <button @click="del(dataItem.operationid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
                                 </td>
                             </tr>
@@ -113,20 +111,16 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>开始时间：</label>
-                                        <input type="text" id="abegin">
+                                        <label>时间：</label>
+                                        <input type="text" id="adate">
                                     </p>
                                     <p>
-                                        <label>结束时间：</label>
-                                        <input type="text" id="aend">
+                                        <label>手术名称：</label>
+                                        <input type="text" id="aname">
                                     </p>
                                     <p>
-                                        <label>治疗药品：</label>
-                                        <input type="text" id="adrug">
-                                    </p>
-                                    <p>
-                                        <label>主治医师：</label>
-                                        <input type="text" id="adoctor">
+                                        <label>备注：</label>
+                                        <input type="text" id="aremark">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -147,29 +141,25 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        编辑治疗记录
+                                        编辑手术记录
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>开始时间：</label>
-                                        <input type="text" v-model="editPeople.treatmentBdate" id="ebegin" value="">
+                                        <label>时间：</label>
+                                        <input type="text" v-model="editPeople.operationtime" id="edate" value="">
                                     </p>
                                     <p>
-                                        <label>结束时间：</label>
-                                        <input type="text" v-model="editPeople.treatmentEdate" id="eend" value="">
+                                        <label>手术名称：</label>
+                                        <input type="text" v-model="editPeople.operationname" id="ename" value="">
                                     </p>
                                     <p>
-                                        <label>治疗药品：</label>
-                                        <input type="text" v-model="editPeople.drug" id="edrug" value="">
-                                    </p>
-                                    <p>
-                                        <label>主治医师：</label>
-                                        <input type="text" v-model="editPeople.doctor" id="edoctor" value="">
+                                        <label>备注：</label>
+                                        <input type="text" v-model="editPeople.remark" id="eremark" value="">
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.treatmentid)">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="update(editPeople.operationid)">
                                         提交更改
                                     </button>
                                 </div>
@@ -195,11 +185,10 @@
 
         function add() {
             var patientid = GetQueryString("userid");
-            var treatmentBdate = $("#abegin").val();
-            var treatmentEdate = $("#aend").val();
-            var drug = $("#adrug").val();
-            var doctor = $("#adoctor").val();
-            if (treatmentBdate == "" || treatmentEdate == "" || drug == "" || doctor=="") {
+            var operationtime = $("#adate").val();
+            var operationname = $("#aname").val();
+            var remark = $("#aremark").val();
+            if (operationtime == "" || operationname == "" || remark == "" ) {
                 swal({
                     title: "含有未填项目!",
                     type: "warning",
@@ -209,13 +198,12 @@
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TTreatment.ashx',
+                    url: '../action/TOperation.ashx',
                     data: {
                         patientid:patientid,
-                        treatmentBdate: treatmentBdate,
-                        treatmentEdate: treatmentEdate,
-                        drug: drug,
-                        doctor: doctor,
+                        operationtime: operationtime,
+                        operationname: operationname,
+                        remark: remark,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -271,13 +259,13 @@
                 })
             }
         }
-        function dele(treatmentid) {
+        function dele(operationid) {
             $.ajax({
                 type: 'Post',
-                url: '../action/TTreatment.ashx',
+                url: '../action/TOperation.ashx',
                 data: {
-                    treatmentid: treatmentid,
-                    op: "deleteByTreatmentId"
+                    operationid: operationid,
+                    op: "delete"
                 },
                 dataType: 'text',
                 success: function (data) {
@@ -337,13 +325,12 @@
                 }
             })
         }
-        function update(treatmentid) {
+        function update(operationid) {
             var patientid = GetQueryString("userid");
-            var treatmentBdate = $("#ebegin").val();
-            var treatmentEdate = $("#eend").val();
-            var drug = $("#edrug").val();
-            var doctor = $("#edoctor").val();
-            if (treatmentBdate == "" || treatmentEdate == "" || drug == "" || doctor=="") {
+            var operationtime = $("#edate").val();
+            var operationname = $("#ename").val();
+            var remark = $("#eremark").val();
+            if (operationtime == "" || operationname == "" || remark == "" ) {
                 swal({
                     title: "含有未填项目!",
                     type: "warning",
@@ -353,21 +340,21 @@
             else {
                 $.ajax({
                     type: 'Post',
-                    url: '../action/TTreatment.ashx',
+                    url: '../action/TOperation.ashx',
                     data: {
-                        treatmentid: treatmentid,
-                        treatmentBdate: treatmentBdate,
-                        treatmentEdate: treatmentEdate,
-                        drug: drug,
-                        doctor: doctor,
-                        op: "updateTreatmentId"
+                        patientid: patientid,
+                        operationid: operationid,
+                        operationtime: operationtime,
+                        operationname: operationname,
+                        remark: remark,
+                        op: "update"
                     },
                     dataType: 'text',
                     success: function (data) {
                         console.log(data);
-                        if (data == "修改成功") {
+                        if (data == "更新成功") {
                             swal({
-                                title: "修改成功",
+                                title: "更新成功",
                                 type: "success",
                                 confirmButtonText: "ok",
                                 allowOutsideClick: true,
@@ -379,7 +366,7 @@
                         }
                         else {
                             swal({
-                                title: "修改失败",
+                                title: "更新失败",
                                 type: "error",
                                 confirmButtonText: "ok",
                                 allowOutsideClick: true,
@@ -582,11 +569,10 @@
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        treatmentid: item.treatmentid,
-                        treatmentBdate: item.treatmentBdate,
-                        treatmentEdate: item.treatmentEdate,
-                        drug: item.drug,
-                        doctor:item.doctor
+                        operationid: item.operationid,
+                        operationtime: item.operationtime,
+                        operationname: item.operationname,
+                        remark: item.remark
                     };
                 },
                 update: function (item) {

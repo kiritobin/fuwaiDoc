@@ -56,7 +56,7 @@ namespace FuWai.DAO
         /// <returns></returns>
         public int insertOperation(string operationtime, string operationname, string remark, string patientid)
         {
-            string sql = "insert into T_Operation(operationtime,operationname,remark,patientid,doctor) values (@operationtime,@operationname,@remark,@patientid)";
+            string sql = "insert into T_Operation(operationtime,operationname,remark,patientid) values (@operationtime,@operationname,@remark,@patientid)";
             string[] param = { "@operationtime", "@operationname", "@remark", "@patientid" };
             object[] value = { operationtime, operationname, remark, patientid };
             return db.ExecuteNoneQuery(sql, param, value);

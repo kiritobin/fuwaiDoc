@@ -63,8 +63,9 @@
                                     <a v-bind:href="['guardian.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">监护人</div></a>
                                     <a v-bind:href="['contact.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">联系方式</div></a>
                                     <a v-bind:href="['medicalhistory.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">病史记录</div></a>
-                                    <a v-bind:href="['record.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">检查记录</div></a>
-                                    <a v-bind:href="['treatment.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">治疗记录</div></a>
+                                    <a v-bind:href="['record.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">诊断记录</div></a>
+                                    <a v-bind:href="['userdrug.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">用药记录</div></a>
+                                    <a v-bind:href="['treatment.html?userid='+dataItem.patientid]"><div class="btn btn-primary btn-sm">手术记录</div></a>
                                 </td>
                             </tr>
                         </table>
@@ -162,6 +163,10 @@
                                         <input type="text" id="aheight">
                                     </p>
                                     <p>
+                                        <label>年龄：</label>
+                                        <input type="text" id="aage">
+                                    </p>
+                                    <p>
                                         <label>地址：</label>
                                         <input type="text" id="aaddress">
                                     </p>
@@ -224,6 +229,10 @@
                                         <input type="text" v-model="editPeople.weight" id="eweight">
                                     </p>
                                     <p>
+                                        <label>年龄：</label>
+                                        <input type="text" v-model="editPeople.age" id="eage">
+                                    </p>
+                                    <p>
                                         <label>地址：</label>
                                         <input type="text" v-model="editPeople.addr" id="eaddress">
                                     </p>
@@ -267,8 +276,9 @@
             var address = $("#aaddress").val();
             var lng = $("#ax").val();
             var lat = $("#ay").val();
+            var age = $("#aage").val();
             var headimg = $("#changeimg")[0].src;
-            if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || lng == "" || lat == "") {
+            if (age==""||patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || lng == "" || lat == "") {
                 swal({
                     title: "含有未填项",
                     type: "warning",
@@ -291,6 +301,7 @@
                         lng: lng,
                         lat:lat,
                         headimg: headimg,
+                        age:age,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -425,8 +436,9 @@
             var address = $("#eaddress").val();
             var lng = $("#ex").val();
             var lat = $("#ex").val();
+            var age = $("#eage").val();
             var headimg = $("#echangeimg")[0].src;
-            if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == ""||lng==""||lat=="") {
+            if (age==""||patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == ""||lng==""||lat=="") {
                 swal({
                     title: "含有未填项",
                     type: "warning",
@@ -448,6 +460,7 @@
                         address: address,
                         lng: lng,
                         lat: lat,
+                        age:age,
                         headimg: headimg,
                         op: "update"
                     },
@@ -767,7 +780,8 @@
                         headimg: item.headimg,
                         addr: item.addr,
                         lat: item.lat,
-                        lng: item.lng
+                        lng: item.lng,
+                        age:item.age
                     };
                     this.search();
                 },

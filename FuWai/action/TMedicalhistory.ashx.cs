@@ -75,7 +75,7 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String remark = context.Request["remark"];
 
-            if (medic.update(medicalhistoryid, medicalhistoryname, patientid, remark))
+            if (medic.update(medicalhistoryid, medicalhistoryname, remark))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();

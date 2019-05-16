@@ -31,14 +31,12 @@
                     <div class="form-group">
                         <table class="table table-bordered table-responsive table-striped">
                             <tr>
-                                <th>病因</th>
-                                <th>诊断医师</th>
+                                <th>疾病名称</th>
                                 <th>备注</th>
                                 <th>操作</th>
                             </tr>
                             <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
-                                <td>{{dataItem.medicalhistoryreason}}</td>
-                                <td>{{dataItem.doctor}}</td>
+                                <td>{{dataItem.medicalhistoryname}}</td>
                                 <td>{{dataItem.remark}}</td>
                                 <td>
                                     <button @click="del(dataItem.medicalhistoryid)" class="btn btn-danger btn-sm">删除</button>
@@ -106,17 +104,13 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        添加病因
+                                        添加疾病名称
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>
                                         <label>病因：</label>
                                         <input type="text" id="adisease">
-                                    </p>
-                                    <p>
-                                        <label>诊断医师：</label>
-                                        <input type="text" id="adoctor">
                                     </p>
                                     <p>
                                         <label>备注：</label>
@@ -146,12 +140,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>
-                                        <label>病因：</label>
-                                        <input type="text" v-model="editPeople.medicalhistoryreason" id="edisease" value="">
-                                    </p>
-                                    <p>
-                                        <label>诊断医师：</label>
-                                        <input type="text" v-model="editPeople.doctor" id="edoctor" value="">
+                                        <label>疾病名称：</label>
+                                        <input type="text" v-model="editPeople.medicalhistoryname" id="edisease" value="">
                                     </p>
                                     <p>
                                         <label>备注：</label>
@@ -187,8 +177,7 @@
             var patientid = GetQueryString("userid");
             var medicalhistoryreason = $("#adisease").val();
             var remark = $("#aremark").val();
-            var doctor = $("#adoctor").val();
-            if (medicalhistoryreason == "" || remark == "" || doctor=="") {
+            if (medicalhistoryreason == "" || remark == "") {
                 swal({
                     title: "含有未填项目!",
                     type: "warning",
@@ -200,9 +189,8 @@
                     type: 'Post',
                     url: '../action/TMedicalhistory.ashx',
                     data: {
-                        doctor: doctor,
                         patientid:patientid,
-                        medicalhistoryreason: medicalhistoryreason,
+                        medicalhistoryname: medicalhistoryreason,
                         remark: remark,
                         op: "insert"
                     },
@@ -328,8 +316,7 @@
         function update(medicalhistoryid) {
             var remark = $("#eremark").val();
             var medicalhistoryreason = $("#edisease").val();
-            var doctor = $("#edoctor").val();
-            if (medicalhistoryreason == "" || remark == "" || doctor=="") {
+            if (medicalhistoryreason == "" || remark == "") {
                 swal({
                     title: "含有未填项",
                     type: "warning",
@@ -342,9 +329,8 @@
                     type: 'Post',
                     url: '../action/TMedicalhistory.ashx',
                     data: {
-                        doctor: doctor,
                         medicalhistoryid: medicalhistoryid,
-                        medicalhistoryreason: medicalhistoryreason,
+                        medicalhistoryname: medicalhistoryreason,
                         remark: remark,
                         op: "update"
                     },
@@ -568,10 +554,9 @@
                 //编辑
                 edit: function (item) {
                     this.editPeople = {
-                        medicalhistoryreason: item.medicalhistoryreason,
                         medicalhistoryid: item.medicalhistoryid,
-                        remark: item.remark,
-                        doctor:item.doctor
+                        medicalhistoryname: item.medicalhistoryname,
+                        remark: item.remark
                     };
                 },
                 update: function (item) {

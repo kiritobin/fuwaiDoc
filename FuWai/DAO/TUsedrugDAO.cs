@@ -56,7 +56,7 @@ namespace FuWai.DAO
         /// <returns></returns>
         public int insert(string usedrugidtime, string usedrugidname, string dosage, string remark, string patientid)
         {
-            string sql = "insert into T_Usedrug(usedrugidtime,usedrugidname,dosage,remark,doctor) values (@usedrugidtime,@usedrugidname,@dosage,@remark,@patientid)";
+            string sql = "insert into T_Usedrug(usedrugidtime,usedrugidname,dosage,remark,patientid) values (@usedrugidtime,@usedrugidname,@dosage,@remark,@patientid)";
             string[] param = { "@usedrugidtime", "@usedrugidname", "@dosage", "@remark", "@patientid" };
             object[] value = { usedrugidtime, usedrugidname, dosage, remark, patientid };
             return db.ExecuteNoneQuery(sql, param, value);

@@ -94,6 +94,7 @@
     <Content Include="home\js\scripts.js" />
     <Content Include="home\level.html" />
     <Content Include="home\map.html" />
+    <Content Include="home\userdrug.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
@@ -712,7 +713,9 @@
     <Content Include="js\jsencrypt.min.js" />
     <Content Include="js\vue.js" />
     <Content Include="login.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="action\map.ashx.cs">

@@ -65,9 +65,9 @@ namespace FuWai.BLL
         /// <param name="patientid">病人编号</param>
         /// <param name="remark">备注</param>
         /// <returns></returns>
-        public Boolean update(int medicalhistoryid, string medicalhistoryname, string patientid, string remark)
+        public Boolean update(int medicalhistoryid, string medicalhistoryname,  string remark)
         {
-            int row = td.update(medicalhistoryid, medicalhistoryname, patientid, remark);
+            int row = td.update(medicalhistoryid, medicalhistoryname,  remark);
             if (row > 0)
             {
                 return true;
