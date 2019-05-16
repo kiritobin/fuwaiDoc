@@ -54,9 +54,12 @@ namespace FuWai.action
             Double lat = Convert.ToDouble(context.Request["lat"]);
             Double lng = Convert.ToDouble(context.Request["lng"]);
             int diseasestatusid = 1;
-            String droneid = context.Request["droneid"];            
+            String droneid = context.Request["droneid"];
+            String weight = context.Request["weight"];
+            String height = context.Request["height"];
+            String headimg = context.Request["headimg"];
 
-            if (tb.insert(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid))
+            if (tb.insert(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid, weight, height, headimg))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -80,8 +83,11 @@ namespace FuWai.action
             Double lng = Convert.ToDouble(context.Request["lng"]);
             int diseasestatusid = 1;
             String droneid = context.Request["droneid"];
+            String weight = context.Request["weight"];
+            String height = context.Request["height"];
+            String headimg = context.Request["headimg"];
 
-            if (tb.update(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid))
+            if (tb.update(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid, weight, height, headimg))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
