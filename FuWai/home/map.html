@@ -1,607 +1,649 @@
-<html>
+﻿<html>
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<script src="js/jquery-2.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<style type="text/css">
-			body,
-			html,
-			#allmap {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				margin: 0;
-				font-family: "微软雅黑";
-			}
-		</style>
-		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=notj5jZfhhHQvej1zwAkF1V7pU4jGtY7"></script>
-		<title>阜外医院</title>
-		<style>
-			#content {
-				position: absolute;
-				width: 100%;
-				bottom: 0px;
-				text-align: center;
-				z-index: 2;
-				overflow: hidden;
-			}
-			
-			.modal-content {
-				background-color: rgba(16, 78, 139, 0.6);
-				height: auto;
-			}
-			
-			.column {
-				padding: 0 -15px;
-			}
-			
-			span {
-				color: white;
-			}
-			
-			ul a {
-				color: white;
-			}
-			
-			tr th {
-				color: white;
-				font-size: 16px;
-			}
-			
-			tr td {
-				color: white;
-				font-size: 14px;
-			}
-			
-			#addr,
-			#lal,
-			#num,
-			#name,
-			#agend,
-			#age {
-				font-size: 16px;
-				vertical-align: middle;
-			}
-			
-			.panel {
-				margin-top: 10px;
-				border: 1px solid white;
-				background-color: rgba(255, 255, 255, 0);
-				text-align: center;
-			}
-			
-			thead {
-				background-color: #1874CD;
-			}
-		</style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=notj5jZfhhHQvej1zwAkF1V7pU4jGtY7"></script>
+    <title>阜外医院</title>
+    <style>
+        #content {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            text-align: center;
+            z-index: 2;
+            overflow: hidden;
+        }
 
-	</head>
+        .modal-content {
+            background-color: rgba(16, 78, 139, 0.6);
+            height: auto;
+        }
 
-	<body>
-		<div id="allmap"></div>
-		<!-- 模态框（Modal） -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-			<div id="content">
-				<div class="modal-content">
-					<div class="container" style="margin-bottom:0;border: none solid #ddd;border-radius: 3px">
-						<div class="row clearfix">
-							<div class="col-md-12 column">
-								<div class="row clearfix">
-									<div class="col-md-3 column">
-										<div class="panel" style="height: auto;">
-											<table class="table table-bordered table-condensed">
-												<thead class="table_head">
-													<tr>
-														<th colspan="2">
-															<span>基本信息</span>
-															<img src="img/av1.png" alt="" style="height:100px;width:100px;margin-left: 60px;">
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<span>编号</span>
-														</td>
-														<td id="num">
-															<span>001</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<span>姓名</span>
-														</td>
-														<td id="name">
-															<span>李毅</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<span>性别</span>
-														</td>
-														<td id="agend">
-															<span>男</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<span>年龄</span>
-														</td>
-														<td id="age">
-															<span>66</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<span>地址信息</span>
-														</td>
-														<td id="lal">
-															<span>云南省昆明市嵩明县杨林镇云南工商学院</span>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<span>位置信息</span>
-														</td>
-														<td id="addr">
-															<span>102.723221,25.046865</span>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+        .column {
+            padding: 0 -15px;
+        }
 
-									</div>
-									<div class="col-md-5 column">
-										<div class="tabbable" id="tabs-902637" style="margin-top: 70px;">
-											<ul id="myTab" class="nav nav-tabs">
-												<li class="active">
-													<a href="#panel-0" data-toggle="tab">病史</a>
-												</li>
-												<li>
-													<a href="#panel-01" data-toggle="tab">诊断记录</a>
-												</li>
-												<li>
-													<a href="#panel-02" data-toggle="tab">用药记录</a>
-												</li>
-												<li>
-													<a href="#panel-03" data-toggle="tab">手术记录</a>
-												</li>
-												<li>
-													<a href="#panel-04" data-toggle="tab">常用联系人</a>
-												</li>
-											</ul>
-											<div class="tab-content" style="margin-top: 10px;">
-												<div class="tab-pane active panel" id="panel-0">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>编号</th>
-																<th>疾病名称</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>1</td>
-																<td>心脏休克</td>
-																<td>情绪激动</td>
-															</tr>
-															<tr>
-																<td>2</td>
-																<td>心律衰竭</td>
-																<td>高血压性心脏病</td>
-															</tr>
-															<tr>
-																<td>3</td>
-																<td>心肌梗塞</td>
-																<td>过劳、大量饮酒</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-01">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>时间</th>
-																<th>诊断结果</th>
-																<th>主治医师</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>2019-4-13</td>
-																<td>心肌梗塞</td>
-																<td>张三</td>
-																<td>平时多注意休息</td>
-															</tr>
-															<tr>
-																<td>2019-5-13</td>
-																<td>心脏休克</td>
-																<td>李四</td>
-																<td>控制情绪</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-02">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>时间</th>
-																<th>药品名称</th>
-																<th>剂量</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>2019-5-11</td>
-																<td>维拉帕米</td>
-																<td>2粒</td>
-																<td></td>
-															</tr>
-															<tr>
-																<td>2019-5-12</td>
-																<td>维拉帕米</td>
-																<td>2粒</td>
-																<td></td>
-															</tr>
-															<tr>
-																<td>2019-5-13</td>
-																<td>维拉帕米</td>
-																<td>2粒</td>
-																<td></td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-03">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>时间</th>
-																<th>手术名称</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>2017-3-2</td>
-																<td>心脏搭桥</td>
-																<td></td>
-															</tr>
+        span {
+            color: white;
+        }
 
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-04">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>编号</th>
-																<th>姓名</th>
-																<th>关系</th>
-																<th>联系方式</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>1</td>
-																<td>赵广益</td>
-																<td>父亲</td>
-																<td>18388596667，18008818180</td>
-																<td></td>
-															</tr>
-															<tr>
-																<td>2</td>
-																<td>王菲</td>
-																<td>母亲</td>
-																<td>18888596664</td>
-																<td></td>
-															</tr>
-															<tr>
-																<td>3</td>
-																<td>紫星</td>
-																<td>哥哥</td>
-																<td>18345596664</td>
-																<td></td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 column" style="margin-top:80px;">
-										<div class="panel" style="height: auto;">
-											<table class="table table-bordered table-condensed">
-												<tbody>
-													<tr>
-														<td style="background-color:#7AC5CD">
-															<h3><span>实时心电图</span></h3>
-														</td>
-														<td>
-															<div style="width: 310px;height: 189px;border:1px dashed #FFA500;padding: 2px;">
-																<img src="img/心电图02.png" alt="" style="height:100%;width:100%">
-															</div>
-															
-														</td>
-													</tr>
-													
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-		<!-- /.modal -->
-	</body>
+        ul a {
+            color: white;
+        }
+
+        tr th {
+            color: white;
+            font-size: 16px;
+        }
+
+        tr td {
+            color: white;
+            font-size: 14px;
+        }
+
+        #addr,
+        #lal,
+        #num,
+        #name,
+        #agend,
+        #age {
+            font-size: 16px;
+            vertical-align: middle;
+        }
+
+        .panel {
+            margin-top: 10px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0);
+            text-align: center;
+        }
+
+        thead {
+            background-color: #1874CD;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="allmap"></div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div id="content">
+            <div class="modal-content" id="app">
+                <div class="container" style="margin-bottom:0;border: none solid #ddd;border-radius: 3px">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <div class="row clearfix">
+                                <div class="col-md-3 column">
+                                    <div class="panel" style="height: auto;">
+                                        <table class="table table-bordered table-condensed">
+                                            <thead class="table_head">
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <span>基本信息</span>
+                                                        <img src="img/av1.png" alt="" style="height:100px;width:100px;margin-left: 60px;">
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span>编号</span>
+                                                    </td>
+                                                    <td id="num">
+                                                        <span>001</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>姓名</span>
+                                                    </td>
+                                                    <td id="name">
+                                                        <span>李毅</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>性别</span>
+                                                    </td>
+                                                    <td id="agend">
+                                                        <span>男</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>年龄</span>
+                                                    </td>
+                                                    <td id="age">
+                                                        <span>66</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>地址信息</span>
+                                                    </td>
+                                                    <td id="lal">
+                                                        <span>云南省昆明市嵩明县杨林镇云南工商学院</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>位置信息</span>
+                                                    </td>
+                                                    <td id="addr">
+                                                        <span>102.723221,25.046865</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-5 column">
+                                    <div class="tabbable" id="tabs-902637" style="margin-top: 70px;">
+                                        <ul id="myTab" class="nav nav-tabs">
+                                            <li class="active">
+                                                <a href="#panel-0" data-toggle="tab">病史</a>
+                                            </li>
+                                            <li>
+                                                <a href="#panel-01" data-toggle="tab">诊断记录</a>
+                                            </li>
+                                            <li>
+                                                <a href="#panel-02" data-toggle="tab">用药记录</a>
+                                            </li>
+                                            <li>
+                                                <a href="#panel-03" data-toggle="tab">手术记录</a>
+                                            </li>
+                                            <li>
+                                                <a href="#panel-04" data-toggle="tab">常用联系人</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" style="margin-top: 10px;">
+                                            <div class="tab-pane active panel" id="panel-0">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>编号</th>
+                                                            <th>疾病名称</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>心脏休克</td>
+                                                            <td>情绪激动</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>心律衰竭</td>
+                                                            <td>高血压性心脏病</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>心肌梗塞</td>
+                                                            <td>过劳、大量饮酒</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane panel" id="panel-01">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>时间</th>
+                                                            <th>诊断结果</th>
+                                                            <th>主治医师</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>2019-4-13</td>
+                                                            <td>心肌梗塞</td>
+                                                            <td>张三</td>
+                                                            <td>平时多注意休息</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2019-5-13</td>
+                                                            <td>心脏休克</td>
+                                                            <td>李四</td>
+                                                            <td>控制情绪</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane panel" id="panel-02">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>时间</th>
+                                                            <th>药品名称</th>
+                                                            <th>剂量</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>2019-5-11</td>
+                                                            <td>维拉帕米</td>
+                                                            <td>2粒</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2019-5-12</td>
+                                                            <td>维拉帕米</td>
+                                                            <td>2粒</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2019-5-13</td>
+                                                            <td>维拉帕米</td>
+                                                            <td>2粒</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane panel" id="panel-03">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>时间</th>
+                                                            <th>手术名称</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>2017-3-2</td>
+                                                            <td>心脏搭桥</td>
+                                                            <td></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane panel" id="panel-04">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>编号</th>
+                                                            <th>姓名</th>
+                                                            <th>关系</th>
+                                                            <th>联系方式</th>
+                                                            <th>备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>赵广益</td>
+                                                            <td>父亲</td>
+                                                            <td>18388596667，18008818180</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>王菲</td>
+                                                            <td>母亲</td>
+                                                            <td>18888596664</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>紫星</td>
+                                                            <td>哥哥</td>
+                                                            <td>18345596664</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 column" style="margin-top:80px;">
+                                    <div class="panel" style="height: auto;">
+                                        <table class="table table-bordered table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="background-color:#7AC5CD">
+                                                        <h3><span>实时心电图</span></h3>
+                                                    </td>
+                                                    <td>
+                                                        <div style="width: 310px;height: 189px;border:1px dashed #FFA500;padding: 2px;">
+                                                            <img src="img/心电图02.png" alt="" style="height:100%;width:100%">
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</body>
 
 </html>
-
+<script src="vue.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#myModal").modal("hide");
+    $(document).ready(function () {
+        $("#myModal").modal("hide");
 
-	});
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	var point = new BMap.Point(102.728547, 25.043682);
-	map.centerAndZoom(point, 15);
-	map.enableScrollWheelZoom(); //启用鼠标滚轮放大缩小
-	var mapStyle = {
-		style: "dark" //设置地图风格为高端黑					
-	}
-	var data = [{
-			"featureType": "water",
-			"elementType": "all",
-			"stylers": {
-				"color": "#021019"
-			}
-		},
-		{
-			"featureType": "highway",
-			"elementType": "geometry.fill",
-			"stylers": {
-				"color": "#000000"
-			}
-		},
-		{
-			"featureType": "highway",
-			"elementType": "geometry.stroke",
-			"stylers": {
-				"color": "#147a92"
-			}
-		},
-		{
-			"featureType": "arterial",
-			"elementType": "geometry.fill",
-			"stylers": {
-				"color": "#000000"
-			}
-		},
-		{
-			"featureType": "arterial",
-			"elementType": "geometry.stroke",
-			"stylers": {
-				"color": "#0b3d51"
-			}
-		},
-		{
-			"featureType": "local",
-			"elementType": "geometry",
-			"stylers": {
-				"color": "#000000"
-			}
-		},
-		{
-			"featureType": "land",
-			"elementType": "all",
-			"stylers": {
-				"color": "#08304b"
-			}
-		},
-		{
-			"featureType": "railway",
-			"elementType": "geometry.fill",
-			"stylers": {
-				"color": "#000000"
-			}
-		},
-		{
-			"featureType": "railway",
-			"elementType": "geometry.stroke",
-			"stylers": {
-				"color": "#08304b"
-			}
-		},
-		{
-			"featureType": "subway",
-			"elementType": "geometry",
-			"stylers": {
-				"lightness": -70
-			}
-		},
-		{
-			"featureType": "building",
-			"elementType": "geometry.fill",
-			"stylers": {
-				"color": "#000000"
-			}
-		},
-		{
-			"featureType": "all",
-			"elementType": "labels.text.fill",
-			"stylers": {
-				"color": "#857f7f"
-			}
-		},
-		{
-			"featureType": "all",
-			"elementType": "labels.text.stroke",
-			"stylers": {
-				"color": "#000000"
-			}
-		},
-		{
-			"featureType": "building",
-			"elementType": "geometry",
-			"stylers": {
-				"color": "#022338"
-			}
-		},
-		{
-			"featureType": "green",
-			"elementType": "geometry",
-			"stylers": {
-				"color": "#062032"
-			}
-		},
-		{
-			"featureType": "boundary",
-			"elementType": "all",
-			"stylers": {
-				"color": "#1e1c1c"
-			}
-		},
-		{
-			"featureType": "manmade",
-			"elementType": "geometry",
-			"stylers": {
-				"color": "#022338"
-			}
-		},
-		{
-			"featureType": "poi",
-			"elementType": "all",
-			"stylers": {
-				"visibility": "off"
-			}
-		},
-		{
-			"featureType": "all",
-			"elementType": "labels.icon",
-			"stylers": {
-				"visibility": "off"
-			}
-		},
-		{
-			"featureType": "all",
-			"elementType": "labels.text.fill",
-			"stylers": {
-				"color": "#2da0c6",
-				"visibility": "on"
-			}
-		}
-	]
-	map.setMapStyle({
-		styleJson: data
-	});
+    });
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(102.728547, 25.043682);
+    map.centerAndZoom(point, 15);
+    map.enableScrollWheelZoom(); //启用鼠标滚轮放大缩小
+    var mapStyle = {
+        style: "dark" //设置地图风格为高端黑
+    }
+    var data = [{
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": {
+            "color": "#021019"
+        }
+    },
+    {
+        "featureType": "highway",
+        "elementType": "geometry.fill",
+        "stylers": {
+            "color": "#000000"
+        }
+    },
+    {
+        "featureType": "highway",
+        "elementType": "geometry.stroke",
+        "stylers": {
+            "color": "#147a92"
+        }
+    },
+    {
+        "featureType": "arterial",
+        "elementType": "geometry.fill",
+        "stylers": {
+            "color": "#000000"
+        }
+    },
+    {
+        "featureType": "arterial",
+        "elementType": "geometry.stroke",
+        "stylers": {
+            "color": "#0b3d51"
+        }
+    },
+    {
+        "featureType": "local",
+        "elementType": "geometry",
+        "stylers": {
+            "color": "#000000"
+        }
+    },
+    {
+        "featureType": "land",
+        "elementType": "all",
+        "stylers": {
+            "color": "#08304b"
+        }
+    },
+    {
+        "featureType": "railway",
+        "elementType": "geometry.fill",
+        "stylers": {
+            "color": "#000000"
+        }
+    },
+    {
+        "featureType": "railway",
+        "elementType": "geometry.stroke",
+        "stylers": {
+            "color": "#08304b"
+        }
+    },
+    {
+        "featureType": "subway",
+        "elementType": "geometry",
+        "stylers": {
+            "lightness": -70
+        }
+    },
+    {
+        "featureType": "building",
+        "elementType": "geometry.fill",
+        "stylers": {
+            "color": "#000000"
+        }
+    },
+    {
+        "featureType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": {
+            "color": "#857f7f"
+        }
+    },
+    {
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
+        "stylers": {
+            "color": "#000000"
+        }
+    },
+    {
+        "featureType": "building",
+        "elementType": "geometry",
+        "stylers": {
+            "color": "#022338"
+        }
+    },
+    {
+        "featureType": "green",
+        "elementType": "geometry",
+        "stylers": {
+            "color": "#062032"
+        }
+    },
+    {
+        "featureType": "boundary",
+        "elementType": "all",
+        "stylers": {
+            "color": "#1e1c1c"
+        }
+    },
+    {
+        "featureType": "manmade",
+        "elementType": "geometry",
+        "stylers": {
+            "color": "#022338"
+        }
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": {
+            "visibility": "off"
+        }
+    },
+    {
+        "featureType": "all",
+        "elementType": "labels.icon",
+        "stylers": {
+            "visibility": "off"
+        }
+    },
+    {
+        "featureType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": {
+            "color": "#2da0c6",
+            "visibility": "on"
+        }
+    }
+    ]
+    map.setMapStyle({
+        styleJson: data
+    });
 
-	function handelAddMarker(pt, url) {
-		var myIcon = new BMap.Icon(url, new BMap.Size(36, 36));
-		var marker2 = new BMap.Marker(pt, {
-			icon: myIcon
-		}); // 创建标注
-		map.addOverlay(marker2);
-	}
-	handelAddMarker(new BMap.Point(102.717249, 25.043926), "./img/无人机.png");
-	handelAddMarker(new BMap.Point(102.736389, 25.043435), "./img/无人机.png");
-	var json_data = [
-		[102.715239, 25.044353],
-		[102.719749, 25.043919],
-		[102.718617, 25.04513],
-		[102.735955, 25.04526],
-		[102.736955, 25.04516],
-		[102.733676, 25.045627],
-		[102.738389, 25.043553]
-	];
-	var pointArray = new Array();
-	for(var i = 0; i < json_data.length; i++) {
-		var marker = new BMap.Marker(new BMap.Point(json_data[i][0], json_data[i][1])); // 创建点
-		map.addOverlay(marker); //增加点
-		pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
-		marker.addEventListener("click", attribute);
-	}
+    function handelAddMarker(pt, url) {
+        var myIcon = new BMap.Icon(url, new BMap.Size(36, 36));
+        var marker2 = new BMap.Marker(pt, {
+            icon: myIcon
+        }); // 创建标注
+        map.addOverlay(marker2);
+    }
 
-	//让所有点在视野范围内
-	map.setViewport(pointArray);
-	//获取覆盖物位置
-	function attribute(e) {
-		var p = e.target;
-		$("#myModal").modal("show");
-		//$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影
-		$(".modal-backdrop").removeClass("modal-backdrop fade in");
-	}
+    function test(data) {
+        alert(JSON.stringify(data));
+    }
+    handelAddMarker(new BMap.Point(102.717249, 25.043926), "./img/无人机.png");
+    handelAddMarker(new BMap.Point(102.736389, 25.043435), "./img/无人机.png");
 
-	/**
-	 *根据等级显示闪烁坐标点 
-	 */
-	//定义自定义覆盖物的构造函数  
-	function ComplexCustomOverlay(point) {
-		this._point = point;
+    var json_data = [
+        [102.715239, 25.044353],
+        [102.719749, 25.043919],
+        [102.718617, 25.04513],
+        [102.735955, 25.04526],
+        [102.736955, 25.04516],
+        [102.733676, 25.045627],
+        [102.738389, 25.043553]
+    ];
+    var pointArray = new Array();
+    for (var i = 0; i < json_data.length; i++) {
+        var marker = new BMap.Marker(new BMap.Point(json_data[i][0], json_data[i][1])); // 创建点
+        map.addOverlay(marker); //增加点
+        pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
+        marker.addEventListener("click", attribute);
+    }
 
-	}
-	// 继承API的BMap.Overlay  
-	ComplexCustomOverlay.prototype = new BMap.Overlay();
+    //让所有点在视野范围内
+    map.setViewport(pointArray);
+    //获取覆盖物位置
+    function attribute(e) {
+        var p = e.target;
+        $("#myModal").modal("show");
+        //$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影
+        $(".modal-backdrop").removeClass("modal-backdrop fade in");
+    }
 
-	// 实现初始化方法  
-	ComplexCustomOverlay.prototype.initialize = function(map) {
-		// 保存map对象实例 
-		this._map = map;
-		// 创建div元素，作为自定义覆盖物的容器  
-		var div = this._div = document.createElement("div");
-		div.style.position = "absolute";
-		div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+    /**
+     *根据等级显示闪烁坐标点
+     */
+    //定义自定义覆盖物的构造函数
+    function ComplexCustomOverlay(point) {
+        this._point = point;
 
-		// 可以根据参数设置元素外观
-		div.style.height = "35px";
-		div.style.width = "35px";
+    }
+    // 继承API的BMap.Overlay
+    ComplexCustomOverlay.prototype = new BMap.Overlay();
 
-		var arrow = this._arrow = document.createElement("img");
-		arrow.src = "http://www.yantiansf.cn/mapImage/1.gif";
-		arrow.style.width = "35px";
-		arrow.style.height = "35px";
-		arrow.style.top = "22px";
-		arrow.style.left = "10px";
-		div.appendChild(arrow);
+    // 实现初始化方法
+    ComplexCustomOverlay.prototype.initialize = function (map) {
+        // 保存map对象实例
+        this._map = map;
+        // 创建div元素，作为自定义覆盖物的容器
+        var div = this._div = document.createElement("div");
+        div.style.position = "absolute";
+        div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
 
-		// 将div添加到覆盖物容器中  
-		map.getPanes().labelPane.appendChild(div);
-		return div;
+        // 可以根据参数设置元素外观
+        div.style.height = "35px";
+        div.style.width = "35px";
 
-	}
+        var arrow = this._arrow = document.createElement("img");
+        arrow.src = "http://www.yantiansf.cn/mapImage/1.gif";
+        arrow.style.width = "35px";
+        arrow.style.height = "35px";
+        arrow.style.top = "22px";
+        arrow.style.left = "10px";
+        div.appendChild(arrow);
 
-	// 实现绘制方法
-	ComplexCustomOverlay.prototype.draw = function() {
-		var map = this._map;
-		var pixel = map.pointToOverlayPixel(this._point);
-		this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-		this._div.style.top = pixel.y - 30 + "px";
-	}
+        // 将div添加到覆盖物容器中
+        map.getPanes().labelPane.appendChild(div);
+        return div;
 
-	function add_overlay(point_long, point_lat) {
-		map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
-	}
-	var grade = 0;
-	if(grade == 1) {
-		add_overlay(102.715239, 25.044353);
-	}
-	//	map.addEventListener("click", function(e) {
-	//		alert(e.point.lng + "," + e.point.lat);
-	//	});
+    }
+
+    // 实现绘制方法
+    ComplexCustomOverlay.prototype.draw = function () {
+        var map = this._map;
+        var pixel = map.pointToOverlayPixel(this._point);
+        this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+        this._div.style.top = pixel.y - 30 + "px";
+    }
+
+    function add_overlay(point_long, point_lat) {
+        map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
+    }
+    var grade = 0;
+    if (grade == 1) {
+        add_overlay(102.715239, 25.044353);
+    }
+
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            data: [],
+        },
+        created: function () {
+            this.loadData(); //页面加载
+        },
+        methods: {
+            loadData: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/testlist.ashx',
+                    data: {
+
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        _this.data = data;
+                        test(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                    }
+                })
+            }
+        },
+    });
+    //	map.addEventListener("click", function(e) {
+    //		alert(e.point.lng + "," + e.point.lat);
+    //	});
 </script>

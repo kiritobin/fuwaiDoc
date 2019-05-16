@@ -36,7 +36,7 @@ namespace FuWai.DAO
         /// <summary>
         /// 通过病史编号（id）查询
         /// </summary>
-        /// <param name="droneid">无人机编号</param>
+        /// <param name="medicalhistoryid">病史编号</param>
         /// <returns>返回数据集合DataTable</returns>
         public DataTable SelecttMedicalhistoryByID(string medicalhistoryid)
         {
@@ -49,15 +49,16 @@ namespace FuWai.DAO
         /// <summary>
         /// 添加病史信息
         /// </summary>
-        /// <param name="medicalhistoryreason">病因</param>
+        /// <param name="medicalhistoryname">疾病名称</param>
         /// <param name="patientid">病人编号</param>
+        /// <param name="remark">备注</param>
         /// <returns></returns>
-        public int insert(string medicalhistoryreason, string patientid, string remark, string doctor)
+        public int insert(string medicalhistoryname, string patientid, string remark)
         {
-            string sql = "insert into T_Medicalhistory values(@medicalhistoryreason,@patientid,@remark,@doctor)";
+            string sql = "insert into T_Medicalhistory values(@medicalhistoryname,@patientid,@remark)";
 
-            string[] param = { "@medicalhistoryreason", "@patientid", "@remark", "@doctor" };
-            object[] value = { medicalhistoryreason, patientid, remark, doctor };
+            string[] param = { "@medicalhistoryname", "@patientid", "@remark"};
+            object[] value = { medicalhistoryname, patientid, remark };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
@@ -65,22 +66,24 @@ namespace FuWai.DAO
         /// <summary>
         /// 修改病史信息
         /// </summary>
-        /// <param name="medicalhistoryreason">病因</param>
+        /// <param name="medicalhistoryid">病史编号</param>
+        /// <param name="medicalhistoryname">疾病名称</param>
         /// <param name="patientid">病人编号</param>
+        /// <param name="remark">备注</param>
         /// <returns></returns>
-        public int update(string medicalhistoryreason, string medicalhistoryid, string remark,string doctor)
+        public int update(int medicalhistoryid,string medicalhistoryname, string patientid, string remark)
         {
-            string sql = "update T_Medicalhistory set medicalhistoryreason=@medicalhistoryreason,remark=@remark,doctor=@doctor where medicalhistoryid=@medicalhistoryid";
+            string sql = "update T_Medicalhistory set medicalhistoryname=@medicalhistoryname,remark=@remark,doctor=@doctor where medicalhistoryid=@medicalhistoryid";
 
-            string[] param = { "@medicalhistoryreason", "@medicalhistoryid", "@remark", "@doctor" };
-            object[] value = { medicalhistoryreason, medicalhistoryid, remark, doctor };
+            string[] param = { "@medicalhistoryid", "@medicalhistoryname", "@patientid", "@remark", "@doctor" };
+            object[] value = { medicalhistoryid, medicalhistoryname, patientid,remark };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
         /// <summary>
         /// 删除病史信息
         /// </summary>
-        /// <param name="medicalhistoryid">编号</param>
+        /// <param name="medicalhistoryid">病史编号</param>
         /// <returns></returns>
         public int delete(string medicalhistoryid)
         {

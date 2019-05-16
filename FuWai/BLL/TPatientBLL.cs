@@ -37,14 +37,16 @@ namespace FuWai.BLL
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
+        /// <param name="age">年龄</param>
+        /// <param name="addr">地址信息</param>
+        /// <param name="lat">x轴</param>
+        /// <param name="lng">y轴</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
-        /// <param name="weight">病人体重</param>
-        /// <param name="height">病人身高</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height, string headimg, string address, string xy)
+        public Boolean insert(string patientid, string patientname, string gender, int age, string addr, Double lat, Double lng, int diseasestatusid, string droneid)
         {
-            int row = td.insert(patientid, patientname, gender, diseasestatusid, droneid, weight, height, headimg, address, xy);
+            int row = td.insert(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid);
             if (row > 0)
             {
                 return true;
@@ -57,14 +59,16 @@ namespace FuWai.BLL
         /// <param name="patientid">编号</param>
         /// <param name="patientname">姓名</param>
         /// <param name="gender">性别</param>
+        /// <param name="age">年龄</param>
+        /// <param name="addr">地址信息</param>
+        /// <param name="lat">x轴</param>
+        /// <param name="lng">y轴</param>
         /// <param name="diseasestatusid">病情等级编号</param>
         /// <param name="droneid">无人机编号</param>
-        /// <param name="weight">病人体重</param>
-        /// <param name="height">病人身高</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean update(string patientid, string patientname, string gender, int diseasestatusid, string droneid, double weight, double height, string headimg, string address, string xy)
+        public Boolean update(string patientid, string patientname, string gender, int age, string addr, Double lat, Double lng, int diseasestatusid, string droneid)
         {
-            int row = td.update(patientid, patientname, gender, diseasestatusid, droneid, weight, height, headimg, address, xy);
+            int row = td.update(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid);
             if (row > 0)
             {
                 return true;

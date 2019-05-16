@@ -685,6 +685,8 @@
     <Content Include="action\TUsedrug.ashx" />
     <Content Include="action\TOperation.ashx" />
     <Content Include="action\VPatientUsedrug.ashx" />
+    <Content Include="action\TDiagnose.ashx" />
+    <Content Include="action\VPatientDiagnose.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -721,6 +723,9 @@
     </Compile>
     <Compile Include="action\TCheck.ashx.cs">
       <DependentUpon>TCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TDiagnose.ashx.cs">
+      <DependentUpon>TDiagnose.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\TDiseasestatus.ashx.cs">
       <DependentUpon>TDiseasestatus.ashx</DependentUpon>
@@ -774,6 +779,9 @@
     <Compile Include="action\VPatientCheck.ashx.cs">
       <DependentUpon>VPatientCheck.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\VPatientDiagnose.ashx.cs">
+      <DependentUpon>VPatientDiagnose.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VPatientTreatment.ashx.cs">
       <DependentUpon>VPatientTreatment.ashx</DependentUpon>
     </Compile>
@@ -783,6 +791,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TCheckBLL.cs" />
+    <Compile Include="BLL\TDiagnoseBLL.cs" />
     <Compile Include="BLL\TDiseasestatusBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
@@ -797,11 +806,13 @@
     <Compile Include="BLL\VMedicalHistoryBLL.cs" />
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VPatientCheckBLL.cs" />
+    <Compile Include="BLL\VPatientDiagnoseBLL.cs" />
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="BLL\VPatientUsedrugBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TOperationDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
+    <Compile Include="DAO\TDiagnoseDAO.cs" />
     <Compile Include="DAO\TDiseasestatusDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />
@@ -815,6 +826,7 @@
     <Compile Include="DAO\VMedicalHistoryDAO.cs" />
     <Compile Include="DAO\VPatientCheckDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
+    <Compile Include="DAO\VPatientDiagnoseDAO.cs" />
     <Compile Include="DAO\VPatientTreatmentDAO.cs" />
     <Compile Include="DAO\VPatientUsedrugDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
