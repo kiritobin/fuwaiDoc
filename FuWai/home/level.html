@@ -1,0 +1,352 @@
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			body,
+			html,
+			#allmap {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				font-family: "微软雅黑";
+			}
+		</style>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=notj5jZfhhHQvej1zwAkF1V7pU4jGtY7"></script>
+		<title>阜外医院</title>
+		<style>
+			#content {
+				position: absolute;
+				width: 100%;
+				bottom: 0px;
+				text-align: center;
+				z-index: 2;
+				overflow: hidden;
+			}
+			
+			.modal-content {
+				background-color: rgba(16,78,139, 0.7);
+				height: 250px;
+			}
+			
+			span {
+				color: white;
+			}
+			table{
+				color: white;
+			}
+			
+		</style>
+
+	</head>
+
+	<body>
+		<div id="allmap"></div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+			<div id="content">
+				<div class="modal-content">
+					<div class="container" style="margin-bottom:0;border: none solid #ddd;border-radius: 3px">
+						<div class="row clearfix">
+							<div class="col-md-12 column">
+								<div class="row clearfix">
+									<div class="col-md-3 column" style="margin-top:18px">
+										<table class="table table-bordered table-condensed">
+											<thead>
+												<tr>
+													<th colspan="2">
+														<span>基本信息</span>
+														<img src="img/av1.png" alt="" style="height:100px;width:100px;margin-left: 60px;">
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<span>编号</span>
+													</td>
+													<td>
+														<span>001</span>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<span>姓名</span>
+													</td>
+													<td>
+														<span>李毅</span>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<span>性别</span>
+													</td>
+													<td>
+														<span>男</span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="col-md-6 column" style="margin-top:10px">
+										<div class="tabbable" id="tabs-902637">
+
+											<ul id="myTab" class="nav nav-tabs" style="margin-bottom: 10px;">
+												<li class="active">
+													<a href="#panel-0 " data-toggle="tab"><span style="color: #000;">病史</span></a>
+												</li>
+												<li>
+													<a href="#panel-01" data-toggle="tab"><span style="color: #000;">治疗</span></a>
+												</li>
+												<li>
+													<a href="#panel-02" data-toggle="tab"><span style="color: #000;">检查</span></a>
+												</li>
+												<li>
+													<a href="#panel-03" data-toggle="tab"><span style="color: #000;">联系人</span></a>
+												</li>
+											</ul>
+											<div class="tab-content">
+												<div class="tab-pane active" id="panel-0">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>病因</th>
+																<th>诊断医师</th>
+																<th>备注</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>心脏休克</td>
+																<td>二</td>
+																<td>情绪激动</td>
+															</tr>
+															<tr>
+																<td>心律衰竭</td>
+																<td>一</td>
+																<td>高血压性心脏病</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane" id="panel-01">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>开始时间</th>
+																<th>结束时间</th>
+																<th>治疗药品</th>
+																<th>主治医师</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>2019-5-12</td>
+																<td>2019-5-13</td>
+																<td>34</td>
+																<td>45</td>
+															</tr>
+															<tr>
+																<td>2019-5-14</td>
+																<td>2019-5-15</td>
+																<td>36</td>
+																<td>5</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane" id="panel-02">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>血压</th>
+																<th>体温</th>
+																<th>检查日期</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>80/120</td>
+																<td>37.5</td>
+																<td>2019-4-15</td>
+															</tr>
+															<tr>
+																<td>83/126</td>
+																<td>36</td>
+																<td>2019-4-15</td>
+															</tr>
+															<tr>
+																<td>82/122</td>
+																<td>36.7</td>
+																<td>2019-5-15</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane" id="panel-03">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>编号</th>
+																<th>姓名</th>
+																<th>关系</th>
+																<th>联系方式</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>1</td>
+																<td>赵广益</td>
+																<td>父亲</td>
+																<td>18388596667，18008818180</td>
+															</tr>
+															<tr>
+																<td>2</td>
+																<td>王菲</td>
+																<td>母亲</td>
+																<td>18888596664</td>
+															</tr>
+															<tr>
+																<td>3</td>
+																<td>紫星</td>
+																<td>哥哥</td>
+																<td>18345596664</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 column" style="margin-top:5px">
+										<h3>
+										<span>实时心电图</span>
+									</h3>
+										<p>
+											<img src="img/心电图02.png" alt="" style="height:180px;width:340px">
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+	</body>
+
+</html>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#myModal").modal("hide");
+
+	});
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(102.728547, 25.043682);
+	map.centerAndZoom(point, 15);
+	map.enableScrollWheelZoom(); //启用鼠标滚轮放大缩小
+	var mapStyle = {
+		style: "dark" //设置地图风格为高端黑					
+	}
+	map.setMapStyle(mapStyle);
+
+	function handelAddMarker(pt, url) {
+		var myIcon = new BMap.Icon(url, new BMap.Size(36, 36));
+		var marker2 = new BMap.Marker(pt, {
+			icon: myIcon
+		}); // 创建标注
+		map.addOverlay(marker2);
+	}
+	handelAddMarker(new BMap.Point(102.717249, 25.043926), "./img/无人机.png");
+	handelAddMarker(new BMap.Point(102.736389, 25.043435), "./img/无人机.png");
+	var json_data = [
+		[102.715239, 25.044353],
+		[102.719749, 25.043919],
+		[102.718617, 25.04513],
+		[102.735955, 25.04526],
+		[102.736955, 25.04516],
+		[102.733676, 25.045627],
+		[102.738389, 25.043553]
+	];
+	var pointArray = new Array();
+	for(var i = 0; i < json_data.length; i++) {
+		var marker = new BMap.Marker(new BMap.Point(json_data[i][0], json_data[i][1])); // 创建点
+		map.addOverlay(marker); //增加点
+		pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
+		marker.addEventListener("click", attribute);
+	}
+
+	//让所有点在视野范围内
+	map.setViewport(pointArray);
+	//获取覆盖物位置
+	function attribute(e) {
+		var p = e.target;
+		$("#myModal").modal("show");
+		//$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影
+		$(".modal-backdrop").removeClass("modal-backdrop fade in");
+	}
+
+	/**
+	 *根据等级显示闪烁坐标点 
+	 */
+	//定义自定义覆盖物的构造函数  
+	function ComplexCustomOverlay(point) {
+		this._point = point;
+
+	}
+	// 继承API的BMap.Overlay  
+	ComplexCustomOverlay.prototype = new BMap.Overlay();
+
+	// 实现初始化方法  
+	ComplexCustomOverlay.prototype.initialize = function(map) {
+		// 保存map对象实例 
+		this._map = map;
+		// 创建div元素，作为自定义覆盖物的容器  
+		var div = this._div = document.createElement("div");
+		div.style.position = "absolute";
+		div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+
+		// 可以根据参数设置元素外观
+		div.style.height = "35px";
+		div.style.width = "35px";
+
+		var arrow = this._arrow = document.createElement("img");
+		arrow.src = "http://www.yantiansf.cn/mapImage/1.gif";
+		arrow.style.width = "35px";
+		arrow.style.height = "35px";
+		arrow.style.top = "22px";
+		arrow.style.left = "10px";
+		div.appendChild(arrow);
+
+		// 将div添加到覆盖物容器中  
+		map.getPanes().labelPane.appendChild(div);
+		return div;
+
+	}
+
+	// 实现绘制方法
+	ComplexCustomOverlay.prototype.draw = function() {
+		var map = this._map;
+		var pixel = map.pointToOverlayPixel(this._point);
+		this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+		this._div.style.top = pixel.y - 30 + "px";
+	}
+
+	function add_overlay(point_long, point_lat) {
+		map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
+	}
+	var grade = 0;
+	if(grade == 1) {
+		add_overlay(102.715239, 25.044353);
+	}
+</script>

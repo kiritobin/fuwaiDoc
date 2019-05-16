@@ -78,16 +78,23 @@
     <Content Include="home\css\bootstrap.min.css" />
     <Content Include="home\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="home\css\style.css" />
+    <Content Include="css\sweet-alert.css" />
     <Content Include="home\drone.html" />
     <Content Include="home\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="home\guardian.html" />
     <Content Include="home\guardiantel.html" />
     <Content Include="home\img\av1.png" />
+    <Content Include="home\img\心电图.png" />
+    <Content Include="home\img\心电图02.png" />
+    <Content Include="home\img\无人机.png" />
     <Content Include="home\index.html" />
     <Content Include="home\js\bootstrap.js" />
     <Content Include="home\js\bootstrap.min.js" />
     <Content Include="home\js\jquery-2.1.1.min.js" />
     <Content Include="home\js\scripts.js" />
+    <Content Include="home\level.html" />
+    <Content Include="home\map.html" />
+    <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
     <Content Include="home\plugins\bootstrap-datepicker\bootstrap-datepicker.css" />
@@ -589,11 +596,10 @@
     <Content Include="home\record.html" />
     <Content Include="home\medicalhistory.html" />
     <Content Include="js\ajaxfileupload.js" />
+    <Content Include="tanc.html" />
     <Content Include="user\4.jpg" />
     <Content Include="user\9.jpg" />
     <Content Include="user\2.jpg" />
-    <Content Include="标注点.html" />
-    <Content Include="闪烁.html" />
     <Content Include="action\TPContact.ashx" />
     <Content Include="action\TTreatment.ashx" />
     <Content Include="action\VPatientCheck.ashx" />
@@ -674,6 +680,9 @@
     <Content Include="home\plugins\weather-icons\font\weathericons-regular-webfont.ttf" />
     <Content Include="home\plugins\weather-icons\font\weathericons-regular-webfont.woff" />
     <Content Include="home\plugins\weather-icons\font\WeatherIcons-Regular.otf" />
+    <Content Include="action\testlist.ashx" />
+    <Content Include="action\map.ashx" />
+    <Content Include="action\TDiagnose.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -702,11 +711,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\map.ashx.cs">
+      <DependentUpon>map.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\PatientInfo.ashx.cs">
       <DependentUpon>PatientInfo.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\TCheck.ashx.cs">
       <DependentUpon>TCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\TDiagnose.ashx.cs">
+      <DependentUpon>TDiagnose.ashx</DependentUpon>
     </Compile>
     <Compile Include="action\TDiseasestatus.ashx.cs">
       <DependentUpon>TDiseasestatus.ashx</DependentUpon>
@@ -717,6 +732,10 @@
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\testlist.ashx.cs">
+      <DependentUpon>testlist.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="action\testmodel.cs" />
     <Compile Include="action\TGcontact.ashx.cs">
       <DependentUpon>TGcontact.ashx</DependentUpon>
     </Compile>
@@ -756,6 +775,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\RSACrypt.cs" />
     <Compile Include="BLL\TCheckBLL.cs" />
+    <Compile Include="BLL\TDiagnoseBLL.cs" />
     <Compile Include="BLL\TDiseasestatusBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
@@ -771,6 +791,7 @@
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
+    <Compile Include="DAO\TDiagnoseDAO.cs" />
     <Compile Include="DAO\TDiseasestatusDAO.cs" />
     <Compile Include="DAO\TDroneDAO.cs" />
     <Compile Include="DAO\TGcontactDAO.cs" />

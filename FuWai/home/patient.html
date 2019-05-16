@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>阜外医院</title>
     <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/sweet-alert.css" />
     <style>
         img{
             width:30px;
@@ -18,13 +19,13 @@
     <div class="container body-content">
         <h2></h2>
         <div class="row" style="height:600px">
-            <div class="col-md-3" style="height: 100%">
+            <!--<div class="col-md-2" style="height: 100%">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#">病人信息管理</a></li>
                     <li><a href="drone.html">无人机管理</a></li>
                 </ul>
-            </div>
-            <div class="col-md-9">
+            </div>-->
+            <div class="col-md-12">
                 <div id="test" class="form-group">
                     <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
                             data-target="#addModal" id="search" @click="search()">
@@ -251,6 +252,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/ajaxfileupload.js"></script>
     <script src="vue.js"></script>
+    <script src="../js/sweet-alert.min.js"></script>
     <script>
         function add() {
             var patientid = $("#No").val();
@@ -265,7 +267,12 @@
             var xy = x + "," + y;
             var headimg = $("#changeimg")[0].src;
             if (patientid == "" || patientname == "" || gender == "" || droneid == "" || height == "" || weight == "" || address == "" || x == "" || y == "") {
-                alert("含有未填项");
+                swal({
+                    title: "含有未填项",
+                    type: "warning",
+                    confirmButtonText: "ok",
+                    allowOutsideClick: true,
+                });
             }
             else {
                 $.ajax({
@@ -286,24 +293,52 @@
                     dataType: 'text',
                     success: function (data) {
                         console.log(data);
-                        if ("添加成功") {
-                            alert("添加成功");
-                            window.location.reload();
+                        if (data == "添加成功") {
+                            swal({
+                                title: "添加成功",
+                                type: "success",
+                                confirmButtonText: "ok",
+                                allowOutsideClick: true,
+                            },
+                                function (isConfirm) {
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 100);
+                                });
                         }
                         else {
-                            alert("添加失败");
+                            swal({
+                                title: "添加失败!",
+                                type: "error",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: true,
+                            });
                         }
                     },
                     error: function (XMLHttpRequest, textStatus) { //请求失败
                         if (textStatus == 'timeout') {
                             var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                             xmlhttp.abort();
-                            alert("请求超时");
+                            swal({
+                                title: "请求超时!",
+                                type: "warning",
+                                confirmButtonText: "OK"
+                            });
                         } else if (textStatus == "error") {
-                            alert("服务器内部错误");
+                            //alert("服务器内部错误");
+                            swal({
+                                title: "服务器内部错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                         else if (textStatus == "parsererror") {
-                            alert("返回类型错误");
+                            //alert("返回类型错误");
+                            swal({
+                                title: "返回类型错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                     }
                 })
@@ -320,24 +355,59 @@
                 dataType: 'text',
                 success: function (data) {
                     console.log(data);
-                    if ("删除成功") {
-                        alert("删除成功");
-                        window.location.reload();
+                    if (data == "删除成功") {
+                        swal({
+                            title: "删除成功",
+                            type: "success",
+                            confirmButtonText: "ok",
+                            allowOutsideClick: true,
+                        }, function (isConfirm) {
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 100);
+                        });
+                    }
+                    else if (data =="删除失败，请先删除联系方式") {
+                        swal({
+                            title: "删除失败，请先删除联系方式",
+                            type: "error",
+                            confirmButtonText: "ok",
+                            allowOutsideClick: true,
+                        });
                     }
                     else {
-                        alert("删除失败");
+                        swal({
+                            title: "删除失败",
+                            type: "error",
+                            confirmButtonText: "ok",
+                            allowOutsideClick: true,
+                        });
                     }
                 },
                 error: function (XMLHttpRequest, textStatus) { //请求失败
                     if (textStatus == 'timeout') {
                         var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                         xmlhttp.abort();
-                        alert("请求超时");
+                        swal({
+                            title: "请求超时!",
+                            type: "warning",
+                            confirmButtonText: "OK"
+                        });
                     } else if (textStatus == "error") {
-                        alert("服务器内部错误");
+                        //alert("服务器内部错误");
+                        swal({
+                            title: "服务器内部错误!",
+                            type: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
                     else if (textStatus == "parsererror") {
-                        alert("返回类型错误");
+                        //alert("返回类型错误");
+                        swal({
+                            title: "返回类型错误!",
+                            type: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
                 }
             })
@@ -353,7 +423,12 @@
             var xy = $("#ex").val();
             var headimg = $("#echangeimg")[0].src;
             if (patientid == "" || patientname == "" || gender == "" || height == "" || weight == "" || droneid == "" || address == "") {
-                alert("含有未填项");
+                swal({
+                    title: "含有未填项",
+                    type: "warning",
+                    confirmButtonText: "ok",
+                    allowOutsideClick: true,
+                });
             }
             else {
                 $.ajax({
@@ -374,24 +449,51 @@
                     dataType: 'text',
                     success: function (data) {
                         console.log(data);
-                        if ("修改成功") {
-                            alert("修改成功");
-                            window.location.reload();
+                        if (data == "修改成功") {
+                            swal({
+                                title: "修改成功",
+                                type: "success",
+                                confirmButtonText: "ok",
+                                allowOutsideClick: true,
+                            }, function (isConfirm) {
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 100);
+                            });
                         }
                         else {
-                            alert("修改失败");
+                            swal({
+                                title: "修改失败",
+                                type: "error",
+                                confirmButtonText: "ok",
+                                allowOutsideClick: true,
+                            });
                         }
                     },
                     error: function (XMLHttpRequest, textStatus) { //请求失败
                         if (textStatus == 'timeout') {
                             var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                             xmlhttp.abort();
-                            alert("请求超时");
+                            swal({
+                                title: "请求超时!",
+                                type: "warning",
+                                confirmButtonText: "OK"
+                            });
                         } else if (textStatus == "error") {
-                            alert("服务器内部错误");
+                            //alert("服务器内部错误");
+                            swal({
+                                title: "服务器内部错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                         else if (textStatus == "parsererror") {
-                            alert("返回类型错误");
+                            //alert("返回类型错误");
+                            swal({
+                                title: "返回类型错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                     }
                 })
@@ -469,12 +571,26 @@
                         if (textStatus == 'timeout') {
                             var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                             xmlhttp.abort();
-                            alert("请求超时");
+                            swal({
+                                title: "请求超时!",
+                                type: "warning",
+                                confirmButtonText: "OK"
+                            });
                         } else if (textStatus == "error") {
-                            alert("服务器内部错误");
+                            //alert("服务器内部错误");
+                            swal({
+                                title: "服务器内部错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                         else if (textStatus == "parsererror") {
-                            alert("返回类型错误");
+                            //alert("返回类型错误");
+                            swal({
+                                title: "返回类型错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
                         }
                     }
                 })
@@ -611,12 +727,26 @@
                             if (textStatus == 'timeout') {
                                 var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                                 xmlhttp.abort();
-                                alert("请求超时");
+                                swal({
+                                    title: "请求超时!",
+                                    type: "warning",
+                                    confirmButtonText: "OK"
+                                });
                             } else if (textStatus == "error") {
-                                alert("服务器内部错误");
+                                //alert("服务器内部错误");
+                                swal({
+                                    title: "服务器内部错误!",
+                                    type: "error",
+                                    confirmButtonText: "OK"
+                                });
                             }
                             else if (textStatus == "parsererror") {
-                                alert("返回类型错误");
+                                //alert("返回类型错误");
+                                swal({
+                                    title: "返回类型错误!",
+                                    type: "error",
+                                    confirmButtonText: "OK"
+                                });
                             }
                         }
                     })

@@ -29,7 +29,7 @@ namespace FuWai.action
         private void loadDrop(HttpContext context)
         {
             String patientid = context.Request["patientid"];
-            String json = vmh.getDroneinfobypatientid(patientid);
+            String json = vmh.getinfobypatientid(patientid);
             context.Response.Write(json);
             context.Response.End();
 

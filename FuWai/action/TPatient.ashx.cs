@@ -97,17 +97,25 @@ namespace FuWai.action
         {
             String patientid = context.Request["patientid"];
 
-            if (tb.delete(patientid))
+            if (!tb.isdelete(patientid))
             {
-                context.Response.Write("删除成功");
-                context.Response.End();
+                if (tb.delete(patientid))
+                {
+                    context.Response.Write("删除成功");
+                    context.Response.End();
 
+                }
+                else
+                {
+                    context.Response.Write("删除失败");
+                    context.Response.End();
+                }
             }
-            else
-            {
-                context.Response.Write("删除失败");
+            else {
+                context.Response.Write("删除失败，请先删除联系方式");
                 context.Response.End();
             }
+            
         }
 
         public bool IsReusable

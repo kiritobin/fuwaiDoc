@@ -25,7 +25,7 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="patientid">病人编号</param>
         /// <returns>返回json</returns>
-        public String getDroneinfobydroneid(string patientid)
+        public String getinfobydroneid(string patientid)
         {
             return JsonHelper.ToJson(td.SelectPatientByID(patientid));
         }
@@ -84,6 +84,21 @@ namespace FuWai.BLL
         public Boolean delete(string patientid)
         {
             int row = td.delete(patientid);
+            if (row > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 删除病人信息判断是否有外键约束
+        /// </summary>
+        /// <param name="patientid">病人编号</param>
+        /// <returns></returns>
+        public Boolean isdelete(string patientid)
+        {
+            int row = td.isdelete(patientid);
             if (row > 0)
             {
                 return true;
