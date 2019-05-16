@@ -22,23 +22,26 @@ namespace FuWai.action
 
         public void test(HttpContext context)
         {
-            List<testmodel> tmlist = new List<testmodel>();
-            testmodel tm = new testmodel();
-            tm.Patientid = "0001";
-            tm.Level = "1";
-            tm.X = "198.7";
-            tm.Y = "63.7";
-            tmlist.Add(tm);
+            //List<testmodel> tmlist = new List<testmodel>();
+            //testmodel tm = new testmodel();
+            //tm.Patientid = "0001";
+            //tm.Level = "1";
+            //tm.X = "198.7";
+            //tm.Y = "63.7";
+            //tmlist.Add(tm);
 
-            testmodel tm1 = new testmodel();
-            tm1.Patientid = "0002";
-            tm1.Level = "1";
-            tm1.X = "19.4";
-            tm1.Y = "63.7";
-            tmlist.Add(tm1);
+            //testmodel tm1 = new testmodel();
+            //tm1.Patientid = "0002";
+            //tm1.Level = "1";
+            //tm1.X = "19.4";
+            //tm1.Y = "63.7";
+            //tmlist.Add(tm1);
 
-            String json = JsonSerializer(tmlist);
-            context.Response.Write(json);
+            //String json = JsonSerializer(tmlist);
+
+            string[,] values = { { "001", "1","198.7","63.7" }, { "002", "1", "19.4", "63.7" } };
+
+            context.Response.Write(values);
             context.Response.End();
 
         }
