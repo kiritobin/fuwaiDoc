@@ -33,9 +33,19 @@ namespace FuWai.action
             testmodel tm1 = new testmodel();
             tm1.Patientid = "0002";
             tm1.Level = "1";
-            tm1.X = "19.4";
-            tm1.Y = "63.7";
+            tm1.X = "102.719749";
+            tm1.Y = "25.043919";
             tmlist.Add(tm1);
+
+        //    [
+        //    [102.715239, 25.044353],
+        //    [102.719749, 25.043919],
+        //    [102.718617, 25.04513],
+        //    [102.735955, 25.04526],
+        //    [102.736955, 25.04516],
+        //    [102.733676, 25.045627],
+        //    [102.738389, 25.043553]
+        //    ];
 
             String json = JsonSerializer(tmlist);
 
@@ -45,7 +55,12 @@ namespace FuWai.action
             context.Response.End();
 
         }
-
+        /// <summary>
+        /// list转化为json（.net内部方法）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t">list对象</param>
+        /// <returns>json字符串</returns>
         public static string JsonSerializer<T>(T t)
         {
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));

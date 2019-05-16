@@ -30,6 +30,10 @@ namespace FuWai.action
             {
                 delete(context);
             }
+            else if (op == "bydroneid")
+            {
+                getDroneinfobydroneid(context);
+            }
         }
         TDroneBLL tb = new TDroneBLL();
 
@@ -45,11 +49,12 @@ namespace FuWai.action
             String droneid = context.Request["droneid"];
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
-            String xy = context.Request["xy"];
+            String lat = context.Request["lat"];
+            String lng = context.Request["lng"];
             int flycount = Convert.ToInt32(context.Request["flycount"]);
             int status = Convert.ToInt32(context.Request["status"]);
 
-            if (tb.insert(droneid, dronemodel, position, flycount, status,xy))
+            if (tb.insert(droneid, dronemodel, position, flycount, status, lat, lng))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -67,11 +72,12 @@ namespace FuWai.action
             String droneid = context.Request["droneid"];
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
-            String xy = context.Request["xy"];
+            String lat = context.Request["lat"];
+            String lng = context.Request["lng"];
             int flycount = Convert.ToInt32(context.Request["flycount"]);
             int status = Convert.ToInt32(context.Request["status"]);
 
-            if (tb.update(droneid, dronemodel, position, flycount, status,xy))
+            if (tb.update(droneid, dronemodel, position, flycount, status, lat, lng))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
@@ -100,6 +106,14 @@ namespace FuWai.action
             }
         }
 
+        private void getDroneinfobydroneid(HttpContext context)
+        {
+            String droneid = context.Request["droneid"];
+
+            String json = tb.getDroneinfobydroneid(droneid);
+            context.Response.Write(json);
+            context.Response.End();
+        }
         public bool IsReusable
         {
             get

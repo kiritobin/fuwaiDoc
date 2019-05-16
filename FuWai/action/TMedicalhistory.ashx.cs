@@ -51,12 +51,11 @@ namespace FuWai.action
         }
         private void insert(HttpContext context)
         {
-            String medicalhistoryreason = context.Request["medicalhistoryreason"];
+            String medicalhistoryname = context.Request["medicalhistoryname"];
             String patientid = context.Request["patientid"];
             String remark = context.Request["remark"];
-            String doctor = context.Request["doctor"];
 
-            if (medic.insert(medicalhistoryreason, patientid, remark, doctor))
+            if (medic.insert(medicalhistoryname, patientid, remark))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -71,12 +70,12 @@ namespace FuWai.action
 
         private void update(HttpContext context)
         {
-            String medicalhistoryreason = context.Request["medicalhistoryreason"];
-            String medicalhistoryid = context.Request["medicalhistoryid"];
+            int medicalhistoryid = Convert.ToInt32(context.Request["medicalhistoryid"]);
+            String medicalhistoryname = context.Request["medicalhistoryname"];
+            String patientid = context.Request["patientid"];
             String remark = context.Request["remark"];
-            String doctor = context.Request["doctor"];
 
-            if (medic.update(medicalhistoryreason, medicalhistoryid, remark, doctor))
+            if (medic.update(medicalhistoryid, medicalhistoryname, patientid, remark))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
