@@ -32,7 +32,7 @@ namespace FuWai.BLL
         /// <summary>
         /// 通过病史编号查询
         /// </summary>
-        /// <param name="droneid">无人机编号</param>
+        /// <param name="medicalhistoryid">病史编号</param>
         /// <returns>返回json</returns>
         public String getDroneinfobydroneid(string medicalhistoryid)
         {
@@ -42,12 +42,13 @@ namespace FuWai.BLL
         /// <summary>
         /// 添加病史信息
         /// </summary>
-        /// <param name="medicalhistoryreason">病因</param>
+        /// <param name="medicalhistoryname">疾病名称</param>
         /// <param name="patientid">病人编号</param>
+        /// <param name="remark">备注</param>
         /// <returns></returns>
-        public Boolean insert(string medicalhistoryreason, string patientid,string remark,string doctor)
+        public Boolean insert(string medicalhistoryname, string patientid, string remark)
         {
-            int row = td.insert(medicalhistoryreason, patientid, remark, doctor);
+            int row = td.insert(medicalhistoryname, patientid, remark);
             if (row > 0)
             {
                 return true;
@@ -58,12 +59,15 @@ namespace FuWai.BLL
         /// <summary>
         /// 修改病史信息
         /// </summary>
-        /// <param name="medicalhistoryreason">病因</param>
+        /// </summary>
+        /// <param name="medicalhistoryid">病史编号</param>
+        /// <param name="medicalhistoryname">疾病名称</param>
         /// <param name="patientid">病人编号</param>
+        /// <param name="remark">备注</param>
         /// <returns></returns>
-        public Boolean update(string medicalhistoryreason, string medicalhistoryid ,string remark, string doctor)
+        public Boolean update(int medicalhistoryid, string medicalhistoryname, string patientid, string remark)
         {
-            int row = td.update(medicalhistoryreason, medicalhistoryid, remark, doctor);
+            int row = td.update(medicalhistoryid, medicalhistoryname, patientid, remark);
             if (row > 0)
             {
                 return true;
@@ -74,7 +78,7 @@ namespace FuWai.BLL
         /// <summary>
         /// 删除病史信息
         /// </summary>
-        /// <param name="medicalhistoryid">编号</param>
+        /// <param name="medicalhistoryid">病史编号</param>
         /// <returns></returns>
         public Boolean delete(string medicalhistoryid)
         {

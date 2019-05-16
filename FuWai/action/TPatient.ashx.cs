@@ -49,15 +49,14 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String patientname = context.Request["patientname"];
             String gender = context.Request["gender"];
+            int age = Convert.ToInt32(context.Request["age"]);
+            String addr = context.Request["addr"];
+            Double lat = Convert.ToDouble(context.Request["lat"]);
+            Double lng = Convert.ToDouble(context.Request["lng"]);
             int diseasestatusid = 1;
-            String droneid = context.Request["droneid"];
-            Double weight= Convert.ToDouble(context.Request["weight"]);
-            Double height = Convert.ToDouble(context.Request["height"]);
-            String headimg = context.Request["headimg"];
-            String address = context.Request["address"];
-            String xy = context.Request["xy"];
+            String droneid = context.Request["droneid"];            
 
-            if (tb.insert(patientid, patientname, gender, diseasestatusid, droneid, weight, height, headimg, address, xy))
+            if (tb.insert(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();
@@ -75,15 +74,14 @@ namespace FuWai.action
             String patientid = context.Request["patientid"];
             String patientname = context.Request["patientname"];
             String gender = context.Request["gender"];
+            int age = Convert.ToInt32(context.Request["age"]);
+            String addr = context.Request["addr"];
+            Double lat = Convert.ToDouble(context.Request["lat"]);
+            Double lng = Convert.ToDouble(context.Request["lng"]);
             int diseasestatusid = 1;
             String droneid = context.Request["droneid"];
-            Double weight = Convert.ToDouble(context.Request["weight"]);
-            Double height = Convert.ToDouble(context.Request["height"]);
-            String headimg = context.Request["headimg"];
-            String address = context.Request["address"];
-            String xy = context.Request["xy"];
 
-            if (tb.update(patientid, patientname, gender, diseasestatusid, droneid, weight, height, headimg, address, xy))
+            if (tb.update(patientid, patientname, gender, age, addr, lat, lng, diseasestatusid, droneid))
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
