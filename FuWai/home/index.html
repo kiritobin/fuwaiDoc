@@ -80,60 +80,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="plugins/nanoscrollerjs/jquery.nanoscroller.min.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="vue.js"></script>
-    <script>
-        var vue = new Vue({
-            el: "#app",
-            data: {
-                data: [],
-            },
-            depart: {
-                depart: [],
-            },
-            patient: {
-                patient: [],
-            },
-            created: function () {
-                this.loadData(); //页面加载
-            },
-            methods: {
-                loadData: function () {
-                    var _this = this;
-                    $.ajax({
-                        type: 'Post',
-                        url: '../action/testlist.ashx',
-                        data: {
-                           
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data);
-                            //_this.data = data;
-                            //var doc = JSON.parse(data.doctor);
-                            //var part = JSON.parse(data.part);
-                            //var ptent = JSON.parse(data.patient);
-                            //_this.data = doc;
-                            //_this.depart = part;
-                            //_this.patient = ptent;
-                        },
-                        error: function (XMLHttpRequest, textStatus) { //请求失败
-                            if (textStatus == 'timeout') {
-                                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
-                                xmlhttp.abort();
-                                alert("请求超时");
-                            } else if (textStatus == "error") {
-                                alert("服务器内部错误");
-                            }
-                        }
-                    })
-                }
-            },
-        });
 
-        $(document).ready(function () {
-           
-        });
-    </script>
 </body>
 
 </html>
