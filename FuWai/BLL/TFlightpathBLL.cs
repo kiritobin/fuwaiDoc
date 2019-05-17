@@ -25,9 +25,9 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="flighttime">飞行时间</param>
         /// <returns>返回json</returns>
-        public String SelectFlightpathbytime(string flighttime)
+        public String SelectFlightpathbytime(string flighttime, string droneid)
         {
-            return JsonHelper.ToJson(td.SelectFlightpathbytime(flighttime));
+            return JsonHelper.ToJson(td.SelectFlightpathbytime(flighttime,droneid));
         }
 
 

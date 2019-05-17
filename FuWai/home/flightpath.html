@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>阜外医院</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/sweet-alert.css" />
+</head>
+
+<body>
+    <div class="container body-content">
+        <h2></h2>
+        <div class="row" style="height:600px">
+            <!--<div class="col-md-3" style="height: 100%">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="index.html">病人信息管理</a></li>
+                    <li><a href="drone.html">无人机管理</a></li>
+                </ul>
+            </div>-->
+            <div class="col-md-12">
+                <div id="test" class="form-group">
+                    <input type="text" value="" placeholder="按时间查询" id="key"/>
+                    <button class="btn btn-primary btn-sm addBox" data-toggle="modal"
+                            data-target="#addModal" @click="search">
+                        查询
+                    </button>
+                    <button class="btn btn-primary btn-sm addBox" onclick="javascript:history.back(-1)">
+                        返回
+                    </button>
+                    <div class="form-group">
+                        <table class="table table-bordered table-responsive table-striped">
+                            <tr>
+                                <th>时间</th>
+                                <th>坐标</th>
+                            </tr>
+                            <tr v-for="dataItem in arrayData | orderBy sortparam sorttype">
+                                <td>{{dataItem.flighttime}}</td>
+                                <td>{{dataItem.lng}},{{dataItem.lat}}</td>
+                            </tr>
+                        </table>
+                        <div class="pager" id="pager">
+                            <span class="form-inline">
+                                <select class="form-control" v-model="pagesize"
+                                        v-on:change="showPage(pageCurrent,$event,true)" number>
+                                    <option v-for="item in arrPageSize" value="{{item}}">{{item}}</option>
+                                </select>
+                            </span>
+                            <template v-for="item in pageCount+1">
+                                <span v-if="item==1" class="btn btn-default" v-on:click="showPage(1,$event)">
+                                    首页
+                                </span>
+                                <span v-if="item==1" class="btn btn-default"
+                                      v-on:click="showPage(pageCurrent-1,$event)">
+                                    上一页
+                                </span>
+                                <span v-if="item==1" class="btn btn-default" v-on:click="showPage(item,$event)">
+                                    {{item}}
+                                </span>
+                                <span v-if="item==1&&item<showPagesStart-1" class="btn btn-default disabled">
+                                    ...
+                                </span>
+                                <span v-if="item>1&&item<=pageCount-1&&item>=showPagesStart&&item<=showPageEnd&&item<=pageCount"
+                                      class="btn btn-default" v-on:click="showPage(item,$event)">
+                                    {{item}}
+                                </span>
+                                <span v-if="item==pageCount&&item>showPageEnd+1" class="btn btn-default disabled">
+                                    ...
+                                </span>
+                                <span v-if="item==pageCount&&item!=1" class="btn btn-default"
+                                      v-on:click="showPage(item,$event)">
+                                    {{item}}
+                                </span>
+                                <span v-if="item==pageCount" class="btn btn-default"
+                                      v-on:click="showPage(pageCurrent+1,$event)">
+                                    下一页
+                                </span>
+                                <span v-if="item==pageCount" class="btn btn-default"
+                                      v-on:click="showPage(pageCount,$event)">
+                                    尾页
+                                </span>
+                            </template>
+                            <span class="form-inline">
+                                <input class="pageIndex form-control" style="width:60px;text-align:center" type="text"
+                                       v-model="pageCurrent | onlyNumeric"
+                                       v-on:keyup.enter="showPage(pageCurrent,$event,true)" />
+                            </span>
+                            <span>{{pageCurrent}}/{{pageCount}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="vue.js"></script>
+    <script src="../js/sweet-alert.min.js"></script>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+
+        //只能输入正整数过滤器
+        Vue.filter('onlyNumeric', {
+            // model -> view
+            // 在更新 `<input>` 元素之前格式化值
+            read: function (val) {
+                return val;
+            },
+            // view -> model
+            // 在写回数据之前格式化值
+            write: function (val, oldVal) {
+                var number = +val.replace(/[^\d]/g, '')
+                return isNaN(number) ? 1 : parseFloat(number.toFixed(2))
+            }
+        })
+
+
+        var vue = new Vue({
+            el: "#test",
+            ready: function () {
+                var _this = this;
+                var droneid = GetQueryString("id");
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/Flightpath.ashx',
+                    data: {
+                        droneid: droneid,
+                        op: "bydroneid"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        //getData(data);
+                        _this.arrayDataAll = data;
+                        _this.totalCount = _this.arrayDataAll.length;
+                        _this.showPage(_this.pageCurrent, null, true);
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            swal({
+                                title: "请求超时!",
+                                type: "warning",
+                                confirmButtonText: "OK"
+                            });
+                        } else if (textStatus == "error") {
+                            //alert("服务器内部错误");
+                            swal({
+                                title: "服务器内部错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
+                        }
+                        else if (textStatus == "parsererror") {
+                            //alert("返回类型错误");
+                            swal({
+                                title: "返回类型错误!",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
+                        }
+                    }
+                })
+            },
+            data: {
+                //总项目数
+                totalCount: 200,
+                //分页数
+                arrPageSize: [5, 10, 20, 30, 40],
+                //当前分页数
+                pageCount: 20,
+                //当前页面
+                pageCurrent: 1,
+                //分页大小
+                pagesize: 10,
+                //显示分页按钮数
+                showPages: 11,
+                //开始显示的分页按钮
+                showPagesStart: 1,
+                //结束显示的分页按钮
+                showPageEnd: 100,
+                //所有数据
+                arrayDataAll: [],
+                //分页数据
+                arrayData: [],
+                //排序字段
+                sortparam: "",
+                //排序方式
+                sorttype: 1
+
+            },
+            methods: {
+                //分页方法
+                showPage: function (pageIndex, $event, forceRefresh) {
+                    if (pageIndex > 0) {
+                        if (pageIndex > this.pageCount) {
+                            pageIndex = this.pageCount;
+                        }
+
+                        //判断数据是否需要更新
+                        var currentPageCount = Math.ceil(this.totalCount / this.pagesize);
+                        if (currentPageCount != this.pageCount) {
+                            pageIndex = 1;
+                            this.pageCount = currentPageCount;
+                        }
+                        else if (this.pageCurrent == pageIndex && currentPageCount == this.pageCount && typeof (forceRefresh) == "undefined") {
+                            console.log("not refresh");
+                            return;
+                        }
+
+                        //处理分页点中样式
+                        var buttons = $("#pager").find("span");
+                        for (var i = 0; i < buttons.length; i++) {
+                            if (buttons.eq(i).html() != pageIndex) {
+                                buttons.eq(i).removeClass("active");
+                            }
+                            else {
+                                buttons.eq(i).addClass("active");
+                            }
+                        }
+
+                        //从所有数据中去分页数据
+                        var newPageInfo = [];
+                        for (var i = 0; i < this.pagesize; i++) {
+                            var index = i + (pageIndex - 1) * this.pagesize;
+                            if (index > this.totalCount - 1) break;
+                            newPageInfo[newPageInfo.length] = this.arrayDataAll[index];
+                        }
+                        this.pageCurrent = pageIndex;
+                        this.arrayData = newPageInfo;
+
+                        //计算分页按钮数据
+                        if (this.pageCount > this.showPages) {
+                            if (pageIndex <= (this.showPages - 1) / 2) {
+                                this.showPagesStart = 1;
+                                this.showPageEnd = this.showPages - 1;
+                                console.log("showPage1")
+                            }
+                            else if (pageIndex >= this.pageCount - (this.showPages - 3) / 2) {
+                                this.showPagesStart = this.pageCount - this.showPages + 2;
+                                this.showPageEnd = this.pageCount;
+                                console.log("showPage2")
+                            }
+                            else {
+                                console.log("showPage3")
+                                this.showPagesStart = pageIndex - (this.showPages - 3) / 2;
+                                this.showPageEnd = pageIndex + (this.showPages - 3) / 2;
+                            }
+                        }
+                        console.log("showPagesStart:" + this.showPagesStart + ",showPageEnd:" + this.showPageEnd + ",pageIndex:" + pageIndex);
+                    }
+
+                }, sortBy: function (sortparam) {
+                    this.sortparam = sortparam;
+                    this.sorttype = this.sorttype == -1 ? 1 : -1;
+                },
+                search: function () {
+                    var key = $("#key").val();
+                    var _this = this;
+                    var droneid = GetQueryString("id");
+                    if (key=="") {
+                        swal({
+                            title: "含有未填项目!",
+                            type: "warning",
+                            confirmButtonText: "OK",
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type: 'Post',
+                            url: '../action/Flightpath.ashx',
+                            data: {
+                                droneid: droneid,
+                                flighttime: key,
+                                op: "byteim"
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data);
+                                //getData(data);
+                                _this.arrayDataAll = data;
+                                _this.totalCount = _this.arrayDataAll.length;
+                                _this.showPage(_this.pageCurrent, null, true);
+                            },
+                            error: function (XMLHttpRequest, textStatus) { //请求失败
+                                if (textStatus == 'timeout') {
+                                    var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                                    xmlhttp.abort();
+                                    swal({
+                                        title: "请求超时!",
+                                        type: "warning",
+                                        confirmButtonText: "OK"
+                                    });
+                                } else if (textStatus == "error") {
+                                    //alert("服务器内部错误");
+                                    swal({
+                                        title: "服务器内部错误!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                    });
+                                }
+                                else if (textStatus == "parsererror") {
+                                    //alert("返回类型错误");
+                                    swal({
+                                        title: "返回类型错误!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                    });
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        });
+        vue.$watch("arrayData", function (value) {
+            // console.log("==============arrayData begin==============");
+            // console.log(value==vue.arrayData);
+            // console.log(vue.arrayData);
+            // console.log("==============arrayData end==============");
+        });
+    </script>
+</body>
+
+</html>

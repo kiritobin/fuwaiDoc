@@ -29,11 +29,11 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="flighttime">飞行时间</param>
         /// <returns>DataTable</returns>
-        public DataTable SelectFlightpathbytime(string flighttime)
+        public DataTable SelectFlightpathbytime(string flighttime,string droneid)
         {
-            string sql = "select * from T_Flightpath where flighttime=@flighttime";
-            string[] param = { "@flighttime" };
-            object[] value = { flighttime };
+            string sql = "select * from T_Flightpath where droneid=@droneid and flighttime=@flighttime";
+            string[] param = { "@flighttime" , "@droneid" };
+            object[] value = { flighttime,droneid };
             return db.FillDataSet(sql, param, value).Tables[0];
         }
 

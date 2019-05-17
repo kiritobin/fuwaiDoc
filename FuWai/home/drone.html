@@ -41,11 +41,12 @@
                                 <td>{{dataItem.dronemodel}}</td>
                                 <td>{{dataItem.position}}</td>
                                 <td>{{dataItem.flycount}}</td>
-                                <td>{{dataItem.xy}}</td>
+                                <td>{{dataItem.lng}},{{dataItem.lat}}</td>
                                 <td>{{dataItem.status}}</td>
                                 <td>
                                     <button @click="del(dataItem.droneid)" class="btn btn-danger btn-sm">删除</button>
                                     <button @click="edit(dataItem)" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>
+                                    <a v-bind:href="['flightpath.html?id='+dataItem.droneid]"><div class="btn btn-primary btn-sm">飞行记录</div></a>
                                 </td>
                             </tr>
                         </table>

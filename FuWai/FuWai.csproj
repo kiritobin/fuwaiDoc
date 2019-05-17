@@ -96,6 +96,7 @@
     <Content Include="home\js\scripts.js" />
     <Content Include="home\js\心电图.js" />
     <Content Include="home\map.html" />
+    <Content Include="home\flightpath.html" />
     <Content Include="home\userdrug.html" />
     <Content Include="home\level.html" />
     <Content Include="js\sweet-alert.min.js" />
