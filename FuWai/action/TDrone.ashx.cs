@@ -72,8 +72,8 @@ namespace FuWai.action
             String droneid = context.Request["droneid"];
             String dronemodel = context.Request["dronemodel"];
             String position = context.Request["position"];
-            String lat = context.Request["lat"];
-            String lng = context.Request["lng"];
+            double lat = Convert.ToDouble(context.Request["lat"]);
+            double lng = Convert.ToDouble(context.Request["lng"]);
             int flycount = Convert.ToInt32(context.Request["flycount"]);
             int status = Convert.ToInt32(context.Request["status"]);
 
