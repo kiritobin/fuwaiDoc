@@ -44,9 +44,10 @@ namespace FuWai.action
 
         private void SelectFlightpathbytime(HttpContext context)
         {
-            String flightpath = context.Request["flightpath"];
+            String flighttime = context.Request["flighttime"];
+            String droneid = context.Request["droneid"];
 
-            String json = tb.SelectFlightpathbytime(flightpath);
+            String json = tb.SelectFlightpathbytime(flighttime, droneid);
             context.Response.Write(json);
             context.Response.End();
 

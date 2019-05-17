@@ -381,7 +381,7 @@
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");
 	var point = new BMap.Point(102.665457, 25.105624);
-	map.centerAndZoom(point, 6);
+	map.centerAndZoom(point, 18);
 	map.enableScrollWheelZoom(); //启用鼠标滚轮放大缩小
 	var mapStyle = {
 		style: "dark" //设置地图风格为高端黑					
@@ -557,7 +557,7 @@
             pointArray[i] = new BMap.Point(data[i].lng, data[i].lat);
             handelAddMarker(new BMap.Point(data[i].lng, data[i].lat), "./img/人物-正常.png");
         }
-        map.setViewport(pointArray);
+        //map.setViewport(pointArray);
     }
 
 	function handelAddDroneMarker(pt, url) {
@@ -582,7 +582,7 @@
             pointArray[i] = new BMap.Point(data[i].lng, data[i].lat);
             handelAddDroneMarker(new BMap.Point(data[i].lng, data[i].lat), "./img/无人机.png");
         }
-        map.setViewport(pointArray);
+        //map.setViewport(pointArray);
     }
 
 
@@ -646,7 +646,40 @@
 		var pixel = map.pointToOverlayPixel(this._point);
 		this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
 		this._div.style.top = pixel.y - 20 + "px";
-	}
+    }
+
+    function showdata() {
+        $.ajax({
+            type: 'Post',
+            url: '../action/map.ashx',
+            data: {
+                op: "load"
+            },
+            dataType: 'text',
+            success: function (data) {
+                var json = [];
+                json = data.split('|-|');
+                var data1 = JSON.parse(json[0]);
+                var data2 = JSON.parse(json[1]);
+                map.clearOverlays();
+                showpatient(data1);
+                showdrone(data2);
+            },
+            error: function (XMLHttpRequest, textStatus) { //请求失败
+                if (textStatus == 'timeout') {
+                    var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                    xmlhttp.abort();
+                    alert("请求超时");
+                } else if (textStatus == "error") {
+                    alert("服务器内部错误");
+                }
+            }
+        })
+    }
+
+    var ref = setInterval(function () {
+        showdata();
+    }, 2000);
 
 	function add_overlay(point_long, point_lat) {
 		map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
