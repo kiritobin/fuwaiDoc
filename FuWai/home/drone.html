@@ -127,8 +127,8 @@
                                     </p>
                                     <p>
                                         <label>坐标：</label>
-                                        <input type="text" id="ax" placeholder="x坐标">
-                                        <input type="text" id="ay" placeholder="y坐标">
+                                        经度：<input type="text" id="ax" placeholder="x坐标">
+                                        纬度：<input type="text" id="ay" placeholder="y坐标">
                                     </p>
                                     <p>
                                         <label>状态：</label>
@@ -178,7 +178,8 @@
                                     </p>
                                     <p>
                                         <label>坐标：</label>
-                                        <input type="text" v-model="editPeople.xy" id="exy" value="">
+                                        经度：<input type="text" v-model="editPeople.lng" id="ex" value="">
+                                        纬度：<input type="text" v-model="editPeople.lat" id="ey" value="">
                                     </p>
                                     <p>
                                         <label>状态：</label>
@@ -212,9 +213,8 @@
             var dronemodel = $("#amodel").val();
             var position = $("#aposition").val();
             var status = $("#astatus").val();
-            var x = $("#ax").val();
-            var y = $("#ay").val();
-            var xy = x + "," + y;
+            var lng = $("#ax").val();
+            var lat = $("#ay").val();
             if (droneid == "" || dronemodel == "" || position=="") {
                 swal({
                     title: "含有未填项目!",
@@ -231,7 +231,8 @@
                         dronemodel: dronemodel,
                         position: position,
                         status: status,
-                        xy: xy,
+                        lat: lat,
+                        lng:lng,
                         op: "insert"
                     },
                     dataType: 'text',
@@ -350,8 +351,9 @@
             var dronemodel = $("#emodel").val();
             var position = $("#eposition").val();
             var flycount = $("#ecount").val();
-            var status = $("#astatus").val();
-            var xy = $("#exy").val();
+            var status = $("#estatus").val();
+            var lng = $("#ex").val();
+            var lat = $("#ey").val();
             if (dronemodel == "" || position == "" || flycount=="") {
                 swal({
                     title: "含有未填项目!",
@@ -369,7 +371,8 @@
                         position: position,
                         flycount: flycount,
                         status: status,
-                        xy:xy,
+                        lat: lat,
+                        lng:lng,
                         op: "update"
                     },
                     dataType: 'text',
@@ -606,7 +609,8 @@
                         position: item.position,
                         flycount:item.flycount,
                         status: item.status,
-                        xy:item.xy
+                        lat: item.lat,
+                        lng:item.lng
                     };
                 },
                 update: function (item) {

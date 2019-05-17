@@ -684,7 +684,6 @@
     <Content Include="home\plugins\weather-icons\font\weathericons-regular-webfont.ttf" />
     <Content Include="home\plugins\weather-icons\font\weathericons-regular-webfont.woff" />
     <Content Include="home\plugins\weather-icons\font\WeatherIcons-Regular.otf" />
-    <Content Include="action\testlist.ashx" />
     <Content Include="action\map.ashx" />
     <Content Include="action\TUsedrug.ashx" />
     <Content Include="action\TOperation.ashx" />
@@ -742,10 +741,6 @@
     <Compile Include="action\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>
-    <Compile Include="action\testlist.ashx.cs">
-      <DependentUpon>testlist.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="action\testmodel.cs" />
     <Compile Include="action\TGcontact.ashx.cs">
       <DependentUpon>TGcontact.ashx</DependentUpon>
     </Compile>

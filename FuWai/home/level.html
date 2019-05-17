@@ -552,8 +552,7 @@
     
     function showpatient(data) {
         var pointArray = new Array();
-        var json = [{ "lng": 102.667631, "lat": 25.106303 }, { "lng": 102.668359, "lat": 25.105665 }];
-        pointArray = json;
+        pointArray = data;
         for (var i = 0; i < data.length; i++) {
             pointArray[i] = new BMap.Point(data[i].lng, data[i].lat);
             handelAddMarker(new BMap.Point(data[i].lng, data[i].lat), "./img/人物-正常.png");
@@ -579,7 +578,6 @@
 
     function showdrone(data) {
         var pointArray = new Array();
-        var json = [{ "lng": 102.665457, "lat": 25.105624 }, { "lng": 102.675284, "lat": 25.108798 }];
         for (var i = 0; i < data.length; i++) {
             pointArray[i] = new BMap.Point(data[i].lng, data[i].lat);
             handelAddDroneMarker(new BMap.Point(data[i].lng, data[i].lat), "./img/无人机.png");
@@ -633,7 +631,7 @@
 		arrow.style.width = "35px";
 		arrow.style.height = "35px";
 		arrow.style.top = "22px";
-		arrow.style.left = "10px";
+		arrow.style.left = "20px";
 		div.appendChild(arrow);
 
 		// 将div添加到覆盖物容器中  
@@ -647,15 +645,15 @@
 		var map = this._map;
 		var pixel = map.pointToOverlayPixel(this._point);
 		this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-		this._div.style.top = pixel.y - 30 + "px";
+		this._div.style.top = pixel.y - 20 + "px";
 	}
 
 	function add_overlay(point_long, point_lat) {
 		map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
 	}
-	var grade = 0;
+	var grade = 1;
 	if(grade == 1) {
-		add_overlay(102.715239, 25.044353);
+        add_overlay(102.667631, 25.106303);
     }
 
     var vue = new Vue({
@@ -676,14 +674,16 @@
                     type: 'Post',
                     url: '../action/map.ashx',
                     data: {
-                        op:"load"
+                        op: "load"
                     },
                     dataType: 'text',
                     success: function (data) {
-                        var json=[];
+                        var json = [];
                         json = data.split('|-|');
                         var data1 = JSON.parse(json[0]);
                         var data2 = JSON.parse(json[1]);
+                        console.log(JSON.stringify(data1));
+                        console.log(JSON.stringify(data2));
                         showpatient(data1);
                         showdrone(data2);
                     },
