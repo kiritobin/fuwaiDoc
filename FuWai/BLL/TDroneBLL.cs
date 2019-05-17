@@ -42,7 +42,7 @@ namespace FuWai.BLL
         /// <param name="lat">x</param>
         /// <param name="lng">y</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string droneid, string dronemodel, string position, int flycount, int status, string lat,string lng) {
+        public Boolean insert(string droneid, string dronemodel, string position, int flycount, int status, double lat, double lng) {
             int row = td.insert( droneid, dronemodel, position, flycount, status, lat, lng);
             if (row > 0) {
                 return true;
@@ -58,7 +58,7 @@ namespace FuWai.BLL
         /// <param name="flycount">飞行次数</param>
         /// <param name="status">状态</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean update(string droneid, string dronemodel, string position, int flycount, int status, string lat, string lng) {
+        public Boolean update(string droneid, string dronemodel, string position, int flycount, int status, double lat, double lng) {
             int row = td.update(droneid, dronemodel, position, flycount, status, lat, lng);
             if (row > 0)
             {

@@ -44,7 +44,7 @@ namespace FuWai.DAO
         /// <param name="lat">x</param>
         /// <param name="lng">y</param>
         /// <returns>返回int</returns>
-        public int insert(string droneid,string dronemodel, string position,int flycount,int status,string lat,string lng) {
+        public int insert(string droneid,string dronemodel, string position,int flycount,int status,double lat, double lng) {
             string sql = "insert into T_Drone values(@droneid,@dronemodel,@position,@flycount,@status,@lat,@lng)";
 
             string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status" , "@lat", "@lng" };
@@ -63,7 +63,7 @@ namespace FuWai.DAO
         /// <param name="lat">x</param>
         /// <param name="lng">y</param>
         /// <returns>返回int</returns>
-        public int update(string droneid, string dronemodel, string position, int flycount, int status, string lat, string lng) {
+        public int update(string droneid, string dronemodel, string position, int flycount, int status, double lat, double lng) {
             string sql = "update T_Drone set droneid=@droneid ,dronemodel=@dronemodel,position=@position,flycount=@flycount,status=@status,lat=@lat,lng=@lng where droneid=@droneid ";
 
             string[] param = { "@droneid", "@dronemodel", "@position", "@flycount", "@status", "@lat", "@lng" };
