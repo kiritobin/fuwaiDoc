@@ -572,10 +572,10 @@
 
 	}
 	//无人机
-	var json_wdata = [
-		[102.665457, 25.105624],
-		[102.675284, 25.108798]
-	];
+	//var json_wdata = [
+	//	[102.665457, 25.105624],
+	//	[102.675284, 25.108798]
+	//];
 
     function showdrone(data) {
         var pointArray = new Array();
@@ -674,18 +674,18 @@
                 var _this = this;
                 $.ajax({
                     type: 'Post',
-                    url: '../action/testlist.ashx',
+                    url: '../action/map.ashx',
                     data: {
-
+                        op:"load"
                     },
-                    dataType: 'json',
+                    dataType: 'text',
                     success: function (data) {
-                        console.log(data);
-
-                        var json1 = [{ "lng": 102.667631, "lat": 25.106303, "id":"123" }, { "lng": 102.668359, "lat": 25.105665, "id":"123" }];
-                        var json2 = [{ "lng": 102.665457, "lat": 25.105624, "id": "123" }, { "lng": 102.675284, "lat": 25.108798, "id": "123"}];
-                        showpatient(json1);
-                        showdrone(json2);
+                        var json=[];
+                        json = data.split('|-|');
+                        var data1 = JSON.parse(json[0]);
+                        var data2 = JSON.parse(json[1]);
+                        showpatient(data1);
+                        showdrone(data2);
                     },
                     error: function (XMLHttpRequest, textStatus) { //请求失败
                         if (textStatus == 'timeout') {

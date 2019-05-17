@@ -19,7 +19,7 @@ namespace FuWai.action
             {
                 patientAbout(context);
             }
-            else if (op == "") {
+            else if (op == "load") {
                 patientandDroneAbout(context);
             }
         }
