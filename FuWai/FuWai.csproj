@@ -690,6 +690,7 @@
     <Content Include="action\VPatientUsedrug.ashx" />
     <Content Include="action\TDiagnose.ashx" />
     <Content Include="action\VPatientDiagnose.ashx" />
+    <Content Include="action\Flightpath.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -720,6 +721,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="action\Flightpath.ashx.cs">
+      <DependentUpon>Flightpath.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\map.ashx.cs">
       <DependentUpon>map.ashx</DependentUpon>
     </Compile>
@@ -795,6 +799,7 @@
     <Compile Include="BLL\TDiagnoseBLL.cs" />
     <Compile Include="BLL\TDiseasestatusBLL.cs" />
     <Compile Include="BLL\TDroneBLL.cs" />
+    <Compile Include="BLL\TFlightpathBLL.cs" />
     <Compile Include="BLL\TGcontactBLL.cs" />
     <Compile Include="BLL\TGuardianBLL.cs" />
     <Compile Include="BLL\TMedicalhistoryBLL.cs" />
@@ -811,6 +816,7 @@
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="BLL\VPatientUsedrugBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\TFlightpathDAO.cs" />
     <Compile Include="DAO\TOperationDAO.cs" />
     <Compile Include="DAO\TCheckDAO.cs" />
     <Compile Include="DAO\TDiagnoseDAO.cs" />
