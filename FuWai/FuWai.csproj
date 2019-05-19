@@ -99,6 +99,7 @@
     <Content Include="home\flightpath.html" />
     <Content Include="home\userdrug.html" />
     <Content Include="home\level.html" />
+    <Content Include="home\level2.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
@@ -692,6 +693,7 @@
     <Content Include="action\TDiagnose.ashx" />
     <Content Include="action\VPatientDiagnose.ashx" />
     <Content Include="action\Flightpath.ashx" />
+    <Content Include="action\VPatientOperation.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -788,6 +790,9 @@
     <Compile Include="action\VPatientDiagnose.ashx.cs">
       <DependentUpon>VPatientDiagnose.ashx</DependentUpon>
     </Compile>
+    <Compile Include="action\VPatientOperation.ashx.cs">
+      <DependentUpon>VPatientOperation.ashx</DependentUpon>
+    </Compile>
     <Compile Include="action\VPatientTreatment.ashx.cs">
       <DependentUpon>VPatientTreatment.ashx</DependentUpon>
     </Compile>
@@ -814,6 +819,7 @@
     <Compile Include="BLL\VPatientBLL.cs" />
     <Compile Include="BLL\VPatientCheckBLL.cs" />
     <Compile Include="BLL\VPatientDiagnoseBLL.cs" />
+    <Compile Include="BLL\VPatientOperationBLL.cs" />
     <Compile Include="BLL\VPatientTreatmentBLL.cs" />
     <Compile Include="BLL\VPatientUsedrugBLL.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
@@ -835,6 +841,7 @@
     <Compile Include="DAO\VPatientCheckDAO.cs" />
     <Compile Include="DAO\VPatientDAO.cs" />
     <Compile Include="DAO\VPatientDiagnoseDAO.cs" />
+    <Compile Include="DAO\VPatientOperationDAO.cs" />
     <Compile Include="DAO\VPatientTreatmentDAO.cs" />
     <Compile Include="DAO\VPatientUsedrugDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />

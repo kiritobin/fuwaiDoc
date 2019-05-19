@@ -1,0 +1,753 @@
+﻿<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<style type="text/css">
+			body,
+			html,
+			#allmap {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				font-family: "微软雅黑";
+			}
+		</style>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=notj5jZfhhHQvej1zwAkF1V7pU4jGtY7"></script>
+		<title>阜外医院</title>
+		<style>
+			#content {
+				position: absolute;
+				width: 100%;
+				bottom: 0px;
+				text-align: center;
+				z-index: 2;
+				overflow: hidden;
+			}
+			
+			.modal-content {
+				background-color: rgba(16, 78, 139, 0.6);
+				height: auto;
+			}
+			
+			.column {
+				padding: 0 -15px;
+			}
+			
+			span {
+				color: white;
+			}
+			
+			ul a {
+				color: white;
+			}
+			
+			tr th,
+			td {
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 16px;
+			}
+			
+			ul>li>a {
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 16px;
+			}
+			
+			.personal_info>tr {
+				text-align: center;
+			}
+			
+			.personal_info>tr>td {
+				font-size: 16px;
+			}
+			
+			#addr,
+			#lal,
+			#num,
+			#name,
+			#agend,
+			#age {
+				font-size: 16px;
+				vertical-align: middle;
+			}
+			
+			.panel {
+				margin-top: 10px;
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				background-color: rgba(255, 255, 255, 0);
+				text-align: center;
+			}
+			
+			thead {
+				background-color: #1874CD;
+			}
+			
+			#basiInfo {
+				background-color: rgba(16, 78, 139, 0.6);
+			}
+			
+			.copyright {
+				width: auto;
+				left: 50%;
+				top: 98%;
+				margin-left: -80px;
+				margin-top: -20px;
+				position: fixed;
+			}
+			
+			.xindt {
+				margin: 0 auto;
+				width: 523px;
+				height: 425px;
+				background-color: #000;
+			}
+			
+			p span {
+				color: #fff;
+				line-height: 150%;
+				font-family: Verdana, "微软雅黑", "宋体";
+				color: rgba(255, 255, 255, 0.8);
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="allmap"></div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+			<div id="content">
+				<div class="modal-content" id="app">
+					<div class="container" style="margin-bottom:0;border: none solid #ddd;border-radius: 3px">
+						<div class="row clearfix"  v-for="item in data">
+							<div class="col-md-12 column">
+								<div class="row clearfix">
+									<div class="col-md-2 column">
+                                        <div style="height: auto;margin-top: 20px;">
+                                            <div>
+                                                <img v-bind:src="item.headimg" alt="" style="height:100px;width:100px;border-radius: 50px">
+                                            </div>
+                                            <div style="text-align: center;margin: 10px 0 20px 0;">
+                                                <span style="font-size: 18px;">{{item.patientname}}</span>
+                                            </div>
+                                            <table class="table table-hover">
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tbody class="personal_info">
+                                                    <tr>
+                                                        <td>
+                                                            编号
+                                                        </td>
+                                                        <td>
+                                                            {{item.patientid}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            性别
+                                                        </td>
+                                                        <td>
+                                                            {{item.gender}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            年龄
+                                                        </td>
+                                                        <td>
+                                                            {{item.age}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            体重
+                                                        </td>
+                                                        <td>{{item.weight}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+									</div>
+									<div class="col-md-6 column">
+										<div class="tabbable" id="tabs-902637" style="margin-top: 70px;">
+											<ul id="myTab" class="nav nav-tabs">
+												<li class="active">
+													<a href="#panel-0" data-toggle="tab">病史</a>
+												</li>
+												<li>
+													<a href="#panel-01" data-toggle="tab">诊断记录</a>
+												</li>
+												<li>
+													<a href="#panel-02" data-toggle="tab">用药记录</a>
+												</li>
+												<li>
+													<a href="#panel-03" data-toggle="tab">手术记录</a>
+												</li>
+												<li>
+													<a href="#panel-04" data-toggle="tab">常用联系人</a>
+												</li>
+											</ul>
+											<div class="tab-content" style="margin-top: 10px;">
+												<div class="tab-pane active panel" id="panel-0" >
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>疾病名称</th>
+                                                                <th>备注</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr v-for="item in history">
+                                                                <td>{{item.medicalhistoryname}}</td>
+                                                                <td>{{item.remark}}</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane panel" id="panel-01">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>时间</th>
+																<th>诊断结果</th>
+																<th>主治医师</th>
+																<th>备注</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr v-for="item in diagnosis">
+                                                                <td>{{item.diagnosetime}}</td>
+                                                                <td>{{item.diagnose}}</td>
+                                                                <td>{{item.doctor}}</td>
+                                                                <td>{{item.remark}}</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane panel" id="panel-02">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>时间</th>
+																<th>药品名称</th>
+																<th>剂量</th>
+																<th>备注</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr v-for="item in drug">
+                                                                <td>{{item.usedrugidtime}}</td>
+                                                                <td>{{item.usedrugidname}}</td>
+                                                                <td>{{item.dosage}}</td>
+                                                                <td>{{item.remark}}</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane panel" id="panel-03">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>时间</th>
+																<th>手术名称</th>
+																<th>备注</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr v-for="item in operation">
+                                                                <td>{{item.operationtime}}</td>
+                                                                <td>{{item.operationname}}</td>
+                                                                <td>{{item.remark}}</td>
+															</tr>
+
+														</tbody>
+													</table>
+												</div>
+												<div class="tab-pane panel" id="panel-04">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>姓名</th>
+																<th>关系</th>
+																<th>联系方式</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr v-for="item in contact">
+                                                                <td>{{item.guardianname}}</td>
+                                                                <td>{{item.appellation}}</td>
+                                                                <td>{{item.cp}}</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 column" style="margin-top:80px;">
+										<div class="panel" style="height: auto">
+											<table class="table table-bordered table-condensed">
+												<tbody>
+													<tr>
+														<td style="background-color:#41b883">
+															<h3><span>实时心电图</span></h3>
+														</td>
+														<td>
+															<div id="canvas" style="width: 310px;height: 189px;border:1px dashed #FFA500;padding: 2px;">
+																<canvas id="can" style="width: 300px;height: 220px;"></canvas>
+															</div>
+
+														</td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+		<div class="copyright">
+			<span> ©&nbsp;云南省阜外心血管病医院版权所有</span>
+		</div>
+	</body>
+
+</html>
+
+<script src="js/心电图.js"></script>
+<script src="vue.js"></script>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(102.665457, 25.105624);
+	map.centerAndZoom(point, 18);
+	map.enableScrollWheelZoom(); //启用鼠标滚轮放大缩小
+	var mapStyle = {
+		style: "dark" //设置地图风格为高端黑					
+	}
+    var styledata = [{
+			"featureType": "water",
+			"elementType": "all",
+			"stylers": {
+				"color": "#021019"
+			}
+		},
+		{
+			"featureType": "highway",
+			"elementType": "geometry.fill",
+			"stylers": {
+				"color": "#000000"
+			}
+		},
+		{
+			"featureType": "highway",
+			"elementType": "geometry.stroke",
+			"stylers": {
+				"color": "#147a92"
+			}
+		},
+		{
+			"featureType": "arterial",
+			"elementType": "geometry.fill",
+			"stylers": {
+				"color": "#000000"
+			}
+		},
+		{
+			"featureType": "arterial",
+			"elementType": "geometry.stroke",
+			"stylers": {
+				"color": "#0b3d51"
+			}
+		},
+		{
+			"featureType": "local",
+			"elementType": "geometry",
+			"stylers": {
+				"color": "#000000"
+			}
+		},
+		{
+			"featureType": "land",
+			"elementType": "all",
+			"stylers": {
+				"color": "#08304b"
+			}
+		},
+		{
+			"featureType": "railway",
+			"elementType": "geometry.fill",
+			"stylers": {
+				"color": "#000000"
+			}
+		},
+		{
+			"featureType": "railway",
+			"elementType": "geometry.stroke",
+			"stylers": {
+				"color": "#08304b"
+			}
+		},
+		{
+			"featureType": "subway",
+			"elementType": "geometry",
+			"stylers": {
+				"lightness": -70
+			}
+		},
+		{
+			"featureType": "building",
+			"elementType": "geometry.fill",
+			"stylers": {
+				"color": "#000000"
+			}
+		},
+		{
+			"featureType": "all",
+			"elementType": "labels.text.fill",
+			"stylers": {
+				"color": "#857f7f"
+			}
+		},
+		{
+			"featureType": "all",
+			"elementType": "labels.text.stroke",
+			"stylers": {
+				"color": "#000000"
+			}
+		},
+		{
+			"featureType": "building",
+			"elementType": "geometry",
+			"stylers": {
+				"color": "#022338"
+			}
+		},
+		{
+			"featureType": "green",
+			"elementType": "geometry",
+			"stylers": {
+				"color": "#062032"
+			}
+		},
+		{
+			"featureType": "boundary",
+			"elementType": "all",
+			"stylers": {
+				"color": "#1e1c1c"
+			}
+		},
+		{
+			"featureType": "manmade",
+			"elementType": "geometry",
+			"stylers": {
+				"color": "#022338"
+			}
+		},
+		{
+			"featureType": "poi",
+			"elementType": "all",
+			"stylers": {
+				"visibility": "off"
+			}
+		},
+		{
+			"featureType": "all",
+			"elementType": "labels.icon",
+			"stylers": {
+				"visibility": "off"
+			}
+		},
+		{
+			"featureType": "all",
+			"elementType": "labels.text.fill",
+			"stylers": {
+				"color": "#2da0c6",
+				"visibility": "on"
+			}
+		}
+	]
+	map.setMapStyle({
+        styleJson: styledata
+    });
+
+	//病人
+	function handelAddMarker(pt, url,data,i) {
+		var myIcon = new BMap.Icon(url, new BMap.Size(36, 36));
+		var marker = new BMap.Marker(pt, {
+			icon: myIcon
+		}); // 创建标注
+        map.addOverlay(marker);
+        var thePoint = data[i];
+        marker.addEventListener("click",
+            function () {
+                //alert(thePoint.patientid)
+                vue.bind(thePoint.patientid);
+                $("#myModal").modal("show");
+                $(".modal-backdrop").removeClass("modal-backdrop fade in");
+            });
+    }
+
+    function showpatient(data) {
+        var pointArray = new Array();
+        for (var i = 0; i < data.length; i++) {
+            pointArray[i] = new BMap.Point(data[i].lng, data[i].lat);
+            handelAddMarker(new BMap.Point(data[i].lng, data[i].lat), "./img/人物-正常.png", data,i);
+        }
+    }
+
+
+	function handelAddDroneMarker(pt, url,data,i) {
+		var myIcon = new BMap.Icon(url, new BMap.Size(36, 36));
+		var marker = new BMap.Marker(pt, {
+			icon: myIcon
+		}); // 创建标注
+        map.addOverlay(marker);
+
+        (function () {
+            var thePoint = data[i];
+            marker.addEventListener("click",
+                function () {
+                    //alert(thePoint.droneid);
+                });
+        })();
+	}
+
+
+    function showdrone(data) {
+        for (var i = 0; i < data.length; i++) {
+            var pointArray = new Array();
+            pointArray[i] = new BMap.Point(data[i].lng, data[i].lat);
+            handelAddDroneMarker(new BMap.Point(data[i].lng, data[i].lat), "./img/无人机.png",data,i);
+        }
+    }
+	
+	//	var pointArray = new Array();
+  //  for (var i = 0; i < json_wdata.length; i++) {
+  //      var pointArray = new Array();
+  //      pointArray[i] = new BMap.Point(json_wdata[i].lng, json_wdata[i].lat);
+		//handelAddDroneMarker(new BMap.Point(json_wdata[i].lng, json_wdata[i].lat), "./img/无人机.png");
+  //  }
+
+	//让所有点在视野范围内
+	//map.setViewport(pointArray);
+	//获取覆盖物位置
+	function attribute(e) {
+		var i = e.target;
+
+		$("#myModal").modal("show");
+		//$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影
+		$(".modal-backdrop").removeClass("modal-backdrop fade in");
+	}
+
+	//无人机的点击事件
+	function handelClick(e) {
+		var p = e.target;
+		alert("我被点击了");
+	}
+
+	/**
+	 *根据等级显示闪烁坐标点 
+	 */
+	//定义自定义覆盖物的构造函数  
+	function ComplexCustomOverlay(point) {
+		this._point = point;
+
+	}
+	// 继承API的BMap.Overlay  
+	ComplexCustomOverlay.prototype = new BMap.Overlay();
+
+	var grade = 2;
+	// 实现初始化方法  
+	ComplexCustomOverlay.prototype.initialize = function(map) {
+		// 保存map对象实例 
+		this._map = map;
+		// 创建div元素，作为自定义覆盖物的容器  
+		var div = this._div = document.createElement("div");
+		div.style.position = "absolute";
+		div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+
+		// 可以根据参数设置元素外观
+		div.style.height = "35px";
+		div.style.width = "35px";
+
+		var arrow = this._arrow = document.createElement("img");
+		if(grade == 1) {
+			arrow.src = "img/红.gif";
+		}
+		if(grade == 2) {
+			arrow.src = "img/黄.gif";
+		}
+
+		arrow.style.width = "35px";
+		arrow.style.height = "35px";
+		arrow.style.left = "20px";
+		div.appendChild(arrow);
+
+		// 将div添加到覆盖物容器中  
+		map.getPanes().labelPane.appendChild(div);
+		return div;
+
+	}
+
+	// 实现绘制方法
+	ComplexCustomOverlay.prototype.draw = function() {
+		var map = this._map;
+		var pixel = map.pointToOverlayPixel(this._point);
+		this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+		this._div.style.top = pixel.y - 20 + "px";
+	}
+
+	function add_overlay(point_long, point_lat) {
+		map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
+	}
+
+	if(grade == 1) {
+		add_overlay(102.667631, 25.106303);
+	}
+	if(grade == 2) {
+		add_overlay(102.674656, 25.106786);
+    }
+
+    function showdata() {
+        $.ajax({
+            type: 'Post',
+            url: '../action/map.ashx',
+            data: {
+                op: "load"
+            },
+            dataType: 'text',
+            success: function (data) {
+                var json = [];
+                json = data.split('|-|');
+                var data1 = JSON.parse(json[0]);
+                var data2 = JSON.parse(json[1]);
+                map.clearOverlays();
+                showpatient(data1);
+                showdrone(data2);
+            },
+            error: function (XMLHttpRequest, textStatus) { //请求失败
+                if (textStatus == 'timeout') {
+                    var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                    xmlhttp.abort();
+                    alert("请求超时");
+                } else if (textStatus == "error") {
+                    alert("服务器内部错误");
+                }
+            }
+        })
+    }
+
+    var ref = setInterval(function () {
+        showdata();
+    }, 2000);
+
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            data: [],
+        },
+        history: {
+            history: [],
+        },
+        diagnosis: {
+            diagnosis: [],
+        },
+        drug: {
+            drug: [],
+        },
+        operation: {
+            operation: [],
+        },
+        contact: {
+            contact:[],
+        },
+        created: function () {
+            this.loadData(); //页面加载
+        },
+        methods: {
+            loadData: function () {
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/map.ashx',
+                    data: {
+                        op: "load"
+                    },
+                    dataType: 'text',
+                    success: function (data) {
+                        var json = [];
+                        json = data.split('|-|');
+                        var data1 = JSON.parse(json[0]);
+                        var data2 = JSON.parse(json[1]);
+                        showpatient(data1);
+                        showdrone(data2);
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                    }
+                })
+            },
+            bind: function (patientid) {
+                var _this = this;
+                $.ajax({
+                    type: 'Post',
+                    url: '../action/map.ashx',
+                    data: {
+                        patientid: patientid,
+                        op: "search"
+                    },
+                    dataType: 'text',
+                    success: function (data) {
+                        console.log(data);
+                        var json = [];
+                        json = data.split('|-|');
+                        var data1 = JSON.parse(json[0]);
+                        var data2 = JSON.parse(json[1]);
+                        var data3 = JSON.parse(json[2]);
+                        var data4 = JSON.parse(json[3]);
+                        var data5 = JSON.parse(json[4]);
+                        var data6 = JSON.parse(json[5]);
+                        _this.data = data1;
+                        _this.history = data2;
+                        _this.diagnosis = data3;
+                        _this.drug = data4;
+                        _this.operation = data5;
+                        _this.contact = data6;
+                        console.log(_this.contact);
+                    },
+                    error: function (XMLHttpRequest, textStatus) { //请求失败
+                        if (textStatus == 'timeout') {
+                            var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                            xmlhttp.abort();
+                            alert("请求超时");
+                        } else if (textStatus == "error") {
+                            alert("服务器内部错误");
+                        }
+                    }
+                })
+            }
+        },
+    });
+</script>

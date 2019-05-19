@@ -90,7 +90,7 @@ namespace FuWai.DAO
         /// <returns>DataTable</returns>
         public DataTable SelectDiagnoseBypatientid(string patientid)
         {
-            string sql = "select * T_Diagnose where patientid = @patientid";
+            string sql = "select * from T_Diagnose where patientid = @patientid";
             string[] param = { "@patientid" };
             object[] values = { patientid };
             return db.FillDataSet(sql, param, values).Tables[0];
