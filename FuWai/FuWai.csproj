@@ -89,6 +89,9 @@
     <Content Include="home\img\心电图.png" />
     <Content Include="home\img\心电图02.png" />
     <Content Include="home\img\无人机.png" />
+    <Content Include="home\img\红.gif" />
+    <Content Include="home\img\起点.png" />
+    <Content Include="home\img\黄.gif" />
     <Content Include="home\index.html" />
     <Content Include="home\js\bootstrap.js" />
     <Content Include="home\js\bootstrap.min.js" />
@@ -100,6 +103,7 @@
     <Content Include="home\userdrug.html" />
     <Content Include="home\level.html" />
     <Content Include="home\level2.html" />
+    <Content Include="home\等级.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
