@@ -126,197 +126,214 @@
 					<div class="container" style="margin-bottom:0;border: none solid #ddd;border-radius: 3px">
 						<div class="row clearfix">
 							<div class="col-md-12 column">
-								<div class="row clearfix">
-									<div class="col-md-2 column">
-										<div style="height: auto;margin-top: 20px;" v-for="(item,index) in this.data">
-											<div>
-												<img v-bind:src="item.headimg" alt="" style="height:100px;width:100px;border-radius: 50px">
-											</div>
-											<div style="text-align: center;margin: 10px 0 20px 0;">
+                                <div class="row clearfix">
+                                    <div class="col-md-2 column">
+                                        <div style="height: auto;margin-top: 20px;" v-for="(item,index) in this.data">
+                                            <div>
+                                                <img v-bind:src="item.headimg" alt="" style="height:100px;width:100px;border-radius: 50px">
+                                            </div>
+                                            <div style="text-align: center;margin: 10px 0 20px 0;">
                                                 <span style="font-size: 18px;">{{item.patientname}}</span>
-											</div>
-											<table class="table table-hover">
-												<colgroup>
-													<col width="50%">
-													<col width="50%">
-												</colgroup>
-												<tbody class="personal_info">
-													<tr>
-														<td>
-															编号
-														</td>
-														<td>
-															{{item.patientid}}
-														</td>
-													</tr>
-													<tr>
-														<td>
-															性别
-														</td>
+                                            </div>
+                                            <table class="table table-hover">
+                                                <colgroup>
+                                                    <col width="50%">
+                                                    <col width="50%">
+                                                </colgroup>
+                                                <tbody class="personal_info">
+                                                    <tr>
+                                                        <td>
+                                                            编号
+                                                        </td>
+                                                        <td>
+                                                            {{item.patientid}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            性别
+                                                        </td>
                                                         <td>
                                                             {{item.gender}}
                                                         </td>
-													</tr>
-													<tr>
-														<td>
-															年龄
-														</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            年龄
+                                                        </td>
                                                         <td>
                                                             {{item.age}}
                                                         </td>
-													</tr>
-													<tr>
-														<td>
-															体重
-														</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            体重
+                                                        </td>
                                                         <td>{{item.weight}}</td>
-													</tr>
-												</tbody>
-											</table>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-										</div>
-									</div>
-									<div class="col-md-6 column">
-										<div class="tabbable" id="tabs-902637" style="margin-top: 70px;">
-											<ul id="myTab" class="nav nav-tabs">
-												<li class="active">
-													<a href="#panel-0" data-toggle="tab">病史</a>
-												</li>
-												<li>
-													<a href="#panel-01" data-toggle="tab">诊断记录</a>
-												</li>
-												<li>
-													<a href="#panel-02" data-toggle="tab">用药记录</a>
-												</li>
-												<li>
-													<a href="#panel-03" data-toggle="tab">手术记录</a>
-												</li>
-												<li>
-													<a href="#panel-04" data-toggle="tab">常用联系人</a>
-												</li>
-											</ul>
-											<div class="tab-content" style="margin-top: 10px;">
-												<div class="tab-pane active panel" id="panel-0">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>序号</th>
-																<th>疾病名称</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr v-for="(item,index) in this.history">
-																<td>{{index+1}}</td>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 column">
+                                        <div class="tabbable" id="tabs-902637" style="margin-top: 70px;">
+                                            <ul id="myTab" class="nav nav-tabs">
+                                                <li class="active">
+                                                    <a href="#panel-0" data-toggle="tab">病史</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#panel-01" data-toggle="tab">诊断记录</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#panel-02" data-toggle="tab">用药记录</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#panel-03" data-toggle="tab">手术记录</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#panel-04" data-toggle="tab">常用联系人</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" style="margin-top: 10px;">
+                                                <div class="tab-pane active panel" id="panel-0">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>序号</th>
+                                                                <th>疾病名称</th>
+                                                                <th>备注</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="(item,index) in this.history">
+                                                                <td>{{index+1}}</td>
                                                                 <td>{{item.medicalhistoryname}}</td>
                                                                 <td>{{item.remark}}</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-01">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>时间</th>
-																<th>诊断结果</th>
-																<th>主治医师</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane panel" id="panel-01">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>时间</th>
+                                                                <th>诊断结果</th>
+                                                                <th>主治医师</th>
+                                                                <th>备注</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             <tr v-for="(item,index) in this.diagnosis">
                                                                 <td>{{item.diagnosetime}}</td>
                                                                 <td>{{item.diagnose}}</td>
                                                                 <td>{{item.doctor}}</td>
                                                                 <td>{{item.remark}}</td>
                                                             </tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-02">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>时间</th>
-																<th>药品名称</th>
-																<th>剂量</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane panel" id="panel-02">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>时间</th>
+                                                                <th>药品名称</th>
+                                                                <th>剂量</th>
+                                                                <th>备注</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             <tr v-for="(item,index) in this.drug">
                                                                 <td>{{item.usedrugidtime}}</td>
                                                                 <td>{{item.usedrugidname}}</td>
                                                                 <td>{{item.dosage}}</td>
                                                                 <td>{{item.remark}}</td>
                                                             </tr>
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-03">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>时间</th>
-																<th>手术名称</th>
-																<th>备注</th>
-															</tr>
-														</thead>
-														<tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane panel" id="panel-03">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>时间</th>
+                                                                <th>手术名称</th>
+                                                                <th>备注</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             <tr v-for="(item,index) in this.operation">
                                                                 <td>{{item.operationtime}}</td>
                                                                 <td>{{item.operationname}}</td>
                                                                 <td>{{item.remark}}</td>
                                                             </tr>
 
-														</tbody>
-													</table>
-												</div>
-												<div class="tab-pane panel" id="panel-04">
-													<table class="table table-bordered">
-														<thead>
-															<tr>
-																<th>序号</th>
-																<th>姓名</th>
-																<th>关系</th>
-																<th>联系方式</th>
-															</tr>
-														</thead>
-														<tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane panel" id="panel-04">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>序号</th>
+                                                                <th>姓名</th>
+                                                                <th>关系</th>
+                                                                <th>联系方式</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             <tr v-for="(item,index) in this.contact">
                                                                 <td>{{index+1}}</td>
                                                                 <td>{{item.guardianname}}</td>
                                                                 <td>{{item.appellation}}</td>
                                                                 <td>{{item.cp}}</td>
                                                             </tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 column" style="margin-top:80px;">
-										<div class="panel" style="height: auto">
-											<table class="table table-bordered table-condensed">
-												<tbody>
-													<tr>
-														<td style="background-color:#41b883">
-															<h3><span>实时心电图</span></h3>
-														</td>
-														<td>
-															<div id="canvas" style="width: 310px;height: 189px;border:1px dashed #FFA500;padding: 2px;">
-																<canvas id="can" style="width: 300px;height: 220px;"></canvas>
-															</div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 column" style="margin-top:80px;">
+                                        <div class="panel" style="height: auto">
+                                            <table class="table table-bordered table-condensed">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="background-color:#41b883">
+                                                            <h3><span>实时心电图</span></h3>
+                                                        </td>
+                                                        <td>
+                                                            <div id="canvas" style="width: 210px;height: 189px;border:1px dashed #FFA500;padding: 2px;">
+                                                                <!--<canvas id="can" style="width: 300px;height: 220px;"></canvas>-->
+                                                                <img src="img/xdt.gif" style="width: 200px;height: 180px;" />
+                                                            </div>
 
-														</td>
-													</tr>
+                                                        </td>
+                                                    </tr>
 
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1 column" style="margin-top:80px;">
+                                        <table class="text-center" style="border: none;">
+                                            <tr>
+                                                <td>
+                                                    <button type="button" style="width: 180px;height: 80px;" class="btn btn-success" @click="fly">开始起飞</button>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" style="margin-top: 20px;width: 180px;height: 80px;" @click="cancel">取消</button>
+                                                </td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -603,12 +620,6 @@
 		$(".modal-backdrop").removeClass("modal-backdrop fade in");
 	}
 
-	//无人机的点击事件
-	function handelClick(e) {
-		var p = e.target;
-		alert("我被点击了");
-	}
-
 	/**
 	 *根据等级显示闪烁坐标点 
 	 */
@@ -620,7 +631,20 @@
 	// 继承API的BMap.Overlay  
 	ComplexCustomOverlay.prototype = new BMap.Overlay();
 
-	var grade = 2;
+    var grade = 1;
+
+    // 实现绘制方法
+    ComplexCustomOverlay.prototype.draw = function () {
+        var map = this._map;
+        var pixel = map.pointToOverlayPixel(this._point);
+        this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+        this._div.style.top = pixel.y - 20 + "px";
+    }
+
+    function add_overlay(point_long, point_lat) {
+        map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
+    }
+
 	// 实现初始化方法  
 	ComplexCustomOverlay.prototype.initialize = function(map) {
 		// 保存map对象实例 
@@ -636,12 +660,11 @@
 
 		var arrow = this._arrow = document.createElement("img");
 		if(grade == 1) {
-			arrow.src = "img/红.gif";
+            arrow.src = "img/红.gif";
 		}
 		if(grade == 2) {
-			arrow.src = "img/黄.gif";
+            arrow.src = "img/黄.gif";
 		}
-
 		arrow.style.width = "35px";
 		arrow.style.height = "35px";
 		arrow.style.left = "20px";
@@ -653,24 +676,13 @@
 
 	}
 
-	// 实现绘制方法
-	ComplexCustomOverlay.prototype.draw = function() {
-		var map = this._map;
-		var pixel = map.pointToOverlayPixel(this._point);
-		this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-		this._div.style.top = pixel.y - 20 + "px";
-	}
 
-	function add_overlay(point_long, point_lat) {
-		map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
-	}
-
-	if(grade == 1) {
-		add_overlay(102.667631, 25.106303);
-	}
-	if(grade == 2) {
-		add_overlay(102.674656, 25.106786);
-	}
+	//if(grade == 1) {
+ //       add_overlay(102.667325, 25.105567);
+	//}
+	//if(grade == 2) {
+ //       add_overlay(102.667325, 25.105567);
+	//}
 
 	//飞行轨迹
 	var PointArr = [{
@@ -679,7 +691,7 @@
 		},
 		{
 			"long": 102.665893,
-			"lat": 25.105714
+			"lat": 25.105614
 		},
 		{
 			"long": 102.666378,
@@ -691,11 +703,11 @@
 		},
 		{
 			"long": 102.667249,
-			"lat": 25.106278
+			"lat": 25.105600
 		},
 		{
-			"long": 102.667631,
-			"lat": 25.106303
+            "long": 102.667325,
+            "lat": 25.105567
 		}
 	];
 	addMarker(new BMap.Point(PointArr[0].long, PointArr[0].lat), '起点', map);
@@ -709,28 +721,36 @@
 			map.addOverlay(marker); // 将标注添加到地图中
 			marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 		}
-	}
+    }
 
-	var droneMk; //定义终点坐标展示的mark对象
-	var myIcon2 = new BMap.Icon("./img/无人机.png", new BMap.Size(36, 36), {}); //初始化终点坐标图标
-	droneMk = new BMap.Marker(new BMap.Point(PointArr[0].long, PointArr[0].lat), {
-		icon: myIcon2
-	}); // 创建标注
-	map.addOverlay(droneMk); // 将标注添加到地图中
+    var droneMk; //定义终点坐标展示的mark对象
+    var myIcon2 = new BMap.Icon("./img/无人机.png", new BMap.Size(36, 36), {}); //初始化终点坐标图标
+    droneMk = new BMap.Marker(new BMap.Point(PointArr[0].long, PointArr[0].lat), {
+        icon: myIcon2
+    }); // 创建标注
+    map.addOverlay(droneMk); // 将标注添加到地图中
 
+    var temporary = []; //定义中间新取出的值放到一个新的数组里面
+    var i = 0;
+    temporary.push(PointArr[i]);
 
-	var temporary = []; //定义中间新取出的值放到一个新的数组里面
-	var i = 0;
-	temporary.push(PointArr[i]);
-	var interval = setInterval(function() {
-		if(i >= PointArr.length) {
-			clearInterval(interval);
-			return;
-		}
-		i = i + 1;
-		temporary.push(PointArr[i]);
-		drowLine(map, temporary); //画线调用
-	}, 1000);
+    function fly() {
+        var interval = setInterval(function () {
+            if (i >= PointArr.length) {
+                clearInterval(interval);
+                return;
+            }
+            i = i + 1;
+            temporary.push(PointArr[i]);
+            if (temporary <= PointArr) {
+                drowLine(map, temporary); //画线调用
+            }
+            else {
+                alert("到达终点了");
+            }
+        }, 1000);
+    }
+
 
 	function drowLine(map, temporary) {
 		if(temporary && temporary.length > 1) { //判断数值为两个点时开始进行绘制
@@ -778,6 +798,7 @@
 
                 var data1 = JSON.parse(data.Data1);
                 var data2 = JSON.parse(data.Data2);
+                add_overlay(102.667325, 25.105567);
                 //map.clearOverlays();
                 showpatient(data1);
                 showdrone(data2);
@@ -788,7 +809,7 @@
                     xmlhttp.abort();
                     alert("请求超时");
                 } else if (textStatus == "error") {
-                    alert("服务器内部错误");
+                    alert("请求失败，请重试");
                 }
             }
         })
@@ -796,7 +817,7 @@
 
     var ref = setInterval(function () {
         showdata();
-    }, 5000);
+    }, 3000);
 
     var vue = new Vue({
         el: "#app",
@@ -893,6 +914,12 @@
                         }
                     }
                 })
+            },
+            fly: function () {
+                fly();
+            },
+            cancel: function () {
+                $("#myModal").modal("hide");
             }
         },
     });

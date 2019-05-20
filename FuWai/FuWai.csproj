@@ -73,7 +73,6 @@
     <Content Include="action\TMedicalhistory.ashx" />
     <Content Include="action\TPatient.ashx" />
     <Content Include="action\PatientInfo.ashx" />
-    <Content Include="home\bind.html" />
     <Content Include="home\contact.html" />
     <Content Include="home\css\bootstrap.css" />
     <Content Include="home\css\bootstrap.min.css" />
@@ -85,6 +84,7 @@
     <Content Include="home\guardian.html" />
     <Content Include="home\guardiantel.html" />
     <Content Include="home\img\av1.png" />
+    <Content Include="home\img\xdt.gif" />
     <Content Include="home\img\人物-正常.png" />
     <Content Include="home\img\心电图.jpg" />
     <Content Include="home\img\心电图.png" />
