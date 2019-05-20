@@ -1,4 +1,6 @@
 ﻿using FuWai.BLL;
+using FuWai.DBHelper;
+using FuWai.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,8 @@ namespace FuWai.action
         TUsedrugBLL tub = new TUsedrugBLL();
         TOperationBLL tob = new TOperationBLL();
         VGContactBLL vgcb = new VGContactBLL();
+        Data data = new Data();
+
         private void patientAbout(HttpContext context)
         {
             String pid = context.Request["patientid"];
@@ -41,7 +45,15 @@ namespace FuWai.action
             String ptob = tob.selectByPatientId(pid);
             String pvgcb = vgcb.selectVGContactByPatientId(pid);
 
-            context.Response.Write(pinfo + "|-|" + phisty + "|-|" + pvptt+ "|-|" + ptub + "|-|" + ptob + "|-|" + pvgcb);
+            data.Data1 = pinfo;
+            data.Data2 = phisty;
+            data.Data3 = pvptt;
+            data.Data4 = ptub;
+            data.Data5 = ptob;
+            data.Data6 = pvgcb;
+            String json = JsonHelper.ObjectToJson(data);
+            context.Response.Write(json);
+            //context.Response.Write(pinfo + "|-|" + phisty + "|-|" + pvptt+ "|-|" + ptub + "|-|" + ptob + "|-|" + pvgcb);
             context.Response.End();
         }
 
@@ -52,7 +64,11 @@ namespace FuWai.action
             String pinfo = tpb.getPatient();
             String dinfo = tdreb.getDroneinfo();
 
-            context.Response.Write(pinfo + "|-|" + dinfo);
+            data.Data1 = pinfo;
+            data.Data2 = dinfo;
+            String json = JsonHelper.ObjectToJson(data);
+
+            context.Response.Write(json);
             context.Response.End();
         }
 

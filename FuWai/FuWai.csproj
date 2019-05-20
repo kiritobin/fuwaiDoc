@@ -73,6 +73,7 @@
     <Content Include="action\TMedicalhistory.ashx" />
     <Content Include="action\TPatient.ashx" />
     <Content Include="action\PatientInfo.ashx" />
+    <Content Include="home\bind.html" />
     <Content Include="home\contact.html" />
     <Content Include="home\css\bootstrap.css" />
     <Content Include="home\css\bootstrap.min.css" />
@@ -103,7 +104,6 @@
     <Content Include="home\userdrug.html" />
     <Content Include="home\level.html" />
     <Content Include="home\level2.html" />
-    <Content Include="home\等级.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
@@ -850,6 +850,7 @@
     <Compile Include="DAO\VPatientUsedrugDAO.cs" />
     <Compile Include="DBHelper\JsonHelper.cs" />
     <Compile Include="DBHelper\SQLHelper.cs" />
+    <Compile Include="Model\Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
