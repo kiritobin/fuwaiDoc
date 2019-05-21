@@ -114,5 +114,22 @@ namespace FuWai.DAO
 
             return Convert.ToInt32(db.ExecuteScalar(sql, param, value));
         }
+
+        /// <summary>
+        /// 修改病人信息
+        /// </summary>
+        /// <param name="patientid">编号</param>
+        /// <param name="diseasestatusid">病情等级编号</param>
+        /// <returns>返回int</returns>
+        public int updatebypatientid(string patientid, int diseasestatusid)
+        {
+            string sql = @"update T_Patient set diseasestatusid=@diseasestatusid where patientid=@patientid ";
+
+            string[] param = { "@patientid", "@diseasestatusid" };
+            object[] value = { patientid, diseasestatusid};
+
+            return db.ExecuteNoneQuery(sql, param, value);
+        }
+
     }
 }

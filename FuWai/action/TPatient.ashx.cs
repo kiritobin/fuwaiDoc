@@ -32,6 +32,11 @@ namespace FuWai.action
             {
                 delete(context);
             }
+            else if (op == "updatebypatientid")
+            {
+                updatebypatientid(context);
+            }
+            
         }
 
        TPatientBLL tb = new TPatientBLL();
@@ -99,6 +104,25 @@ namespace FuWai.action
                 context.Response.End();
             }
         }
+
+        private void updatebypatientid(HttpContext context)
+        {
+            String patientid = context.Request["patientid"];
+            int diseasestatusid = Convert.ToInt32(context.Request["diseasestatusid"]);
+            
+            if (tb.updatebypatientid(patientid, diseasestatusid))
+            {
+                context.Response.Write("修改成功");
+                context.Response.End();
+
+            }
+            else
+            {
+                context.Response.Write("修改失败");
+                context.Response.End();
+            }
+        }
+
         private void delete(HttpContext context)
         {
             String patientid = context.Request["patientid"];

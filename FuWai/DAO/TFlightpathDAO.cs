@@ -45,12 +45,12 @@ namespace FuWai.DAO
         /// <param name="lat">经度</param>
         /// <param name="lng">纬度</param>
         /// <returns>int</returns>
-        public int insert(string droneid,string flighttime, double lat , double lng)
+        public int insert(string droneid,string flighttime, double lat , double lng,int status)
         {
-            string sql = "insert into T_Flightpath values(@droneid,@flighttime,@lat,@lng)";
+            string sql = "insert into T_Flightpath values(@droneid,@flighttime,@lat,@lng,@status)";
 
-            string[] param = { "@droneid", "@flighttime", "@lat", "lng" };
-            object[] value = { droneid, flighttime, lat, lng };
+            string[] param = { "@droneid", "@flighttime", "@lat", "@lng", "@status" };
+            object[] value = { droneid, flighttime, lat, lng, status };
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
