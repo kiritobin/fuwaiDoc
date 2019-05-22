@@ -195,7 +195,7 @@
                                                     <a href="#panel-04" data-toggle="tab">常用联系人</a>
                                                 </li>
                                             </ul>
-                                            <div class="tab-content" style="margin-top: 10px;">
+                                            <div class="tab-content" style="margin-top: 10px;height:190px;overflow-y:auto">
                                                 <div class="tab-pane active panel" id="panel-0">
                                                     <table class="table table-bordered">
                                                         <thead>
@@ -631,8 +631,6 @@
 	// 继承API的BMap.Overlay  
 	ComplexCustomOverlay.prototype = new BMap.Overlay();
 
-    var grade = 1;
-
     // 实现绘制方法
     ComplexCustomOverlay.prototype.draw = function () {
         var map = this._map;
@@ -645,36 +643,38 @@
         map.addOverlay(new ComplexCustomOverlay(new BMap.Point(point_long, point_lat)));
     }
 
-	// 实现初始化方法  
-	ComplexCustomOverlay.prototype.initialize = function(map) {
-		// 保存map对象实例 
-		this._map = map;
-		// 创建div元素，作为自定义覆盖物的容器  
-		var div = this._div = document.createElement("div");
-		div.style.position = "absolute";
-		div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+    function patientcolor(grade) {
+        // 实现初始化方法  
+        ComplexCustomOverlay.prototype.initialize = function (map) {
+            // 保存map对象实例 
+            this._map = map;
+            // 创建div元素，作为自定义覆盖物的容器  
+            var div = this._div = document.createElement("div");
+            div.style.position = "absolute";
+            div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
 
-		// 可以根据参数设置元素外观
-		div.style.height = "35px";
-		div.style.width = "35px";
+            // 可以根据参数设置元素外观
+            div.style.height = "35px";
+            div.style.width = "35px";
 
-		var arrow = this._arrow = document.createElement("img");
-		if(grade == 1) {
-            arrow.src = "img/红.gif";
-		}
-		if(grade == 2) {
-            arrow.src = "img/黄.gif";
-		}
-		arrow.style.width = "35px";
-		arrow.style.height = "35px";
-		arrow.style.left = "20px";
-		div.appendChild(arrow);
+            var arrow = this._arrow = document.createElement("img");
+            if (grade == 3) {
+                arrow.src = "img/红.gif";
+            }
+            if (grade == 2) {
+                arrow.src = "img/黄.gif";
+            }
+            arrow.style.width = "35px";
+            arrow.style.height = "35px";
+            arrow.style.left = "20px";
+            div.appendChild(arrow);
 
-		// 将div添加到覆盖物容器中  
-		map.getPanes().labelPane.appendChild(div);
-		return div;
+            // 将div添加到覆盖物容器中  
+            map.getPanes().labelPane.appendChild(div);
+            return div;
+        }
+    }
 
-	}
 
 
 	//if(grade == 1) {
@@ -685,32 +685,7 @@
 	//}
 
 	//飞行轨迹
-	var PointArr = [{
-			"long": 102.665457,
-			"lat": 25.105624
-		},
-		{
-			"long": 102.665893,
-			"lat": 25.105614
-		},
-		{
-			"long": 102.666378,
-			"lat": 25.105984
-		},
-		{
-			"long": 102.666944,
-			"lat": 25.106197
-		},
-		{
-			"long": 102.667249,
-			"lat": 25.105600
-		},
-		{
-            "long": 102.667325,
-            "lat": 25.105567
-		}
-	];
-	addMarker(new BMap.Point(PointArr[0].long, PointArr[0].lat), '起点', map);
+
 	//调用方法具体为
 	function addMarker(point, name, map) {
 		if(name == "起点") {
@@ -724,48 +699,88 @@
     }
 
     var droneMk; //定义终点坐标展示的mark对象
-    var myIcon2 = new BMap.Icon("./img/无人机.png", new BMap.Size(36, 36), {}); //初始化终点坐标图标
-    droneMk = new BMap.Marker(new BMap.Point(PointArr[0].long, PointArr[0].lat), {
-        icon: myIcon2
-    }); // 创建标注
-    map.addOverlay(droneMk); // 将标注添加到地图中
+    var myIcon2;
+    function qidian(PointArr) {
+        myIcon2 = new BMap.Icon("./img/无人机.png", new BMap.Size(36, 36), {}); //初始化终点坐标图标
+        if (PointArr.length>1) {
+            droneMk = new BMap.Marker(new BMap.Point(PointArr[1].lng, PointArr[1].lat), {
+                icon: myIcon2
+            });
+        }
+        // 创建标注
+        map.addOverlay(droneMk); // 将标注添加到地图中
+    }
 
-    var temporary = []; //定义中间新取出的值放到一个新的数组里面
-    var i = 0;
-    temporary.push(PointArr[i]);
+    
+    //temporary.push(PointArr[i]);
 
-    function fly() {
+    function fly(PointArr) {
+        if (pointArray.length != 0) {
+        qidian(PointArr);
+        var temporary = []; //定义中间新取出的值放到一个新的数组里面
+        var i = 0;
+
         var interval = setInterval(function () {
             if (i >= PointArr.length) {
                 clearInterval(interval);
                 return;
             }
-            i = i + 1;
-            temporary.push(PointArr[i]);
-            if (temporary <= PointArr) {
-                drowLine(map, temporary); //画线调用
-            }
             else {
-                alert("到达终点了");
+                i = i + 1;
+                temporary.push(PointArr[i]);
+                drowLine(map, temporary); //画线调用
+                change(PointArr[i].lat, PointArr[i].lng);
             }
-        }, 1000);
-    }
 
+            }, 5000);
+            if (zdlat == PointArr[i].lat && zdlng == PointArr[i].lng) {
+                alert("到底终点");
+
+                clearInterval(interval);
+                return;
+            }
+    }
+  }
+
+    function change(lat,lng) {
+        $.ajax({
+            type: 'Post',
+            url: '../action/Flightpath.ashx',
+            data: {
+                lat: lat,
+                lng:lng,
+                op: "change"
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (XMLHttpRequest, textStatus) { //请求失败
+                if (textStatus == 'timeout') {
+                    var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                    xmlhttp.abort();
+                    alert("请求超时");
+                } else if (textStatus == "error") {
+                    alert("服务器内部错误");
+                }
+            }
+        })
+    }
 
 	function drowLine(map, temporary) {
 		if(temporary && temporary.length > 1) { //判断数值为两个点时开始进行绘制
 			for(var i = 0; i < temporary.length - 1; i++) {
 				var polyline = new BMap.Polyline(
 					[
-						new BMap.Point(temporary[i].long, temporary[i].lat),
-						new BMap.Point(temporary[i + 1].long, temporary[i + 1].lat)
+						new BMap.Point(temporary[i].lng, temporary[i].lat),
+						new BMap.Point(temporary[i + 1].lng, temporary[i + 1].lat)
 					], {
 						strokeColor: "green", //设置颜色 
 						strokeWeight: 8, //宽度
 						strokeOpacity: 0.8 //透明度
 					}); //创建折线
 				map.addOverlay(polyline);
-				addMarkerEnd(new BMap.Point(temporary[i + 1].long, temporary[i + 1].lat), '终点', map); //添加图标
+				addMarkerEnd(new BMap.Point(temporary[i + 1].lng, temporary[i + 1].lat), '终点', map); //添加图标
 			}
 		}
 	}
@@ -781,7 +796,8 @@
 			map.addOverlay(droneMk); // 将标注添加到地图中
 		}
     }
-
+    var zdlat;
+    var zdlng;
     function showdata() {
         $.ajax({
             type: 'Post',
@@ -798,8 +814,20 @@
 
                 var data1 = JSON.parse(data.Data1);
                 var data2 = JSON.parse(data.Data2);
-                add_overlay(102.667325, 25.105567);
                 //map.clearOverlays();
+                for (var i = 0; i < data1.length; i++) {
+                    patientcolor(data1[i].diseasestatusid);
+                    if (data1[i].diseasestatusid == 2) {
+                        add_overlay(data1[i].lng, data1[i].lat);
+                    }
+                    if (data1[i].diseasestatusid == 3) {
+                        add_overlay(data1[i].lng, data1[i].lat);
+                        zdlat = data1[i].lat;
+                        zdlng = data1[i].lng;
+                        searchdrone(data1[i].droneid);
+                    }
+                }
+                
                 showpatient(data1);
                 showdrone(data2);
             },
@@ -817,7 +845,36 @@
 
     var ref = setInterval(function () {
         showdata();
-    }, 3000);
+    }, 5000);
+
+    function searchdrone(droneid) {
+        $.ajax({
+            type: 'Post',
+            url: '../action/Flightpath.ashx',
+            data: {
+                droneid: droneid,
+                op: "bydrone"
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var data1 = JSON.parse(data.Data1);
+                var data2 = JSON.parse(data.Data2);
+                //addMarker(new BMap.Point(data2[0].lng, data2[0].lat), '起点', map);
+
+                fly(data1);
+            },
+            error: function (XMLHttpRequest, textStatus) { //请求失败
+                if (textStatus == 'timeout') {
+                    var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                    xmlhttp.abort();
+                    alert("请求超时");
+                } else if (textStatus == "error") {
+                    alert("服务器内部错误");
+                }
+            }
+        })
+    }
 
     var vue = new Vue({
         el: "#app",

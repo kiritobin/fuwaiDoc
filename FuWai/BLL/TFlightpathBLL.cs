@@ -15,9 +15,9 @@ namespace FuWai.BLL
         /// </summary>
         /// <param name="droneid">无人机id</param>
         /// <returns>返回json</returns>
-        public String SelectFlightpathbyDroneid(string droneid)
+        public String SelectFlightpathbyDroneid(string droneid,int status)
         {
-            return JsonHelper.ToJson(td.SelectFlightpathbyDroneid(droneid));
+            return JsonHelper.ToJson(td.SelectFlightpathbyDroneid(droneid,status));
         }
 
         /// <summary>
@@ -42,6 +42,22 @@ namespace FuWai.BLL
         public Boolean insert(string droneid, string flighttime, double lat, double lng)
         {
             int row = td.insert(droneid, flighttime, lat, lng);
+            if (row > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 通过坐标改变已飞过状态
+        /// </summary>
+        /// <param name="lat"></param>
+        /// <param name="lng"></param>
+        /// <returns></returns>
+        public Boolean changestatus(double lat,double lng)
+        {
+            int row = td.changestatus(lat, lng);
             if (row > 0)
             {
                 return true;

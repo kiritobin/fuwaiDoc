@@ -1,4 +1,6 @@
 ﻿using FuWai.BLL;
+using FuWai.DBHelper;
+using FuWai.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,15 +30,25 @@ namespace FuWai.action
             {
                 insert(context);
             }
+            else if (op=="bydrone")
+            {
+                SelectFlightpathbyDrone(context);
+            }
+            else if (op=="change")
+            {
+                changestatus(context);
+            }
         }
 
         TFlightpathBLL tb = new TFlightpathBLL();
+        TDroneBLL drone = new TDroneBLL();
+        Data data = new Data();
 
         private void SelectFlightpathbyDroneid(HttpContext context)
         {
             String droneid = context.Request["droneid"];
 
-            String json = tb.SelectFlightpathbyDroneid(droneid);
+            String json = tb.SelectFlightpathbyDroneid(droneid,1);
             context.Response.Write(json);
             context.Response.End();
 
@@ -51,6 +63,16 @@ namespace FuWai.action
             context.Response.Write(json);
             context.Response.End();
 
+        }
+
+        private void SelectFlightpathbyDrone(HttpContext context)
+        {
+            String droneid = context.Request["droneid"];
+            data.Data1 = tb.SelectFlightpathbyDroneid(droneid, 1);
+            data.Data2 = drone.getDroneinfobydroneid(droneid);
+            String json = JsonHelper.ObjectToJson(data);
+            context.Response.Write(json);
+            context.Response.End();
         }
 
         private void insert(HttpContext context)
@@ -69,6 +91,23 @@ namespace FuWai.action
             else
             {
                 context.Response.Write("添加失败");
+                context.Response.End();
+            }
+        }
+
+        public void changestatus(HttpContext context)
+        {
+            Double lat = Convert.ToDouble(context.Request["lat"]);
+            Double lng = Convert.ToDouble(context.Request["lng"]);
+            if (tb.changestatus(lat, lng))
+            {
+                context.Response.Write("修改成功");
+                context.Response.End();
+
+            }
+            else
+            {
+                context.Response.Write("修改失败");
                 context.Response.End();
             }
         }

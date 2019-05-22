@@ -16,11 +16,11 @@ namespace FuWai.DAO
         /// </summary>
         /// <param name="droneid">无人机id</param>
         /// <returns>DataTable</returns>
-        public DataTable SelectFlightpathbyDroneid(string droneid)
+        public DataTable SelectFlightpathbyDroneid(string droneid,int status)
         {
-            string sql = "select * from T_Flightpath where droneid=@droneid";
-            string[] param = { "@droneid" };
-            object[] value = { droneid };
+            string sql = "select * from T_Flightpath where droneid=@droneid and status=@status";
+            string[] param = { "@droneid","@status" };
+            object[] value = { droneid ,status};
             return db.FillDataSet(sql, param, value).Tables[0];
         }
 
@@ -47,13 +47,26 @@ namespace FuWai.DAO
         /// <returns>int</returns>
         public int insert(string droneid,string flighttime, double lat , double lng)
         {
-            string sql = "insert into T_Flightpath values(@droneid,@flighttime,@lat,@lng)";
+            string sql = "insert into T_Flightpath values(@droneid,@flighttime,@lat,@lng,@status)";
 
-            string[] param = { "@droneid", "@flighttime", "@lat", "lng" };
-            object[] value = { droneid, flighttime, lat, lng };
+            string[] param = { "@droneid", "@flighttime", "@lat", "lng" ,"@status"};
+            object[] value = { droneid, flighttime, lat, lng ,1};
 
             return db.ExecuteNoneQuery(sql, param, value);
         }
         
+        /// <summary>
+        /// 通过坐标改变已飞过状态
+        /// </summary>
+        /// <param name="lat"></param>
+        /// <param name="lng"></param>
+        /// <returns></returns>
+        public int changestatus(double lat,double lng)
+        {
+            string sql = "update T_Flightpath set status=0 where lat=@lat and lng=@lng";
+            string[] param = { "@lat", "lng" };
+            object[] value = { lat, lng };
+            return db.ExecuteNoneQuery(sql, param, value);
+        }
     }
 }

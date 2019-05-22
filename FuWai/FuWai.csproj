@@ -104,6 +104,8 @@
     <Content Include="home\userdrug.html" />
     <Content Include="home\level.html" />
     <Content Include="home\level2.html" />
+    <Content Include="home\无人机管理.html" />
+    <Content Include="home\病人管理.html" />
     <Content Include="js\sweet-alert.min.js" />
     <Content Include="home\plugins\animate-css\animate.min.css" />
     <Content Include="home\plugins\bootbox\bootbox.min.js" />
