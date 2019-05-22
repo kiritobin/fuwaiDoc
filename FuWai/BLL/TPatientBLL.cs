@@ -108,5 +108,21 @@ namespace FuWai.BLL
             return false;
         }
 
+        /// <summary>
+        /// 修改病人信息
+        /// </summary>
+        /// <param name="patientid">编号</param>
+        /// <param name="diseasestatusid">病情等级编号</param>
+        /// <returns>成功返回true失败返回fasle</returns>
+        public Boolean updatebypatientid(string patientid, int diseasestatusid)
+        {
+            int row = td.updatebypatientid(patientid, diseasestatusid);
+            if (row > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
