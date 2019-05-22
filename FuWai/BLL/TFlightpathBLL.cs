@@ -39,9 +39,9 @@ namespace FuWai.BLL
         /// <param name="lat">经度</param>
         /// <param name="lng">纬度</param>
         /// <returns>成功返回true失败返回fasle</returns>
-        public Boolean insert(string droneid, string flighttime, double lat, double lng,int status)
+        public Boolean insert(string droneid, string flighttime, double lat, double lng)
         {
-            int row = td.insert(droneid, flighttime, lat, lng, status);
+            int row = td.insert(droneid, flighttime, lat, lng);
             if (row > 0)
             {
                 return true;

@@ -713,14 +713,14 @@
 
     
     //temporary.push(PointArr[i]);
-
+    var interval;
     function fly(PointArr) {
-        if (pointArray.length != 0) {
+        if (PointArr.length != 0&&br==0) {
         qidian(PointArr);
         var temporary = []; //定义中间新取出的值放到一个新的数组里面
         var i = 0;
 
-        var interval = setInterval(function () {
+        interval = setInterval(function () {
             if (i >= PointArr.length) {
                 clearInterval(interval);
                 return;
@@ -732,15 +732,34 @@
                 change(PointArr[i].lat, PointArr[i].lng);
             }
 
-            }, 5000);
-            if (zdlat == PointArr[i].lat && zdlng == PointArr[i].lng) {
-                alert("到底终点");
-
-                clearInterval(interval);
-                return;
-            }
+            }, 1000);
     }
-  }
+    }
+
+    function status(patientid) {
+        $.ajax({
+            type: 'Post',
+            url: '../action/TPatient.ashx',
+            data: {
+                diseasestatusid: 1,
+                patientid: patientid,
+                op: "updatebypatientid"
+            },
+            dataType: 'text',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (XMLHttpRequest, textStatus) { //请求失败
+                if (textStatus == 'timeout') {
+                    var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+                    xmlhttp.abort();
+                    alert("请求超时");
+                } else if (textStatus == "error") {
+                    alert("服务器内部错误");
+                }
+            }
+        })
+    }
 
     function change(lat,lng) {
         $.ajax({
@@ -766,7 +785,7 @@
             }
         })
     }
-
+    var br = 0;
 	function drowLine(map, temporary) {
 		if(temporary && temporary.length > 1) { //判断数值为两个点时开始进行绘制
 			for(var i = 0; i < temporary.length - 1; i++) {
@@ -780,7 +799,14 @@
 						strokeOpacity: 0.8 //透明度
 					}); //创建折线
 				map.addOverlay(polyline);
-				addMarkerEnd(new BMap.Point(temporary[i + 1].lng, temporary[i + 1].lat), '终点', map); //添加图标
+                addMarkerEnd(new BMap.Point(temporary[i + 1].lng, temporary[i + 1].lat), '终点', map); //添加图标
+                if (br==0) {
+                    if (zdlat == temporary[i + 1].lat && zdlng == temporary[i + 1].lng) {
+                        status(patientid);
+                        br =1;
+                        map.clearOverlays();
+                    }
+                }
 			}
 		}
 	}
@@ -798,6 +824,8 @@
     }
     var zdlat;
     var zdlng;
+    var patientid;
+    var red = 0;
     function showdata() {
         $.ajax({
             type: 'Post',
@@ -821,9 +849,15 @@
                         add_overlay(data1[i].lng, data1[i].lat);
                     }
                     if (data1[i].diseasestatusid == 3) {
+                        
+                        if (red == 0) {
+                            alert("红色预警");
+                            red = 1;
+                        }
                         add_overlay(data1[i].lng, data1[i].lat);
                         zdlat = data1[i].lat;
                         zdlng = data1[i].lng;
+                        patientid = data1[i].patientid;
                         searchdrone(data1[i].droneid);
                     }
                 }
@@ -843,9 +877,20 @@
         })
     }
 
+    function deletePoint(lng) {
+        lng = 102.669612;
+        var allOverlay = map.getOverlays();
+        for (var i = 0; i < allOverlay.length; i++) {
+            if (allOverlay[i].getPosition().lng == lng) {
+                map.removeOverlay(allOverlay[i]);
+                return false;
+            }
+        }
+    }
+
     var ref = setInterval(function () {
         showdata();
-    }, 5000);
+    }, 1000);
 
     function searchdrone(droneid) {
         $.ajax({

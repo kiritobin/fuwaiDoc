@@ -81,8 +81,8 @@ namespace FuWai.action
             String flighttime = context.Request["flighttime"];
             Double lat = Convert.ToDouble(context.Request["lat"]);
             Double lng = Convert.ToDouble(context.Request["lng"]);
-            int status = Convert.ToInt32(context.Request["status"]);
-            if (tb.insert(droneid, flighttime, lat, lng, status))
+            //int status = Convert.ToInt32(context.Request["status"]);
+            if (tb.insert(droneid, flighttime, lat, lng))
             {
                 context.Response.Write("添加成功");
                 context.Response.End();

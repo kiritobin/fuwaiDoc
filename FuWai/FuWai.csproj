@@ -101,6 +101,7 @@
     <Content Include="home\js\心电图.js" />
     <Content Include="home\map.html" />
     <Content Include="home\flightpath.html" />
+    <Content Include="home\path.html" />
     <Content Include="home\userdrug.html" />
     <Content Include="home\level.html" />
     <Content Include="home\level2.html" />
