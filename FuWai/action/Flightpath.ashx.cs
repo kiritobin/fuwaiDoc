@@ -48,7 +48,7 @@ namespace FuWai.action
         {
             String droneid = context.Request["droneid"];
 
-            String json = tb.SelectFlightpathbyDroneid(droneid,1);
+            String json = tb.SelectFlightpathbyDroneid(droneid,0);
             context.Response.Write(json);
             context.Response.End();
 

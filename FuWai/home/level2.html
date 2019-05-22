@@ -145,7 +145,7 @@
                                                         <td>
                                                             编号
                                                         </td>
-                                                        <td>
+                                                        <td id="pid">
                                                             {{item.patientid}}
                                                         </td>
                                                     </tr>
@@ -806,6 +806,11 @@
                         br =1;
                         map.clearOverlays();
                     }
+                    if (hzdlat == temporary[i + 1].lat && hzdlng == temporary[i + 1].lng) {
+                        status(hpatientid);
+                        br = 1;
+                        map.clearOverlays();
+                    }
                 }
 			}
 		}
@@ -826,6 +831,11 @@
     var zdlng;
     var patientid;
     var red = 0;
+    var yellow = 0;
+    var hzdlat;
+    var hzdlng;
+    var hpatientid;
+    var click = 0;
     function showdata() {
         $.ajax({
             type: 'Post',
@@ -846,7 +856,17 @@
                 for (var i = 0; i < data1.length; i++) {
                     patientcolor(data1[i].diseasestatusid);
                     if (data1[i].diseasestatusid == 2) {
+                        if (yellow==0) {
+                            alert("黄色预警");
+                            yellow = 1;
+                        }
                         add_overlay(data1[i].lng, data1[i].lat);
+                        hzdlat = data1[i].lat;
+                        hzdlng = data1[i].lng;
+                        hpatientid = data1[i].patientid;
+                        if (click==1) {
+                            searchdrone(data1[i].droneid);
+                        }
                     }
                     if (data1[i].diseasestatusid == 3) {
                         
@@ -1018,9 +1038,11 @@
                 })
             },
             fly: function () {
-                fly();
+                click = 1;
             },
             cancel: function () {
+                var droneid = $("#pid").text();
+                searchdrone(droneid);
                 $("#myModal").modal("hide");
             }
         },
