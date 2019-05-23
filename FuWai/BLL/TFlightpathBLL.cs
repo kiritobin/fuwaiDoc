@@ -64,5 +64,19 @@ namespace FuWai.BLL
             }
             return false;
         }
+
+        /// <summary>
+        /// 重设飞行路径
+        /// </summary>
+        /// <returns></returns>
+        public Boolean reset()
+        {
+            int row = td.reset();
+            if (row > 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

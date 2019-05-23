@@ -732,7 +732,7 @@
                 change(PointArr[i].lat, PointArr[i].lng);
             }
 
-            }, 1000);
+            }, 500);
     }
     }
 
@@ -748,6 +748,7 @@
             dataType: 'text',
             success: function (data) {
                 console.log(data);
+                map.clearOverlays();
             },
             error: function (XMLHttpRequest, textStatus) { //请求失败
                 if (textStatus == 'timeout') {
@@ -809,7 +810,7 @@
                     if (hzdlat == temporary[i + 1].lat && hzdlng == temporary[i + 1].lng) {
                         status(hpatientid);
                         br = 1;
-                        map.clearOverlays();
+                        //map.clearOverlays();
                     }
                 }
 			}
@@ -910,7 +911,7 @@
 
     var ref = setInterval(function () {
         showdata();
-    }, 1000);
+    }, 3000);
 
     function searchdrone(droneid) {
         $.ajax({
@@ -1041,8 +1042,8 @@
                 click = 1;
             },
             cancel: function () {
-                var droneid = $("#pid").text();
-                searchdrone(droneid);
+                var droneid = $("#pid").text().trim();
+                status(droneid);
                 $("#myModal").modal("hide");
             }
         },

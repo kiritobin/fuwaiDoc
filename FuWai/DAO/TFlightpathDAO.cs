@@ -68,5 +68,15 @@ namespace FuWai.DAO
             object[] value = { lat, lng };
             return db.ExecuteNoneQuery(sql, param, value);
         }
+
+        /// <summary>
+        /// 重设飞行路径
+        /// </summary>
+        /// <returns></returns>
+        public int reset()
+        {
+            string sql = "update T_Flightpath set status=1";
+            return db.ExecuteNoneQuery(sql, null, null);
+        }
     }
 }

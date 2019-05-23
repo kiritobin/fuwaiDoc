@@ -38,6 +38,10 @@ namespace FuWai.action
             {
                 changestatus(context);
             }
+            else if (op=="reset")
+            {
+                reset(context);
+            }
         }
 
         TFlightpathBLL tb = new TFlightpathBLL();
@@ -100,6 +104,21 @@ namespace FuWai.action
             Double lat = Convert.ToDouble(context.Request["lat"]);
             Double lng = Convert.ToDouble(context.Request["lng"]);
             if (tb.changestatus(lat, lng))
+            {
+                context.Response.Write("修改成功");
+                context.Response.End();
+
+            }
+            else
+            {
+                context.Response.Write("修改失败");
+                context.Response.End();
+            }
+        }
+
+        public void reset(HttpContext context)
+        {
+            if (tb.reset())
             {
                 context.Response.Write("修改成功");
                 context.Response.End();
